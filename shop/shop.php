@@ -106,7 +106,6 @@ include ('../functions/common_function.php');
         <div class="row">
 
           <!--PHP code to display products in DB-->
-
           <?php
           getproducts();
           ?>
@@ -127,40 +126,20 @@ include ('../functions/common_function.php');
 
           <!--PHP code to display category in DB-->
           <?php
-          $select_categorys = "SELECT * from `categories`";
-          $result_categorys = mysqli_query($con, $select_categorys);
+          getCategory()
+            ?>
 
-          while ($row_data = mysqli_fetch_assoc($result_categorys)) {
-            $category_title = $row_data['categorie_tittle'];
-            $category_id = $row_data['categorie_id'];
-            echo "
-          <li class='nav-item bg-info'>
-            <a href='' class='nav-link'>
-             $category_title
-            </a> ";
-          }
-          ?>
           </li>
           <li class="nav-item bg-info">
             <a href="" class="nav-link">
               <h4>Brands</h4>
             </a>
           </li>
+
           <!--PHP code to display category in DB-->
           <?php
-          $select_brand = "SELECT * from `brands`";
-          $result_brand = mysqli_query($con, $select_brand);
-
-          while ($row_data = mysqli_fetch_assoc($result_brand)) {
-            $brand_title = $row_data['brand_tittle'];
-            $brand_id = $row_data['brand_id'];
-            echo "
-          <li class='nav-item bg-info'>
-            <a href='' class='nav-link'>
-             $brand_title
-            </a> ";
-          }
-          ?>
+          getBrands()
+            ?>
         </ul>
   </section>
   <!--footer-------------->

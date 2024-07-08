@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=Anta&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=RocknRoll+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anta&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=RocknRoll+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anta&family=Barrio&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=RocknRoll+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anta&family=Barrio&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=RocknRoll+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Anta&family=Barrio&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=RocknRoll+One&display=swap");
+
+body {
+  background-image: url("../index/images/bannerwp.jpg");
+  height: 580px; /* You must set a specified height */
+  width: 100%;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.font {
+  font-family: "Anta";
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.buy-btn {
+  margin-top: 10px;
+  font-family: "Barrio";
+  font-size: 0.9rem;
+  font-weight: 700;
+  outline: none;
+  border: none;
+  background-color: rgb(255, 238, 1);
+  color: rgb(0, 2, 3);
+  padding: 13px 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 12px;
+}
+
+.buy-btn:hover {
+  background-color: rgba(0, 7, 2, 0.918);
+  border-radius: 12px;
+  color: rgb(255, 254, 254);
+  box-shadow: antiquewhite 5px;
+}
+
+.adminbar {
+  font-family: "Anta";
+  color: #f30c00;
+  font-weight: bolder;
+}
+
+footer {
+  width: 100%;
+  bottom: 0;
+  background: linear-gradient(to right, rgb(255, 89, 0), rgb(2, 32, 70));
+  color: #fff;
+  padding: 100 0 30px;
+  margin-left: 0 5rem;
+  font-size: 13px;
+  line-height: 20px;
+  font-family: "Anta";
+  border-radius: 1px;
+  padding-left: 3rem;
+}
+.row {
+  width: 85%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.col {
+  flex-basis: 25%;
+  padding: 15px;
+}
+
+.col:nth-child(2),
+.col:nth-child(3) {
+  flex-basis: 10%;
+}
+.logo {
+  width: 150px;
+  margin-bottom: 30px;
+}
+.col h3 {
+  width: fit-content;
+  margin-bottom: 10px;
+  position: relative;
+}
+.email-id {
+  width: fit-content;
+  border-bottom: 1px solid #ccc;
+  margin: 20px 0;
+}
+ul li {
+  list-style: none;
+  margin-bottom: 12px;
+}
+ul li a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+li .a:hover {
+  color: #ff1e1e;
+}
+form {
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 50px;
+}
+form .bx {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+form input {
+  width: 100%;
+  background: transparent;
+  color: #ccc;
+  border: 0;
+  outline: none;
+}
+form button {
+  background: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+form button .bx {
+  font-size: 20px;
+  color: #fdfcfc;
+}
+.social-icons h3 {
+  margin-top: -2.3rem;
+}
+.social-icons .bx {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  margin-bottom: 0.3rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: #000000;
+  background: whitesmoke;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.social-icons .bx:hover {
+  color: #f30c00;
+}
+hr {
+  width: 90%;
+  border: 0;
+  border-bottom: 1.6px solid #f8f8f8;
+  margin: 20px auto;
+}
+.copyright {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: -1rem;
+}
+.underline {
+  width: 100%;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 3px;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  overflow: hidden;
+}
+.underline span {
+  width: 15px;
+  height: 100%;
+  background: #ff0000;
+  border-radius: 3px;
+  box-shadow: 0 0 10px white;
+  position: absolute;
+  top: 1px;
+  left: 10px;
+  animation: moving 2s linear infinite;
+}
+@keyframes moving {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: 100px;
+  }
+}

@@ -2,7 +2,7 @@
 
 $con = mysqli_connect('localhost', 'root', '', 'irishvisualsdb');
 if (!$con) {
-    die(mysqli_error($con));
+    die("Connection failed: " . mysqli_connect_error());
 } else {
 
 }

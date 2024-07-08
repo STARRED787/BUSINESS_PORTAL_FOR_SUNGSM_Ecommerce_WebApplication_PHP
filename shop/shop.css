@@ -24,11 +24,6 @@ h2 {
   font-weight: 600;
 }
 
-h3 {
-  font-size: 1.5rem;
-  font-weight: 800;
-}
-
 h4 {
   font-size: 1.2rem;
   font-weight: 600;
@@ -93,7 +88,8 @@ h5 {
 /*footer----------*/
 footer {
   width: 100%;
-  bottom: 0;
+  line-height: 1rem;
+  bottom: 200px;
   background: linear-gradient(to right, rgb(255, 89, 0), rgb(2, 32, 70));
   color: #fff;
   padding: 100 0 30px;

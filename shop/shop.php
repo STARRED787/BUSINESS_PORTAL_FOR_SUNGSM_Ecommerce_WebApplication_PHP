@@ -12,7 +12,7 @@ include ('../functions/common_function.php');
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shop</title>
+  <title>IrishVisuals</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="shop.css" />
@@ -48,6 +48,12 @@ include ('../functions/common_function.php');
 
   #in-cate {
     font-family: "Poppins";
+  }
+
+  .tx {
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
   }
 </style>
 
@@ -96,7 +102,7 @@ include ('../functions/common_function.php');
   <section class=" bg-light">
     <!--heading Bar-->
     <div class="bg-light">
-      <h3 class="text-center">Our Products</h3>
+      <h3 class="tx font-4xl font-semibold">Our Products</h3>
     </div>
 
     <!--fourth section-->
@@ -108,7 +114,9 @@ include ('../functions/common_function.php');
           <!--PHP code to display products in DB-->
           <?php
           getproducts();
-          ?>
+          getUniqCategory();
+          getUniqbrand()
+            ?>
 
           <!-- row end-->
         </div>
@@ -126,8 +134,8 @@ include ('../functions/common_function.php');
 
           <!--PHP code to display category in DB-->
           <?php
-          getCategory()
-            ?>
+          getCategory();
+          ?>
 
           </li>
           <li class="nav-item bg-info">
@@ -143,10 +151,10 @@ include ('../functions/common_function.php');
         </ul>
   </section>
   <!--footer-------------->
-  <footer class="footer col-md-12 col-lg-12 col-sm-12 mb-3">
+  <footer class="footer col-md-12 col-lg-12 col-sm-12">
     <div class="row">
       <div class="col">
-        <img src="logo.png" class="logo" />
+        <img src="logo.png" class="logo" width="20px" height="20px" />
         <p>
           Immerse yourself in a world of visual wonder with IRISH Visuals,
           your premier destination for captivating imagery. Explore the latest

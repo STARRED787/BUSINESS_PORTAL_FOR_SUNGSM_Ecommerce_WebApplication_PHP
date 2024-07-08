@@ -32,9 +32,9 @@ if (isset($_POST['insert_product'])) {
         echo "<script>alert('Please Fill all available fields')</script>";
         exit();
     } else {
-        move_uploaded_file($tmp_product_image_1, "./product_images/ $product_image_1");
-        move_uploaded_file($tmp_product_image_2, "./product_images/ $product_image_2");
-        move_uploaded_file($tmp_product_image_3, "./product_images/ $product_image_3");
+        move_uploaded_file($tmp_product_image_1, "../images/ $product_image_1");
+        move_uploaded_file($tmp_product_image_2, "../images/ $product_image_2");
+        move_uploaded_file($tmp_product_image_3, "../images/ $product_image_3");
 
         //insert query
         $insert_products = "INSERT INTO `products` (product_tittle, product_description, product_keyword, categorie_id,

@@ -118,84 +118,9 @@ include ('../include/connect.php');
               </div>
             </div>
           </div>
-
-          <div class="col-md-4 mb-4 ">
-            <div class="card ">
-              <img src="../images/game1.jpg" class="card-img-top" alt="..." style=" width: 100%;
-                     height: 200px; 
-                     object-fit:contain">
-              <div class="card-body ">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a href="#" class="btn btn-primary flex">Add to cart</a>
-                <a href="#" class="btn btn-primary ">View more</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4  mb-4 ">
-            <div class="card ">
-              <img src="../images/game1.jpg" class="card-img-top" alt="..." style=" width: 100%;
-                     height: 200px; 
-                     object-fit:contain">
-              <div class="card-body ">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a href="#" class="btn btn-primary flex">Add to cart</a>
-                <a href="#" class="btn btn-primary ">View more</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4   mb-4 ">
-            <div class="card ">
-              <img src="../images/game1.jpg" class="card-img-top" alt="..." style=" width: 100%;
-                     height: 200px; 
-                     object-fit:contain">
-              <div class="card-body ">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a href="#" class="btn btn-primary flex">Add to cart</a>
-                <a href="#" class="btn btn-primary ">View more</a>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-md-4 mb-4 ">
-            <div class="card ">
-              <img src="../images/game1.jpg" class="card-img-top" alt="..." style=" width: 100%;
-                     height: 200px; 
-                     object-fit:contain">
-              <div class="card-body ">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a href="#" class="btn btn-primary flex">Add to cart</a>
-                <a href="#" class="btn btn-primary ">View more</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 mb-4 ">
-            <div class="card ">
-              <img src="../images/game1.jpg" class="card-img-top" alt="..." style=" width: 100%;
-                     height: 200px; 
-                     object-fit:contain">
-              <div class="card-body ">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a href="#" class="btn btn-primary flex">Add to cart</a>
-                <a href="#" class="btn btn-primary ">View more</a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+
       <div class="col-md-2 mb-4 bg-secondary p-10">
         <!--side nav-->
         <ul class=" navbar-nav me-auto m-0 text-center">
@@ -223,7 +148,7 @@ include ('../include/connect.php');
           </li>
           <li class="nav-item bg-info">
             <a href="" class="nav-link">
-              <h4>Category</h4>
+              <h4>Brands</h4>
             </a>
           </li>
           <!--PHP code to display category in DB-->
@@ -243,8 +168,6 @@ include ('../include/connect.php');
           ?>
         </ul>
   </section>
-
-
   <!--footer-------------->
   <footer class="footer col-md-12 col-lg-12 col-sm-12 mb-3">
     <div class="row">

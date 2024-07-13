@@ -46,10 +46,11 @@
               <i class="fa-solid fa-user nav-link"></i>
             </li>
           </ul>
-          <form class="d-flex" role="search" action="" method="">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-              name="search_data" />
-            <input type="submit" value="Search" class="btn" name="search_data_product">
+          <form class="d-flex" action="../shop/search.php" method="get">
+            <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search" style="width: 300px;"
+              name="search_data">
+            <button class="btn btn-outline" name="search_data_product"></button>
+            <input type="submit" value="search" class="btn btn-outline" name="search_data_product">
           </form>
         </div>
       </div>

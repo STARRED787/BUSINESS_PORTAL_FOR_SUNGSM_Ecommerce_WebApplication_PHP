@@ -46,7 +46,7 @@
               <i class="fa-solid fa-user nav-link"></i>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <form class="d-flex" role="search" action="" method="">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
               name="search_data" />
             <input type="submit" value="Search" class="btn" name="search_data_product">

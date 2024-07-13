@@ -90,9 +90,10 @@ include ('../functions/common_function.php');
             <i class="fa-solid fa-user nav-link"></i>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data" />
-          <input type="submit" value="Search" class="btn" name="search_data_product">
+        <form class="d-flex">
+          <input class="form-control m-2" action="" method="get" type="search" palceholder="Search" aria-label="Search"
+            style="width: 300px;" name="search_data">
+          <input type="submit" value="search" class="btn btn-outline" name="search_data_product">
         </form>
       </div>
     </div>
@@ -112,6 +113,7 @@ include ('../functions/common_function.php');
 
           <!--PHP code to display products in DB-->
           <?php
+
           getproducts();
           getUniqCategory();
           getUniqbrand()

@@ -26,7 +26,7 @@ include ('../functions/common_function.php');
 </head>
 <style>
     .buy-btn {
-
+        margin: 1px;
         font-family: "Barrio";
         font-size: 0.9rem;
         font-weight: 700;
@@ -55,6 +55,39 @@ include ('../functions/common_function.php');
         font-size: 50px;
         font-weight: 700;
         text-align: center;
+    }
+
+    .logo {
+        width: 100px;
+        height: auto;
+        margin-bottom: 30px;
+    }
+
+    footer {
+        width: 100%;
+        bottom: 0;
+        background: linear-gradient(to right, rgb(255, 89, 0), rgb(2, 32, 70));
+        color: #fff;
+        padding: 20px;
+        margin-left: 0 5rem;
+        font-size: 13px;
+        line-height: 20px;
+        font-family: "Anta";
+        border-radius: 1px;
+        padding-left: 5rem;
+    }
+
+    .search {
+        background-color: #f8f9fa;
+        color: #495057;
+        border-color: black;
+        border-radius: 0.25rem;
+        padding: 0.5rem 0.1rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.3rem;
+        margin-left: 10px;
+
     }
 </style>
 
@@ -94,8 +127,8 @@ include ('../functions/common_function.php');
                 <form class="d-flex" action="search.php" method="get">
                     <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search"
                         style="width: 300px;" name="search_data">
-                    <button class="btn btn-outline" name="search_data_product"></button>
-                    <input type="submit" value="search" class="btn btn-outline" name="search_data_product">
+
+                    <input type="submit" value="search" class="btn-outline search" name="search_data_product">
                 </form>
             </div>
         </div>

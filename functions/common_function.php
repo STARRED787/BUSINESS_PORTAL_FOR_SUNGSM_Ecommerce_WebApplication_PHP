@@ -245,15 +245,23 @@ function product_Details()
                 <div class='col-md-7 '>
                     <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 400px; object-fit: contain'  id='ProductImg'>
                     <div class='row m-4'>
-                        <div class='col-md-4 border p-2 sm:m-2'>
-                            <img src='../images/$product_image1' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg' >
-                        </div>
-                        <div class='col-md-4 border p-2 sm:m-2'>
-                            <img src='../images/$product_image2' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg'>
-                        </div>
-                        <div class='col-md-4 border p-2 sm:m-2'>
-                            <img src='../images/$product_image3' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg'>
-                        </div>
+                        <div class='col-md-4 p-2 sm:m-2'>
+                        <span class='py-5 border border-primary'>
+                        <img src='../images/$product_image1' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg' >
+                        </span>
+                         </div>
+
+                        <div class='col-md-4 p-2 sm:m-2'>
+                        <span class='py-5 border border-primary'>
+                        <img src='../images/$product_image2' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg' >
+                        </span>
+                         </div>
+
+                        <div class='col-md-4 p-2 sm:m-2'>
+                        <span class='py-5 border border-primary'>
+                        <img src='../images/$product_image3' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg' >
+                        </span>
+                         </div>
                     </div>
                 </div>
                 <div class='col-md-5'>
@@ -268,6 +276,7 @@ function product_Details()
             var ProductImg = document.getElementById('ProductImg');
             var SmallImg = document.getElementsByClassName('small-img');
 
+            
             SmallImg[0].onclick = function() {
                 ProductImg.src = SmallImg[0].src;
             }

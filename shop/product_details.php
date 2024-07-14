@@ -101,31 +101,20 @@ include ('../functions/common_function.php');
         </div>
     </nav>
 
-    <section class=" bg-light">
+    <section class=" bg-light container mb-4 ">
         <!--heading Bar-->
-        <div class="bg-light">
-            <h3 class="tx font-4xl font-semibold">Our Products</h3>
+        <div class="mt-2">
+            <br>
+
         </div>
+        <!--PHP code to display products in DB-->
+        <?php
+        product_Details();
+        search_Product();
+        getUniqCategory();
+        getUniqbrand();
+        ?>
 
-
-        <!--fourth section-->
-        <div class="row m-5">
-            <div class="col-md-10  ">
-                <!--products-->
-
-
-                <!--PHP code to display products in DB-->
-                <?php
-                product_Details();
-                search_Product();
-                getUniqCategory();
-                getUniqbrand();
-                ?>
-
-                <!-- row end-->
-            </div>
-            <!-- column end-->
-        </div>
 
         </ul>
     </section>
@@ -133,7 +122,7 @@ include ('../functions/common_function.php');
     <footer class="footer col-md-12 col-lg-12 col-sm-12">
         <div class="row">
             <div class="col">
-                <img src="logo.png" class="logo" width="20px" height="20px" />
+                <img src="../images/logo.png" class="logo" width="20px" height="20px" />
                 <p>
                     Immerse yourself in a world of visual wonder with IRISH Visuals,
                     your premier destination for captivating imagery. Explore the latest
@@ -201,7 +190,10 @@ include ('../functions/common_function.php');
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-    <script src="../index/index.js"></script>
+    <script src="../index/index.js">
+
+    </script>
+
 </body>
 
 </html>

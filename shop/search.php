@@ -26,7 +26,7 @@ include ('../functions/common_function.php');
 </head>
 <style>
     .buy-btn {
-
+        margin: 1px;
         font-family: "Barrio";
         font-size: 0.9rem;
         font-weight: 700;
@@ -55,6 +55,26 @@ include ('../functions/common_function.php');
         font-size: 50px;
         font-weight: 700;
         text-align: center;
+    }
+
+    .logo {
+        width: 100px;
+        height: auto;
+        margin-bottom: 30px;
+    }
+
+    footer {
+        width: 100%;
+        bottom: 0;
+        background: linear-gradient(to right, rgb(255, 89, 0), rgb(2, 32, 70));
+        color: #fff;
+        padding: 20px;
+        margin-left: 0 5rem;
+        font-size: 13px;
+        line-height: 20px;
+        font-family: "Anta";
+        border-radius: 1px;
+        padding-left: 5rem;
     }
 </style>
 

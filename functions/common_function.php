@@ -242,27 +242,48 @@ function product_Details()
 
                     echo "
             <div class='row'>
-                <div class='col-md-6'>
-                    <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 400px; object-fit: contain'>
+                <div class='col-md-7 '>
+                    <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 400px; object-fit: contain'  id='ProductImg'>
                     <div class='row m-4'>
-                        <div class='col-md-4'>
-                            <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain'>
+                        <div class='col-md-4 border p-2 sm:m-2'>
+                            <img src='../images/$product_image1' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg' >
                         </div>
-                        <div class='col-md-4'>
-                            <img src='../images/$product_image2' class='card-img-top' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain'>
+                        <div class='col-md-4 border p-2 sm:m-2'>
+                            <img src='../images/$product_image2' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg'>
                         </div>
-                        <div class='col-md-4'>
-                            <img src='../images/$product_image3' class='card-img-top' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain'>
+                        <div class='col-md-4 border p-2 sm:m-2'>
+                            <img src='../images/$product_image3' class='small-img' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain' id='ProductImg'>
                         </div>
                     </div>
                 </div>
-                <div class='col-md-6'>
-                    <h2>$product_title</h2>
-                    <p>$product_description</p>
+                <div class='col-md-5'>
+                    <h2 class='text-uppercase'>$product_title</h2>
+                    <p class=''>$product_description</p>
                     <p>$product_price</p>
                     <a href='#' class='btn btn-primary flex buy-btn'>Add to cart</a>
                 </div>
-            </div>";
+            </div>
+            
+            <script>
+            var ProductImg = document.getElementById('ProductImg');
+            var SmallImg = document.getElementsByClassName('small-img');
+
+            SmallImg[0].onclick = function() {
+                ProductImg.src = SmallImg[0].src;
+            }
+                   SmallImg[1].onclick = function() {
+                ProductImg.src = SmallImg[1].src;
+            }
+                   SmallImg[2].onclick = function() {
+                ProductImg.src = SmallImg[2].src;
+            }
+                   SmallImg[3].onclick = function() {
+                ProductImg.src = SmallImg[3].src;
+            }
+            
+            </script>
+             
+            ";
                 }
             }
         }

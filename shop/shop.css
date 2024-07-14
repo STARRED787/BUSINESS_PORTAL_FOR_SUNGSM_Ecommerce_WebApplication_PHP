@@ -14,6 +14,10 @@ body {
   background-attachment: fixed;
 }
 
+.font {
+  font-family: "Anta";
+}
+
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -22,6 +26,11 @@ h1 {
 h2 {
   font-size: 1.8rem;
   font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 
 h4 {
@@ -33,6 +42,29 @@ h5 {
   font-size: 1rem;
   font-weight: 400;
 }
+
+.homebtn {
+  font-family: "Barrio";
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  background-color: rgb(0, 0, 0);
+  color: aliceblue;
+  padding: 13px 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 12px;
+}
+
+.homebtn:hover {
+  background-color: rgba(0, 253, 84, 0.918);
+  border-radius: 12px;
+  color: black;
+  box-shadow: antiquewhite 5px;
+}
+
 /*navigation----------*/
 .navbar {
   font-size: 15px;
@@ -41,7 +73,6 @@ h5 {
   top: 0;
   left: 0;
   color: black;
-  font-family: "Anta";
 }
 
 .navbar-nav {
@@ -80,16 +111,195 @@ h5 {
   }
 }
 
-.card-img-top {
+#home {
+  color: rgb(0, 0, 0);
+  font-family: "Poppins";
+  margin-top: 8rem;
+  font-weight: 10px;
+  font-size: 20px;
+}
+
+/*new----------*/
+
+#new {
+  font-family: "Montserrat";
+  margin-top: 10rem;
+}
+
+#new .one {
+  position: relative;
+}
+
+#new .one .details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: peachpuff;
+  font-weight: bold;
+  transition: 0.4s ease;
+  opacity: 0.7;
+  background-color: black;
+
   width: 100%;
-  height: 15vw;
+  height: 100%;
+}
+
+#new .one img {
+  width: 100%;
+  height: 400px;
+}
+#new .one #newbtn {
+  font-family: "Barrio";
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  background-color: rgb(0, 0, 0);
+  color: aliceblue;
+  padding: 13px 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 12px;
+}
+
+#new .one #newbtn:hover {
+  background-color: rgba(0, 253, 84, 0.918);
+  border-radius: 12px;
+  color: black;
+  box-shadow: antiquewhite 5px;
+}
+
+#new .one:nth-child(1) .details {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: start;
+}
+#new .one:nth-child(2) .details {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+#new .one:nth-child(3) .details {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: end;
+}
+
+#new .one:nth-child(4) .details {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: start;
+}
+
+/*Sales----------*/
+
+.price-container {
+  font-size: 16px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: rgba(94, 94, 94, 0.912);
+}
+
+.new-price {
+  color: green;
+  font-weight: 700;
+}
+
+.buy-btn {
+  margin-top: 10px;
+  font-family: "Barrio";
+  font-size: 0.9rem;
+  font-weight: 700;
+  outline: none;
+  border: none;
+  background-color: rgb(255, 238, 1);
+  color: rgb(0, 2, 3);
+  padding: 13px 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 12px;
+}
+
+.buy-btn:hover {
+  background-color: rgba(0, 7, 2, 0.918);
+  border-radius: 12px;
+  color: rgb(255, 254, 254);
+  box-shadow: antiquewhite 5px;
+}
+
+.productsale {
+  cursor: pointer;
+  margin-bottom: 2rem all;
+  font-family: "RocknRoll One";
+}
+
+.productsale img {
+  transition: 0.3s;
+}
+
+.productsale:hover img {
+  transform: scale(1.1); /* Adjust the scale factor as desired */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.712); /* Add a shadow effect on hover */
+  border-radius: 20px;
+}
+.star {
+  color: #ffd904;
+}
+#sales {
+  background-color: #f8f8f8;
+  margin-top: -1rex;
+}
+
+/*Banner----------*/
+.banbtn {
+  margin-top: 10px;
+  font-family: "Barrio";
+  font-size: 0.9rem;
+  font-weight: 700;
+  outline: none;
+  border: none;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  padding: 13px 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 12px;
+}
+
+.banbtn:hover {
+  background-color: rgba(0, 234, 66, 0.918);
+  border-radius: 12px;
+  color: rgb(0, 0, 0);
+  box-shadow: antiquewhite 5px;
+}
+
+#banner {
+  background-image: url("../index/images/bannermid.jpg");
+  height: 60vh; /* You must set a specified height */
+  width: 100%;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 /*footer----------*/
 footer {
   width: 100%;
-  line-height: 1rem;
-  bottom: 200px;
+  bottom: 0;
   background: linear-gradient(to right, rgb(255, 89, 0), rgb(2, 32, 70));
   color: #fff;
   padding: 100 0 30px;
@@ -118,7 +328,7 @@ footer {
   flex-basis: 10%;
 }
 .logo {
-  width: 150px;
+  width: 50px;
   margin-bottom: 30px;
 }
 .col h3 {

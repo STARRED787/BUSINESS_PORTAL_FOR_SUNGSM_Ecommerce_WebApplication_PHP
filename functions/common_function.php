@@ -42,7 +42,7 @@ function getproducts()
             <p class='card-text'>$product_description</p>
             <p class='card-text'>$product_price</p>
             <a href='#' class='btn btn-primary flex buy-btn'>Add to cart</a>
-             <a href='#' class='btn btn-primary m-1 buy-btn'>View more</a>
+             <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
          </div>
       </div>
     </div>      
@@ -86,7 +86,7 @@ function getUniqCategory()
             <p class='card-text'>$product_description</p>
             <p class='card-text'>$product_price</p>
             <a href='#' class='btn btn-primary flex buy-btn'>Add to cart</a>
-             <a href='#' class='btn btn-primary m-1 buy-btn'>View more</a>
+             <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
          </div>
       </div>
     </div>      
@@ -130,7 +130,7 @@ function getUniqbrand()
             <p class='card-text'>$product_description</p>
             <p class='card-text'>$product_price</p>
             <a href='#' class='btn btn-primary flex buy-btn'>Add to cart</a>
-             <a href='#' class='btn btn-primary m-1 buy-btn'>View more</a>
+             <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
          </div>
       </div>
     </div>      
@@ -207,13 +207,64 @@ function search_Product()
                             <p class='card-text'>$product_description</p>
                             <p class='card-text'>$$product_price</p>
                             <a href='#' class='btn btn-primary flex buy-btn'>Add to cart</a>
-                            <a href='#' class='btn btn-primary m-1 buy-btn'>View more</a>
+                            <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
                         </div>
                     </div>
                 </div>";
             }
         } else {
             echo "<p >No products found matching your search criteria.</p>";
+        }
+    }
+}
+
+
+//display Product Details
+function product_Details()
+{
+    global $con;
+    if (isset($_GET['product_id'])) {
+        if (!isset($_GET['category'])) {
+            if (!isset($_GET['brand'])) {
+                $product_id = $_GET['product_id'];
+                $select_query = "SELECT * from `products` where product_id='$product_id'";
+                $result_query = mysqli_query($con, $select_query);
+                while ($row = mysqli_fetch_assoc($result_query)) {
+                    $product_id = $row['product_id'];
+                    $product_title = $row['product_tittle'];
+                    $product_description = $row['product_description'];
+                    $product_image1 = $row['product_image1'];
+                    $product_image2 = $row['product_image2'];
+                    $product_image3 = $row['product_image3'];
+                    $product_price = $row['product_price'];
+                    $product_categoroy = $row['categorie_id'];
+                    $product_brand = $row['brand_id'];
+
+                    echo "
+            <div class='row'>
+                <div class='col-md-6'>
+                    <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 400px; object-fit: contain'>
+                    <div class='row m-4'>
+                        <div class='col-md-4'>
+                            <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain'>
+                        </div>
+                        <div class='col-md-4'>
+                            <img src='../images/$product_image2' class='card-img-top' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain'>
+                        </div>
+                        <div class='col-md-4'>
+                            <img src='../images/$product_image3' class='card-img-top' alt='$product_title' style='width: 100%; height: 100px; object-fit: contain'>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <h2>$product_title</h2>
+                    <p>$product_description</p>
+                    <p>$product_price</p>
+                    <a href='#' class='btn btn-primary flex buy-btn'>Add to cart</a>
+                </div>
+            </div>";
+                }
+            }
         }
     }
 }

@@ -154,6 +154,7 @@ include ('../functions/common_function.php');
                     search_Product();
                     getUniqCategory();
                     getUniqbrand()
+
                         ?>
 
                     <!-- row end-->

@@ -148,11 +148,14 @@ include ('../functions/common_function.php');
 
           <!--PHP code to display products in DB-->
           <?php
+
           search_Product();
           getproducts();
           getUniqCategory();
-          getUniqbrand()
-            ?>
+          getUniqbrand();
+          getIPAddress();
+
+          ?>
 
           <!-- row end-->
         </div>

@@ -1,3 +1,11 @@
+<?php
+
+//database connection
+include ('../include/connect.php');
+include ('../functions/common_function.php');
+
+?>
+
 <!DOCTYPE html>
 
 <head>
@@ -14,47 +22,68 @@
 </head>
 
 <body>
-  <!--Navigation Bar-->
-  <nav class="navbar navbar-expand-lg py-4 font">
-    <div class="container">
-      <a href="index.html"><img src="../index/images/logo.png" alt="logo" width="70px" height="70px" /></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse animated-underline" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="../index/index.php">Home</a>
-          </li>
+  <section>
+    <?php
+    function cart_item()
+    {
+      global $con;
+      $get_ip_add = getIPAddress();
 
-          <li class="nav-item">
-            <a class="nav-link" href="../shop/shop.php">Shop</a>
-          </li>
+      // Query to select items from the cart where the IP address matches
+      $select_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
+      $result_query = mysqli_query($con, $select_query);
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
-          </li>
+      // Count the number of rows returned by the query
+      $count_cart_items = mysqli_num_rows($result_query);
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cantact Us</a>
-          </li>
+      // Output the number of items in the cart
+      echo $count_cart_items;
+    }
 
-          <li class="nav-item">
-            <i class="fa-solid fa-cart-shopping nav-link"></i>
-            <i class="fa-solid fa-user nav-link"></i>
-          </li>
-        </ul>
-        <form class="d-flex" action="../shop/search.php" method="get">
-          <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search" style="width: 300px;"
-            name="search_data">
-          <button class="btn btn-outline" name="search_data_product"></button>
-          <input type="submit" value="search" class="btn btn-outline" name="search_data_product">
-        </form>
+    ?>
+    <!--Navigation Bar-->
+    <nav class="navbar navbar-expand-lg py-4 font">
+      <div class="container">
+        <a href="index.html"><img src="../index/images/logo.png" alt="logo" width="70px" height="70px" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse animated-underline" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="../index/index.php">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="../shop/shop.php">Shop</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Blog</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cantact Us</a>
+            </li>
+
+            <li class="nav-item">
+              <i class="fa-solid fa-cart-shopping nav-link">
+                <sup><?php cart_item() ?></sup>
+              </i>
+              <i class="fa-solid fa-user nav-link"></i>
+            </li>
+          </ul>
+          <form class="d-flex" action="../shop/search.php" method="get">
+            <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search" style="width: 300px;"
+              name="search_data">
+            <button class="btn btn-outline" name="search_data_product"></button>
+            <input type="submit" value="search" class="btn btn-outline" name="search_data_product">
+          </form>
+        </div>
       </div>
-    </div>
-  </nav>
-
+    </nav>
+  </section>
   <!--Home-->
   <section id="home">
     <div class="container">

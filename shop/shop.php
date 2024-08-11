@@ -139,7 +139,6 @@ include ('../functions/common_function.php');
             </li>
 
             <li class="nav-item">
-
               <i class="fa-solid fa-cart-shopping nav-link">
                 <sup><?php cart_item() ?></sup>
               </i>

@@ -208,21 +208,38 @@ include ('../functions/common_function.php');
     ?>
     <!--cart table-->
     <section>
-        <table class="table table-hover table-dark container table-bordered">
+        <table class="table table-hover table-dark container table-bordered
+        text-center
+        ">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Product Title</th>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Quantity</th>
+
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Remove</th>
+                    <th scope="col">Operations</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+
+                    <td>Call of duty</td>
+                    <td><img src="../images/ game3.jpg" style=" width: 100%;
+                         height: 100px; 
+                         object-fit:contain"></td>
+                    <td>
+                        <input type="number" value="1" min="1" max="10">
+                    </td>
+                    <td>1800</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <p>update</p>
+                        <p>remove</p>
+                    </td>
+
                 </tr>
 
             </tbody>

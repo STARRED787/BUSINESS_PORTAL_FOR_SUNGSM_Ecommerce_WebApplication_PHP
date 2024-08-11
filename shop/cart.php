@@ -5,7 +5,7 @@ include ('../include/connect.php');
 include ('../functions/common_function.php');
 
 ?>
-</style>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -187,12 +187,7 @@ include ('../functions/common_function.php');
                         </li>
 
                     </ul>
-                    <form class="d-flex" action="search.php" method="get">
 
-                        <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search"
-                            style="width: 300px;" name="search_data">
-
-                        <input type="submit" value="search" class="btn-outline search" name="search_data_product">
                     </form>
                 </div>
 
@@ -245,6 +240,13 @@ include ('../functions/common_function.php');
             </tbody>
         </table>
     </section>
+
+    <!--sub Total-->
+    <div class="px-3 container">
+        <h3>Subtotal: <strong>Rs. 1600</strong></h3>
+        <a href="#"><button class="btn buy-btn mb-3">Check Out</button></a>
+        <a href="../shop/shop.php"><button class="btn buy-btn mb-3">Continue Shoping</button></a>
+    </div>
 
     <!--footer-------------->
     <footer class="footer col-md-12 col-lg-12 col-sm-12">

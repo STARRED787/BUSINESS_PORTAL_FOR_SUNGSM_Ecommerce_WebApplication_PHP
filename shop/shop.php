@@ -178,9 +178,9 @@ include ('../functions/common_function.php');
 
             <li class="nav-item">
               <i class="fa-solid fa-user nav-link"></i>
-              <i class="fa-solid fa-cart-shopping nav-link">
-                <sup><?php cart_item() ?></sup>
-              </i>
+              <a href="../shop/cart.php"> <i class="fa-solid fa-cart-shopping nav-link">
+                  <sup><?php cart_item() ?></sup>
+                </i></a>
               Total price Rs. <?php total_cart_price() ?>
 
             </li>

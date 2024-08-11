@@ -134,6 +134,11 @@ include ('../functions/common_function.php');
         </div>
     </nav>
 
+    <!--call cart functio-->
+    <?php
+    cart();
+
+    ?>
     <section class=" bg-light container mb-4 ">
         <!--heading Bar-->
         <div class="mt-2">

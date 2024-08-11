@@ -136,6 +136,12 @@ include ('../functions/common_function.php');
         </div>
     </nav>
 
+    <!--call cart functio-->
+    <?php
+    cart();
+
+    ?>
+
     <section class=" bg-light">
         <!--heading Bar-->
         <div class="bg-light">

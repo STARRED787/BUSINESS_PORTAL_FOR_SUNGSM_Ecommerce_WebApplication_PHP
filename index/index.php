@@ -5,23 +5,95 @@ include ('../include/connect.php');
 include ('../functions/common_function.php');
 
 ?>
+</style>
 
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IrishVisuals</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../index/index.css" />
+
+  <link rel="stylesheet" href="index.css" />
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+  .buy-btn {
+    margin: 1px;
+    font-family: "Barrio";
+    font-size: 0.9rem;
+    font-weight: 700;
+    outline: none;
+    border: none;
+    background-color: rgb(255, 238, 1);
+    color: rgb(0, 2, 3);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.5s ease;
+    border-radius: 5px;
+  }
+
+  .buy-btn:hover {
+    background-color: rgba(0, 7, 2, 0.918);
+    border-radius: 12px;
+    color: rgb(255, 254, 254);
+    box-shadow: antiquewhite 5px;
+  }
+
+  #in-cate {
+    font-family: "Poppins";
+  }
+
+  .tx {
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 30px;
+  }
+
+  footer {
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(to right, rgb(255, 89, 0), rgb(2, 32, 70));
+    color: #fff;
+    padding: 20px;
+    margin-left: 0 5rem;
+    font-size: 13px;
+    line-height: 20px;
+    font-family: "Anta";
+    border-radius: 1px;
+    padding-left: 5rem;
+  }
+
+  .search {
+    background-color: #f8f9fa;
+    color: #495057;
+    border-color: black;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+    margin-left: 10px;
+
+  }
+</style>
 
 <body>
+
+  <!--Navigation Bar-->
   <section>
     <?php
     //number of cart items
@@ -128,6 +200,14 @@ include ('../functions/common_function.php');
 
 
   </section>
+
+  <!--call cart function-->
+  <?php
+  cart();
+
+  ?>
+
+
   <!--Home-->
   <section id="home">
     <div class="container">
@@ -175,13 +255,11 @@ include ('../functions/common_function.php');
       </div>
     </div>
   </section>
-
-
   <!--footer-------------->
   <footer class="footer col-md-12 col-lg-12 col-sm-12">
     <div class="row">
       <div class="col">
-        <img src="logo.png" class="logo" />
+        <img src="../images/logo.png" class="logo" width="20px" height="20px" />
         <p>
           Immerse yourself in a world of visual wonder with IRISH Visuals,
           your premier destination for captivating imagery. Explore the latest
@@ -245,7 +323,6 @@ include ('../functions/common_function.php');
     <hr />
     <p class="copyright">IRISH Visuals © 2024 - All Right Reserved</p>
   </footer>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>

@@ -177,11 +177,12 @@ include ('../functions/common_function.php');
             </li>
 
             <li class="nav-item">
+              <i class="fa-solid fa-user nav-link"></i>
               <i class="fa-solid fa-cart-shopping nav-link">
                 <sup><?php cart_item() ?></sup>
               </i>
-              Rs. <?php total_cart_price() ?>
-              <i class="fa-solid fa-user nav-link"></i>
+              Total price Rs. <?php total_cart_price() ?>
+
             </li>
 
           </ul>

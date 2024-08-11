@@ -95,6 +95,7 @@ include ('../functions/common_function.php');
     <!--Navigation Bar-->
     <section>
         <?php
+        //number of cart items
         function cart_item()
         {
             global $con;
@@ -110,6 +111,43 @@ include ('../functions/common_function.php');
             // Output the number of items in the cart
             echo $count_cart_items;
         }
+        //total of cart items
+        
+        function total_cart_price()
+        {
+            global $con;
+            $get_ip_add = getIPAddress();
+
+            // Query to select items from the cart where the IP address matches
+            $select_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
+            $result_query = mysqli_query($con, $select_query);
+
+            // Initialize the total price to 0
+            $total_price = 0;
+
+            // Loop through the items in the cart
+            while ($row = mysqli_fetch_array($result_query)) {
+                // Get the product ID
+                $product_id = $row['product_id'];
+
+                // Query to select the product from the products table where the product ID matches
+                $select_product = "SELECT * FROM `products` WHERE product_id='$product_id'";
+                $result_product = mysqli_query($con, $select_product);
+
+                // Get the product details
+                $product_row = mysqli_fetch_array($result_product);
+
+                // Get the product price
+                $product_price = $product_row['product_price'];
+
+                // Add the product price to the total price
+                $total_price += $product_price;
+            }
+
+            // Output the total price
+            echo $total_price;
+        }
+
 
         ?>
         <nav class="navbar navbar-expand-lg py-4 font">
@@ -139,10 +177,12 @@ include ('../functions/common_function.php');
                         </li>
 
                         <li class="nav-item">
+                            <i class="fa-solid fa-user nav-link"></i>
                             <i class="fa-solid fa-cart-shopping nav-link">
                                 <sup><?php cart_item() ?></sup>
                             </i>
-                            <i class="fa-solid fa-user nav-link"></i>
+                            Total price Rs. <?php total_cart_price() ?>
+
                         </li>
 
                     </ul>

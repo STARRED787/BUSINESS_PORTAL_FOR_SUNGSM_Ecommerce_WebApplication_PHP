@@ -113,9 +113,41 @@ include ('../functions/common_function.php');
             echo $count_cart_items;
         }
 
+        //total of cart items
+        function total_cart_price()
+        {
+            global $con;
+            $get_ip_add = getIPAddress();
 
+            // Query to select items from the cart where the IP address matches
+            $select_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
+            $result_query = mysqli_query($con, $select_query);
 
+            // Initialize the total price to 0
+            $total_price = 0;
 
+            // Loop through the items in the cart
+            while ($row = mysqli_fetch_array($result_query)) {
+                // Get the product ID
+                $product_id = $row['product_id'];
+
+                // Query to select the product from the products table where the product ID matches
+                $select_product = "SELECT * FROM `products` WHERE product_id='$product_id'";
+                $result_product = mysqli_query($con, $select_product);
+
+                // Get the product details
+                $product_row = mysqli_fetch_array($result_product);
+
+                // Get the product price
+                $product_price = $product_row['product_price'];
+
+                // Add the product price to the total price
+                $total_price += $product_price;
+            }
+
+            // Output the total price
+            echo $total_price;
+        }
         ?>
         <nav class="navbar navbar-expand-lg py-4 font">
             <div class=" container">
@@ -169,8 +201,7 @@ include ('../functions/common_function.php');
     <!--cart table-->
     <section>
         <table class="table table-hover table-dark container table-bordered
-        text-center
-        ">
+        text-center">
             <thead>
                 <tr>
                     <th scope="col">Product Title</th>
@@ -179,37 +210,69 @@ include ('../functions/common_function.php');
                     <th scope="col">Total Price</th>
                     <th scope="col">Remove</th>
                     <th scope="col" colspan="2">Operations</th>
-
                 </tr>
             </thead>
             <tbody>
-                <!--PHP code to display Dynamic data-->
-                <tr>
+                <!--display dyanamic data-->
 
-                    <td>Call of duty</td>
-                    <td><img src="../images/ game3.jpg" style=" width: 100%;
-                         height: 100px; 
+                <?php
+                global $con;
+                $get_ip_add = getIPAddress();
+
+                // Query to select items from the cart where the IP address matches
+                $select_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
+                $result_query = mysqli_query($con, $select_query);
+
+                // Initialize the total price to 0
+                $total_price = 0;
+
+                // Loop through the items in the cart
+                while ($row = mysqli_fetch_array($result_query)) {
+                    // Get the product ID
+                    $product_id = $row['product_id'];
+
+                    // Query to select the product from the products table where the product ID matches
+                    $select_product = "SELECT * FROM `products` WHERE product_id='$product_id'";
+                    $result_product = mysqli_query($con, $select_product);
+
+                    // Get the product details
+                    $product_row = mysqli_fetch_array($result_product);
+
+                    // Get the product price
+                    $product_price = $product_row['product_price'];
+                    $product_tittle = $product_row['product_tittle'];
+                    $product_image1 = $product_row['product_image1'];
+
+                    // Add the product price to the total price
+                    $total_price += $product_price;
+
+                    ?>
+
+                    <tr>
+                        <td><?php echo $product_tittle ?></td>
+                        <td><img src="../images/<?php echo $product_image1 ?>" style=" width: 100%;
+                         height: 60px; 
                          object-fit:contain"></td>
-                    <td>
-                        <input type="number" value="1" min="1" max="10">
-                    </td>
-                    <td>1800</td>
-                    <td><input type="checkbox"></td>
-                    <td class="">
-                        <button class=" btn btn-success mb-2 m-1">Update</button> <button
-                            class=" btn btn-danger mb-2 m-1">Remove</button>
+                        <td>
+                            <input type="number" value="1" min="0" max="10">
+                        </td>
+                        <td> Rs.<?php echo $product_price ?></td>
+                        <td><input type="checkbox"></td>
+                        <td class="">
+                            <button class=" btn btn-success mb-2 m-1">Update</button> <button
+                                class=" btn btn-danger mb-2 m-1">Remove</button>
 
-                    </td>
+                        </td>
 
-                </tr>
-
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </section>
 
     <!--sub Total-->
     <div class="px-3 container">
-        <h3>Subtotal: <strong>Rs. 1600</strong></h3>
+        <h3>Subtotal: <strong>Rs.<?php total_cart_price(); ?></strong></h3>
         <a href="#"><button class="btn buy-btn mb-3">Check Out</button></a>
         <a href="../shop/shop.php"><button class="btn buy-btn mb-3">Continue Shoping</button></a>
     </div>

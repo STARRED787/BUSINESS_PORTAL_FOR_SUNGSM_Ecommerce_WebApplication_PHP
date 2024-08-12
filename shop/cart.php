@@ -265,7 +265,7 @@ include ('../functions/common_function.php');
 
                                         if ($result_qty) {
                                             // Recalculate total price for each product based on updated quantity
-                                            $total_price += $product_price * ($quantity - $row['quantity']);
+                                            $total_price += $product_price * $quantity;
                                         }
                                     }
                                 }

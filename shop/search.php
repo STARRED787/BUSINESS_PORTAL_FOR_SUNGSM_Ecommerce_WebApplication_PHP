@@ -117,31 +117,23 @@ include ('../functions/common_function.php');
         {
             global $con;
             $get_ip_add = getIPAddress();
-
-            // Query to select items from the cart where the IP address matches
-            $select_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
-            $result_query = mysqli_query($con, $select_query);
-
-            // Initialize the total price to 0
             $total_price = 0;
-
-            // Loop through the items in the cart
-            while ($row = mysqli_fetch_array($result_query)) {
-                // Get the product ID
+            $cart_query = "Select * from `cart` where
+                            ip_address='$get_ip_add'";
+            $result = mysqli_query($con, $cart_query);
+            while ($row = mysqli_fetch_array($result)) {
                 $product_id = $row['product_id'];
-
-                // Query to select the product from the products table where the product ID matches
-                $select_product = "SELECT * FROM `products` WHERE product_id='$product_id'";
-                $result_product = mysqli_query($con, $select_product);
-
-                // Get the product details
-                $product_row = mysqli_fetch_array($result_product);
-
-                // Get the product price
-                $product_price = $product_row['product_price'];
-
-                // Add the product price to the total price
-                $total_price += $product_price;
+                $select_products = "Select * from `products` where
+                            product_id='$product_id'";
+                $result_products = mysqli_query($con, $select_products);
+                while ($row_product_price = mysqli_fetch_array($result_products)) {
+                    $product_price = array($row_product_price['product_price']);
+                    $price_table = $row_product_price['product_price'];
+                    $product_tittle = $row_product_price['product_tittle'];
+                    $product_image1 = $row_product_price['product_image1'];
+                    $product_values = array_sum($product_price); // [500]
+                    $total_price += $product_values; //500
+                }
             }
 
             // Output the total price

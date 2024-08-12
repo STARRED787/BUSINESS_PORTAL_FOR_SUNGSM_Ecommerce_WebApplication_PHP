@@ -200,79 +200,98 @@ include ('../functions/common_function.php');
     ?>
     <!--cart table-->
     <section>
-        <table class="table table-hover table-dark container table-bordered
+        <form action="" method="POST">
+            <table class="table table-hover table-dark container table-bordered
         text-center">
-            <thead>
-                <tr>
-                    <th scope="col">Product Title</th>
-                    <th scope="col">Product Image</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total Price</th>
-                    <th scope="col">Remove</th>
-                    <th scope="col" colspan="2">Operations</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!--display dyanamic data-->
-
-                <?php
-                global $con;
-                $get_ip_add = getIPAddress();
-
-                // Query to select items from the cart where the IP address matches
-                $select_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
-                $result_query = mysqli_query($con, $select_query);
-
-                // Initialize the total price to 0
-                $total_price = 0;
-
-                // Loop through the items in the cart
-                while ($row = mysqli_fetch_array($result_query)) {
-                    // Get the product ID
-                    $product_id = $row['product_id'];
-
-                    // Query to select the product from the products table where the product ID matches
-                    $select_product = "SELECT * FROM `products` WHERE product_id='$product_id'";
-                    $result_product = mysqli_query($con, $select_product);
-
-                    // Get the product details
-                    $product_row = mysqli_fetch_array($result_product);
-
-                    // Get the product price
-                    $product_price = $product_row['product_price'];
-                    $product_tittle = $product_row['product_tittle'];
-                    $product_image1 = $product_row['product_image1'];
-
-                    // Add the product price to the total price
-                    $total_price += $product_price;
-
-                    ?>
-
+                <thead>
                     <tr>
-                        <td><?php echo $product_tittle ?></td>
-                        <td><img src="../images/<?php echo $product_image1 ?>" style=" width: 100%;
-                         height: 60px; 
-                         object-fit:contain"></td>
-                        <td>
-                            <input type="number" value="1" min="0" max="10">
-                        </td>
-                        <td> Rs.<?php echo $product_price ?></td>
-                        <td><input type="checkbox"></td>
-                        <td class="">
-                            <button class=" btn btn-success mb-2 m-1">Update</button> <button
-                                class=" btn btn-danger mb-2 m-1">Remove</button>
-
-                        </td>
-
+                        <th scope="col">Product Title</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Remove</th>
+                        <th scope="col" colspan="2">Operations</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <!--PHP code display dyanamic cart data-->
+
+                    <?php
+
+                    global $con;
+                    $get_ip_add = getIPAddress();
+                    $total_price = 0;
+
+                    // Fetch items in the cart for the given IP address
+                    $cart_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
+                    $result = mysqli_query($con, $cart_query);
+
+                    while ($row = mysqli_fetch_array($result)) {
+                        $product_id = $row['product_id'];
+
+                        // Fetch product details from the products table
+                        $select_products = "SELECT * FROM `products` WHERE product_id='$product_id'";
+                        $result_products = mysqli_query($con, $select_products);
+
+                        while ($row_product_price = mysqli_fetch_array($result_products)) {
+                            $product_price = $row_product_price['product_price'];
+                            $product_tittle = $row_product_price['product_tittle'];
+                            $product_image1 = $row_product_price['product_image1'];
+
+                            // Calculate the total price by adding the price of each product
+                            $total_price += $product_price;
+
+                            ?>
+
+                            <tr>
+                                <td><?php echo $product_tittle; ?></td>
+                                <td><img src="../images/<?php echo $product_image1; ?>"
+                                        style="width: 100%; height: 60px; object-fit:contain;"></td>
+                                <td>
+                                    <input type="text" name="qty[]" class="form-input w-50 bg-white rounded px-3 py-2"
+                                        value="<?php echo $row['quantity']; ?>">
+                                </td>
+
+                                <!-- Update cart quantity and recalculate total price -->
+                                <?php
+                                if (isset($_POST['update_cart'])) {
+                                    $quantities = $_POST['qty'];
+
+                                    foreach ($quantities as $index => $quantity) {
+                                        $product_id = $row['product_id'];
+                                        $quantity = (int) $quantity; // Ensure the quantity is an integer
+                                        $update_cart = "UPDATE `cart` SET quantity='$quantity' WHERE ip_address='$get_ip_add' AND product_id='$product_id'";
+                                        $result_qty = mysqli_query($con, $update_cart);
+
+                                        if ($result_qty) {
+                                            // Recalculate total price for each product based on updated quantity
+                                            $total_price += $product_price * ($quantity - $row['quantity']);
+                                        }
+                                    }
+                                }
+                                ?>
+
+                                <td> Rs. <?php echo $product_price; ?></td>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <input type="submit" value="Update" class="bg-info px-3 py-2 border-0 rounded"
+                                        name="update_cart">
+                                </td>
+
+                            </tr>
+
+                        <?php }
+                    } ?>
+
+                </tbody>
+
+            </table>
+        </form>
     </section>
 
     <!--sub Total-->
     <div class="px-3 container">
-        <h3>Subtotal: <strong>Rs.<?php total_cart_price(); ?></strong></h3>
+        <h3>Subtotal: <strong>Rs.<?php echo $total_price ?></strong></h3>
         <a href="#"><button class="btn buy-btn mb-3">Check Out</button></a>
         <a href="../shop/shop.php"><button class="btn buy-btn mb-3">Continue Shoping</button></a>
     </div>

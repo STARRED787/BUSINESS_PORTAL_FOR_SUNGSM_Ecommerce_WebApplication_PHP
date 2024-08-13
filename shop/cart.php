@@ -214,8 +214,40 @@ include ('../functions/common_function.php');
                     </tr>
                 </thead>
                 <tbody>
+                    <!--cart Delete-->
                     <?php
+                    function cart_delete()
+                    {
+                        global $con;
 
+                        if (isset($_POST['remove_cart'])) {
+                            if (isset($_POST['removeitem']) && !empty($_POST['removeitem'])) {
+                                foreach ($_POST['removeitem'] as $remove_id) {
+                                    // Sanitize input to prevent SQL injection
+                                    $remove_id = mysqli_real_escape_string($con, $remove_id);
+                                    $delete_product = "DELETE FROM `cart` WHERE product_id='$remove_id'";
+                                    $run_delete = mysqli_query($con, $delete_product);
+
+                                    if ($run_delete) {
+                                        // Redirect to cart page after deletion
+                                        echo "<script>window.open('cart.php','_self')</script>";
+                                    } else {
+                                        // Handle error if the query fails
+                                        echo "<script>alert('Failed to remove item from cart.'); window.open('cart.php','_self')</script>";
+                                    }
+                                }
+                            } else {
+                                // Show message if no items are selected
+                                echo "<script>alert('Please select at least one item to remove.'); window.open('cart.php','_self')</script>";
+                            }
+                        }
+                    }
+                    // Call the function
+                    cart_delete();
+                    ?>
+
+                    <!--cart Upadate-->
+                    <?php
                     global $con;
                     $get_ip_add = getIPAddress();
                     $total_price = 0; // This will hold the subtotal
@@ -256,16 +288,17 @@ include ('../functions/common_function.php');
                             $total_price += $product_price * $quantity;
 
                             ?>
+
                             <tr>
                                 <td><?php echo $product_tittle; ?></td>
                                 <td><img src="../images/<?php echo $product_image1; ?>"
                                         style="width: 100%; height: 70px; object-fit:contain;"></td>
                                 <td>
-                                    <input type="text" name="qty[<?php echo $product_id; ?>]" value="<?php echo $quantity; ?>"
+                                    <input type="text" name="qty[<?php echo $product_id; ?>]"
                                         class="form-input w-50 bg-white rounded px-3 py-2 text-black">
                                 </td>
                                 <td> Rs. <?php echo $product_price; ?></td>
-                                <td><input type="checkbox"></td>
+                                <td><input type="checkbox" name="removeitem[]" value="<?php echo $product_id ?>"></td>
                                 <td>
                                     <input type="submit" value="Update" class="bg-success px-3 py-2 border-0 rounded m-1"
                                         name="update_cart">

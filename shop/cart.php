@@ -342,7 +342,9 @@ include ('../functions/common_function.php');
             <a href='../shop/shop.php'><button class='btn buy-btn mb-3'>Continue Shopping</button></a>
         </div>";
     } else {
-        echo "<h1 class='tx'>Your Cart is Empty</h1>";
+        echo "<h1 class='tx mb-5'>Your Cart is Empty</h1>
+        <a href='../shop/shop.php'><button class='btn buy-btn mb-3 m-5'>Continue Shopping</button></a>
+        ";
     }
     ?>
 

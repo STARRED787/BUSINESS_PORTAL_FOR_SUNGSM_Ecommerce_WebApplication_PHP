@@ -180,11 +180,8 @@ include ('../functions/common_function.php');
                             <a href="../shop/cart.php"> <i class="fa-solid fa-cart-shopping nav-link">
                                     <sup><?php cart_item() ?></sup>
                                 </i></a>
-
-
                         </li>
                     </ul>
-
                     </form>
                 </div>
 
@@ -203,16 +200,7 @@ include ('../functions/common_function.php');
         <form action="" method="POST">
             <table class="table table-hover table-dark container table-bordered
         text-center">
-                <thead>
-                    <tr>
-                        <th scope="col">Product Title</th>
-                        <th scope="col">Product Image</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Total Price</th>
-                        <th scope="col">Remove</th>
-                        <th scope="col" colspan="2">Operations</th>
-                    </tr>
-                </thead>
+
                 <tbody>
                     <!--cart Delete-->
                     <?php
@@ -246,7 +234,7 @@ include ('../functions/common_function.php');
                     cart_delete();
                     ?>
 
-                    <!--cart Upadate-->
+                    <!--cart Upadate -->
                     <?php
                     global $con;
                     $get_ip_add = getIPAddress();
@@ -255,6 +243,22 @@ include ('../functions/common_function.php');
                     // Fetch items in the cart for the given IP address
                     $cart_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
                     $result = mysqli_query($con, $cart_query);
+
+                    // Get table headings only if there are items in the cart
+                    $result_count = mysqli_num_rows($result);
+                    if ($result_count > 0) {
+                        echo ' 
+                        <thead>
+                        <tr>
+                            <th scope="col">Product Title</th>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Remove</th>
+                            <th scope="col" colspan="2">Operations</th>
+                        </tr>
+                    </thead>';
+                    }
 
                     // Initialize an array to store updated quantities
                     $updated_quantities = [];
@@ -294,13 +298,13 @@ include ('../functions/common_function.php');
                                 <td><img src="../images/<?php echo $product_image1; ?>"
                                         style="width: 100%; height: 70px; object-fit:contain;"></td>
                                 <td>
-                                    <input type="text" name="qty[<?php echo $product_id; ?>]"
+                                    <input type="text" name="qty[<?php echo $product_id; ?>]" value="1"
                                         class="form-input w-50 bg-white rounded px-3 py-2 text-black">
                                 </td>
                                 <td> Rs. <?php echo $product_price; ?></td>
                                 <td><input type="checkbox" name="removeitem[]" value="<?php echo $product_id ?>"></td>
                                 <td>
-                                    <input type="submit" value="Update" class="bg-success px-3 py-2 border-0 rounded m-1"
+                                    <input type="submit" value="Add" class="bg-success px-3 py-2 border-0 rounded m-1"
                                         name="update_cart">
                                 </td>
                                 <td colspan="2">
@@ -308,22 +312,40 @@ include ('../functions/common_function.php');
                                         name="remove_cart">
                                 </td>
                             </tr>
+
                         <?php }
-                    } ?>
+                    }
 
 
+                    ?>
                 </tbody>
 
             </table>
         </form>
     </section>
 
-    <!-- Subtotal Section -->
-    <div class="px-3 container">
-        <h3>Subtotal: <strong>Rs.<?php echo $total_price; ?></strong></h3>
-        <a href="#"><button class="btn buy-btn mb-3">Check Out</button></a>
-        <a href="../shop/shop.php"><button class="btn buy-btn mb-3">Continue Shopping</button></a>
-    </div>
+
+    <?php
+    global $con;
+    $get_ip_add = getIPAddress();
+
+    // Fetch items in the cart for the given IP address
+    $cart_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
+    $result = mysqli_query($con, $cart_query);
+    $result_count = mysqli_num_rows($result);
+    if ($result_count > 0) {
+        // Subtotal Section
+        echo "
+        <div class='px-3 container'>
+            <h3>Subtotal: <strong>Rs.$total_price</strong></h3>
+            <a href=''><button class='btn buy-btn mb-3'>Check Out</button></a>
+            <a href=''../shop/shop.php'><button class='btn buy-btn mb-3'>Continue Shopping</button></a>
+        </div>";
+    } else {
+        echo "<h1 class='tx'>Your Cart is Empty</h1>";
+    }
+    ?>
+
 
 
     <!--footer-------------->

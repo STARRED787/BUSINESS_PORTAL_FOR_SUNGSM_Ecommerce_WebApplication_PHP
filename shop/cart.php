@@ -324,7 +324,6 @@ include ('../functions/common_function.php');
         </form>
     </section>
 
-
     <?php
     global $con;
     $get_ip_add = getIPAddress();

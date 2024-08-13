@@ -214,17 +214,22 @@ include ('../functions/common_function.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <!--PHP code display dyanamic cart data-->
-
                     <?php
 
                     global $con;
                     $get_ip_add = getIPAddress();
-                    $total_price = 0;
-
+                    $total_price = 0; // This will hold the subtotal
+                    
                     // Fetch items in the cart for the given IP address
                     $cart_query = "SELECT * FROM `cart` WHERE ip_address='$get_ip_add'";
                     $result = mysqli_query($con, $cart_query);
+
+                    // Initialize an array to store updated quantities
+                    $updated_quantities = [];
+
+                    if (isset($_POST['update_cart'])) {
+                        $updated_quantities = $_POST['qty'];
+                    }
 
                     while ($row = mysqli_fetch_array($result)) {
                         $product_id = $row['product_id'];
@@ -238,50 +243,41 @@ include ('../functions/common_function.php');
                             $product_tittle = $row_product_price['product_tittle'];
                             $product_image1 = $row_product_price['product_image1'];
 
-                            // Calculate the total price by adding the price of each product
-                            $total_price += $product_price;
+                            // Update cart quantity and recalculate total price
+                            if (isset($_POST['update_cart'])) {
+                                $quantity = isset($updated_quantities[$product_id]) ? (int) $updated_quantities[$product_id] : $row['quantity'];
+                                $update_cart = "UPDATE `cart` SET quantity='$quantity' WHERE ip_address='$get_ip_add' AND product_id='$product_id'";
+                                mysqli_query($con, $update_cart);
+                            } else {
+                                $quantity = $row['quantity'];
+                            }
+
+                            // Calculate the total price based on updated quantity
+                            $total_price += $product_price * $quantity;
 
                             ?>
-
                             <tr>
                                 <td><?php echo $product_tittle; ?></td>
                                 <td><img src="../images/<?php echo $product_image1; ?>"
-                                        style="width: 100%; height: 60px; object-fit:contain;"></td>
+                                        style="width: 100%; height: 70px; object-fit:contain;"></td>
                                 <td>
-                                    <input type="text" name="qty[]" class="form-input w-50 bg-white rounded px-3 py-2"
-                                        value="<?php echo $row['quantity']; ?>">
+                                    <input type="text" name="qty[<?php echo $product_id; ?>]" value="<?php echo $quantity; ?>"
+                                        class="form-input w-50 bg-white rounded px-3 py-2 text-black">
                                 </td>
-
-                                <!-- Update cart quantity and recalculate total price -->
-                                <?php
-                                if (isset($_POST['update_cart'])) {
-                                    $quantities = $_POST['qty'];
-
-                                    foreach ($quantities as $index => $quantity) {
-                                        $product_id = $row['product_id'];
-                                        $quantity = (int) $quantity; // Ensure the quantity is an integer
-                                        $update_cart = "UPDATE `cart` SET quantity='$quantity' WHERE ip_address='$get_ip_add' AND product_id='$product_id'";
-                                        $result_qty = mysqli_query($con, $update_cart);
-
-                                        if ($result_qty) {
-                                            // Recalculate total price for each product based on updated quantity
-                                            $total_price += $product_price * $quantity;
-                                        }
-                                    }
-                                }
-                                ?>
-
                                 <td> Rs. <?php echo $product_price; ?></td>
                                 <td><input type="checkbox"></td>
                                 <td>
-                                    <input type="submit" value="Update" class="bg-info px-3 py-2 border-0 rounded"
+                                    <input type="submit" value="Update" class="bg-success px-3 py-2 border-0 rounded m-1"
                                         name="update_cart">
                                 </td>
-
+                                <td colspan="2">
+                                    <input type="submit" value="Delete" class="bg-danger px-3 py-2 border-0 rounded m-1"
+                                        name="remove_cart">
+                                </td>
                             </tr>
-
                         <?php }
                     } ?>
+
 
                 </tbody>
 
@@ -289,12 +285,13 @@ include ('../functions/common_function.php');
         </form>
     </section>
 
-    <!--sub Total-->
+    <!-- Subtotal Section -->
     <div class="px-3 container">
-        <h3>Subtotal: <strong>Rs.<?php echo $total_price ?></strong></h3>
+        <h3>Subtotal: <strong>Rs.<?php echo $total_price; ?></strong></h3>
         <a href="#"><button class="btn buy-btn mb-3">Check Out</button></a>
-        <a href="../shop/shop.php"><button class="btn buy-btn mb-3">Continue Shoping</button></a>
+        <a href="../shop/shop.php"><button class="btn buy-btn mb-3">Continue Shopping</button></a>
     </div>
+
 
     <!--footer-------------->
     <footer class="footer col-md-12 col-lg-12 col-sm-12">

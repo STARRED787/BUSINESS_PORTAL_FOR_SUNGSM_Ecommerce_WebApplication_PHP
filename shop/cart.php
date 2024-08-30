@@ -1,8 +1,8 @@
 <?php
 
 //database connection
-include ('../include/connect.php');
-include ('../functions/common_function.php');
+include('../include/connect.php');
+include('../functions/common_function.php');
 
 ?>
 
@@ -13,7 +13,7 @@ include ('../functions/common_function.php');
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IrishVisuals</title>
+    <title>SUN GSM</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="shop.css" />
@@ -151,7 +151,7 @@ include ('../functions/common_function.php');
         ?>
         <nav class="navbar navbar-expand-lg py-4 font">
             <div class=" container">
-                <a href="index.php"><img src="../index/images/logo.png" alt="logo" width="70px" height="70px" /></a>
+                <a href="index.php"><img src="../index/images/loogo.png" alt="logo" width="100px" height="70px" /></a>
                 <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -298,10 +298,10 @@ include ('../functions/common_function.php');
                                 <td><img src="../images/<?php echo $product_image1; ?>"
                                         style="width: 100%; height: 70px; object-fit:contain;"></td>
                                 <td>
-                                    <input type="text" name="qty[<?php echo $product_id; ?>]" value="1"
+                                    <input type="text" name="qty[<?php echo $product_id; ?>]" value="<?php echo $quantity; ?>"
                                         class="form-input w-50 bg-white rounded px-3 py-2 text-black">
                                 </td>
-                                <td> Rs. <?php echo $product_price; ?></td>
+                                <td> Rs. <?php echo $product_price * $quantity; ?></td>
                                 <td><input type="checkbox" name="removeitem[]" value="<?php echo $product_id ?>"></td>
                                 <td>
                                     <input type="submit" value="Add" class="bg-success px-3 py-2 border-0 rounded m-1"
@@ -353,12 +353,12 @@ include ('../functions/common_function.php');
     <footer class="footer col-md-12 col-lg-12 col-sm-12">
         <div class="row">
             <div class="col">
-                <img src="../images/logo.png" class="logo" width="20px" height="20px" />
+                <img style="margin-bottom: 1rem;" src="../index/images/logoo.jpg" width="180px" height="70px" />
                 <p>
-                    Immerse yourself in a world of visual wonder with IRISH Visuals,
+                    Immerse yourself in a world of visual wonder with SUN GSM,
                     your premier destination for captivating imagery. Explore the latest
                     releases, delve into exclusive interviews, and dive deep into expert
-                    reviews. Unleash the power of visuals. 🎬✨ #IRISHVisuals
+                    reviews. Unleash the power of visuals. 🎬✨ #SUNGSM
                 </p>
             </div>
             <div class="col">
@@ -366,11 +366,10 @@ include ('../functions/common_function.php');
                     Location
                     <div class="underline"><span></span></div>
                 </h3>
-                <p>Mattegoda Bus Stop</p>
-                <p>Polgasowita,</p>
+                <p>No 193/5 Bandaranayakepura</p>
                 <p>POSTOL: 10240, Mattegoda.</p>
-                <p class="email-id">irishvisuals@gmail.com</p>
-                <h4>+94-113467895 <br />+94-716634743</h4>
+                <p class="email-id">sun.g.s.m.mobi@gmail.com</p>
+                <h4>+94-113467895 <br />+94-713130053</h4>
             </div>
             <div class="col">
                 <h3>
@@ -415,7 +414,7 @@ include ('../functions/common_function.php');
             </div>
         </div>
         <hr />
-        <p class="copyright">IRISH Visuals © 2024 - All Right Reserved</p>
+        <p class="copyright">SUN GSM © 2024 - All Right Reserved</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

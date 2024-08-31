@@ -89,6 +89,127 @@ include('../functions/common_function.php');
         margin-left: 10px;
 
     }
+
+    .row {
+        width: 85%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .col {
+        flex-basis: 25%;
+        padding: 15px;
+    }
+
+    .col:nth-child(2),
+    .col:nth-child(3) {
+        flex-basis: 10%;
+    }
+
+    .logo {
+        width: 50px;
+        margin-bottom: 30px;
+    }
+
+    .col h3 {
+        width: fit-content;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    .email-id {
+        width: fit-content;
+        border-bottom: 1px solid #ccc;
+        margin: 20px 0;
+    }
+
+    ul li {
+        list-style: none;
+        margin-bottom: 12px;
+    }
+
+    ul li a {
+        text-decoration: none;
+        color: whitesmoke;
+    }
+
+    li .a:hover {
+        color: #ff1e1e;
+    }
+
+
+    .social-icons h3 {
+        margin-top: -2.3rem;
+    }
+
+    .social-icons .bx {
+        margin-top: 0.5rem;
+        margin-left: 1rem;
+        margin-bottom: 0.3rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        font-size: 20px;
+        color: #000000;
+        background: whitesmoke;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+
+    .social-icons .bx:hover {
+        color: #f30c00;
+    }
+
+    hr {
+        width: 90%;
+        border: 0;
+        border-bottom: 1.6px solid #f8f8f8;
+        margin: 20px auto;
+    }
+
+    .copyright {
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: -1rem;
+    }
+
+    .underline {
+        width: 100%;
+        height: 6px;
+        background: #ffffff;
+        border-radius: 3px;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        overflow: hidden;
+    }
+
+    .underline span {
+        width: 15px;
+        height: 100%;
+        background: #ff0000;
+        border-radius: 3px;
+        box-shadow: 0 0 10px white;
+        position: absolute;
+        top: 1px;
+        left: 10px;
+        animation: moving 2s linear infinite;
+    }
+
+    @keyframes moving {
+        0% {
+            left: 0px;
+        }
+
+        100% {
+            left: 100px;
+        }
+    }
 </style>
 
 <body>
@@ -143,7 +264,7 @@ include('../functions/common_function.php');
 
 
         ?>
-        <nav class="navbar navbar-expand-lg  font">
+        <nav class="navbar navbar-expand-lg font">
             <div class=" container">
                 <a href="index.php"><img src="../index/images/loogo.png" alt="logo" width="100px" height="70px" /></a>
                 <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse"
@@ -259,11 +380,11 @@ include('../functions/common_function.php');
                     <i class="bx bxs-envelope" undefined></i>
                     <input type="text" placeholder="Enter Your Email ID" required />
                     <button type="submit">
-                        <i class="bx bxs-right-arrow-circle"></i>
+                        <i class="bx bxs-right-arrow-circle flex"></i>
                     </button>
                 </form>
                 <div class="social-icons">
-                    <h3>
+                    <h3 class=" mt-3">
                         Follow Us
                         <div class="underline"><span></span></div>
                     </h3>

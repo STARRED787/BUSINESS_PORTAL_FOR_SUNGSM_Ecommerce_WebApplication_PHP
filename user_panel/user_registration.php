@@ -38,25 +38,82 @@
 
 <body class="font" style=" background:rgb(32, 30, 67)">
 
-    <div class="container d-flex justify-content-center align-items-center min-vh-100 ">
-        <div class="row rounded-5 p-3 bg-white shadow box ">
-            <div class="col-md-6 left-box rounded d-flex flex-column bg-i justify-content-center align-items-center">
-                <dic class="fetured-img ">
-                    <img src="./images/rgistration.jpg" class="img-fliud mt-2 rounded-4" width="430px">
-                </dic>
-                <p class="  fs-2 text-center">Registraion</p>
-                <small class="  text-wrap text-center">SUN GSM Community</small>
-            </div>
-            <div class="col-md-6 right-box">
-                <div class="row align-items-center">
-                    <div class="header-text mb-4">
-                        hello
-                    </div>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-2">
+        <div class="row rounded-5 p-3 bg-white shadow box w-100">
+            <!-- Left Box -->
+            <div
+                class="col-md-6 col-12 rounded d-flex flex-column justify-content-center align-items-center p-3 mb-3 mb-md-0">
+                <div class="featured-img mb-3">
+                    <img src="./images/rgistration.jpg" class="img-fluid mt-2 rounded-4 w-100">
                 </div>
+                <p class="fs-2 text-center">Registration</p>
+                <a href=""><small class="text-wrap text-center">Already have acount login here </small></a>
+                <a href="../index/index.php"><small class="text-wrap text-center">Back to home click here </small></a>
             </div>
 
+            <!-- Right Box -->
+            <div class="col-md-6 col-12">
+                <div class="row align-items-center">
+                    <div class="header-text mb-4 text-center">
+                        <h4>SUN GSM Community</h4>
+                    </div>
+
+                    <form action="">
+                        <!-- username -->
+                        <label for="username" class="form-label"> Username</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="Enter your Username" id="username" name="username" required>
+                        </div>
+                        <!-- email -->
+                        <label for="email" class="form-label"> Email</label>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="Enter your Email" id="email" name="email" required>
+                        </div>
+                        <!-- user image -->
+                        <label for="user_image" class="form-label"> User Image</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="upload your Image" id="user_image" name="user_image" required>
+                        </div>
+                        <!-- password -->
+                        <label for="password" class="form-label"> Password</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="type your password" id="password" name="password" required>
+                        </div>
+                        <!-- confirm password -->
+                        <label for="confirm_password" class="form-label"> Confirm Password</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="type your password" id="confirm_password" name="confirm_password" required>
+                        </div>
+                        <!-- Address-->
+                        <label for="address" class="form-label">Address</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="type your address" id="address" name="address" required>
+                        </div>
+                        <!-- mobile number-->
+                        <label for="mobile_number" class="form-label"> Mobile Number</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="type your address" id="mobile_number" name="mobile_number" required>
+                        </div>
+
+                        <!-- submit-->
+
+                        <div class="btn mb-3">
+                            <input type="submit" value="Register" class="bg-info py-2 px-3 rounded"
+                                name="user_registration">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
         </div>
-    </div>
+
 </body>
 
 </html>

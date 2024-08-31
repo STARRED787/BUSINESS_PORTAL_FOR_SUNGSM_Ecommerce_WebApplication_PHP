@@ -337,7 +337,7 @@ include('../functions/common_function.php');
         echo "
         <div class='px-3 container'>
             <h3>Subtotal: <strong>Rs.$total_price</strong></h3>
-            <a href=''><button class='btn buy-btn mb-3'>Check Out</button></a>
+            <a href='../user_panel/checkout.php'><button class='btn buy-btn mb-3'>Check Out</button></a>
             <a href='../shop/shop.php'><button class='btn buy-btn mb-3'>Continue Shopping</button></a>
         </div>";
     } else {

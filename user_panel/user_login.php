@@ -45,11 +45,9 @@
                 class="col-md-6 col-12 rounded d-flex flex-column justify-content-center align-items-center p-3 mb-3 mb-md-0">
                 <div class="featured-img mb-3">
                     <img src="./images/rgistration.jpg" class="img-fluid mt-2 rounded-4 w-100">
+                    <p class="fs-2 text-center">Login</p>
                 </div>
-                <p class="fs-2 text-center">Login</p>
-                <a href="user_registration.php"><small class="text-wrap text-center">You have not acount Registraion
-                        here </small></a>
-                <a href="../index/index.php"><small class="text-wrap text-center">Back to home click here </small></a>
+
             </div>
 
             <!-- Right Box -->
@@ -57,6 +55,7 @@
                 <div class="row align-items-center">
                     <div class="header-text mb-4 text-center">
                         <h4>SUN GSM Community</h4>
+
                     </div>
 
                     <form action="">
@@ -79,7 +78,20 @@
                             <input type="text" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="type your password" id="password" name="password" required>
 
+                        </div>
+                        <!-- submit-->
+
+                        <div class="btn mb-3">
+                            <input type="submit" value="Login" class="bg-info py-2 px-3 rounded" name="user_login">
+                        </div>
+
+
                     </form>
+                    <a href="user_registration.php"><small class="text-wrap text-center">You have not acount
+                            Registraion
+                            here </small></a>
+                    <a href="../index/index.php"><small class="text-wrap text-center">Back to home click here
+                        </small></a>
 
                 </div>
             </div>

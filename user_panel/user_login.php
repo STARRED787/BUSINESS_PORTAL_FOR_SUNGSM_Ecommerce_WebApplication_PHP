@@ -43,12 +43,12 @@
             <!-- Left Box -->
             <div
                 class="col-md-6 col-12 rounded d-flex flex-column justify-content-center align-items-center p-3 mb-3 mb-md-0">
-                <div class="featured-img mb-3 ">
-                    <img src="./images/rgistration.jpg" class="img-fluid rounded-4 w-100">
+                <div class="featured-img mb-3">
+                    <img src="./images/rgistration.jpg" class="img-fluid mt-2 rounded-4 w-100">
                 </div>
-                <p class="fs-2 text-center">Registration</p>
-                <a href="./user_login.php"><small class="text-wrap text-center">Already have acount login here
-                    </small></a>
+                <p class="fs-2 text-center">Login</p>
+                <a href="user_registration.php"><small class="text-wrap text-center">You have not acount Registraion
+                        here </small></a>
                 <a href="../index/index.php"><small class="text-wrap text-center">Back to home click here </small></a>
             </div>
 
@@ -72,43 +72,13 @@
                             <input type="email" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="Enter your Email" id="email" name="email" required>
                         </div>
-                        <!-- user image -->
-                        <label for="user_image" class="form-label"> User Image</label>
-                        <div class="input-group mb-3">
-                            <input type="file" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="upload your Image" id="user_image" name="user_image" required>
-                        </div>
+
                         <!-- password -->
                         <label for="password" class="form-label"> Password</label>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="type your password" id="password" name="password" required>
-                        </div>
-                        <!-- confirm password -->
-                        <label for="confirm_password" class="form-label"> Confirm Password</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="type your password" id="confirm_password" name="confirm_password" required>
-                        </div>
-                        <!-- Address-->
-                        <label for="address" class="form-label">Address</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="type your address" id="address" name="address" required>
-                        </div>
-                        <!-- mobile number-->
-                        <label for="mobile_number" class="form-label"> Mobile Number</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="type your address" id="mobile_number" name="mobile_number" required>
-                        </div>
 
-                        <!-- submit-->
-
-                        <div class="btn mb-3">
-                            <input type="submit" value="Register" class="bg-info py-2 px-3 rounded"
-                                name="user_registration">
-                        </div>
                     </form>
 
                 </div>

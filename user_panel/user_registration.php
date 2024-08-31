@@ -25,8 +25,10 @@
         width: 930px;
     }
 
-    .bg-i {
-        background-color: rgb(11, 47, 159);
+
+
+    .bg-body {
+        background: red;
     }
 
     .font {
@@ -34,17 +36,24 @@
     }
 </style>
 
-<body class="font">
+<body class="font" style=" background:rgb(32, 30, 67)">
+
     <div class="container d-flex justify-content-center align-items-center min-vh-100 ">
-        <div class="row rounder-5 p-3 bg-white shadow box ">
+        <div class="row rounded-5 p-3 bg-white shadow box ">
             <div class="col-md-6 left-box rounded d-flex flex-column bg-i justify-content-center align-items-center">
-                <dic class="fetured-img">
-                    <img src="./images/registration.jpg" class="img-fliud mt-2" width="430px">
+                <dic class="fetured-img ">
+                    <img src="./images/rgistration.jpg" class="img-fliud mt-2 rounded-4" width="430px">
                 </dic>
-                <p class=" text-white fs-2 text-center">Registraion</p>
-                <small class=" text-white text-wrap text-center">SUN GSM Community</small>
+                <p class="  fs-2 text-center">Registraion</p>
+                <small class="  text-wrap text-center">SUN GSM Community</small>
             </div>
-            <div class="col-md-6 right-box"></div>
+            <div class="col-md-6 right-box">
+                <div class="row align-items-center">
+                    <div class="header-text mb-4">
+                        hello
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

@@ -207,7 +207,7 @@ include('../functions/common_function.php');
     <div class="container">
       <h5>NEW ARRIVALS</h5>
       <h1 style="color: rgb(0, 0, 0)">Best Prices For Deals</h1>
-      <p style="color: rgb(0, 0, 0)">IRISH Offers for the best products</p>
+      <p style="color: rgb(0, 0, 0)">SUN GSM Offers for the best products</p>
       <button style="border-radius: 12px" class="homebtn">Shop Now</button>
     </div>
   </section>

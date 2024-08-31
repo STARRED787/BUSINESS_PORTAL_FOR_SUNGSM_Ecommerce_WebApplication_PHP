@@ -88,6 +88,10 @@ include('../functions/common_function.php');
     margin-left: 10px;
 
   }
+
+  .font {
+    font-family: 'Anta';
+  }
 </style>
 
 <body>
@@ -208,7 +212,10 @@ include('../functions/common_function.php');
       <h5>NEW ARRIVALS</h5>
       <h1 style="color: rgb(0, 0, 0)">Best Prices For Deals</h1>
       <p style="color: rgb(0, 0, 0)">SUN GSM Offers for the best products</p>
-      <button style="border-radius: 12px" class="homebtn">Shop Now</button>
+      <a href="../user_panel/user_login.php"> <button style="border-radius: 12px" class="homebtn font">Sign
+          In</button></a>
+      <a href="../user_panel/user_registration.php"><button style="border-radius: 12px" class="homebtn font">Sign
+          Up</button></a>
     </div>
   </section>
 

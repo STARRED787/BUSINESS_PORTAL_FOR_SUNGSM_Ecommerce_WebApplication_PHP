@@ -130,10 +130,6 @@ include('../functions/common_function.php');
         <!-- Toastr JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
             referrerpolicy="no-referrer"></script>
-
-
-
-
 </body>
 
 </html>
@@ -144,6 +140,7 @@ if (isset($_POST['user_registration'])) {
     $user_username = $_POST['username'];
     $user_email = $_POST['email'];
     $user_password = $_POST['password'];
+    $hashed_password = password_hash($user_password, PASSWORD_DEFAULT);
     $user_confirm_password = $_POST['confirm_password'];
     $user_address = $_POST['address'];
     $user_mobile_number = $_POST['mobile_number'];
@@ -158,13 +155,17 @@ if (isset($_POST['user_registration'])) {
 
     if ($rows_count > 0) {
         echo "<script>$(document).ready(function() { toastr.error('Username or Email Already exists'); });</script>";
+    }
+
+    if ($user_password != $user_confirm_password) {
+        echo "<script>$(document).ready(function() { toastr.error('Password is Not Match'); });</script>";
     } else {
         // Upload the image
         move_uploaded_file($user_image_tmp, "./user_images/$user_image");
 
         // Insert Query
         $query = "INSERT INTO `user` (username, user_email, password, user_image, user_ip, user_address, user_mobile)
-                  VALUES ('$user_username', '$user_email', '$user_password', '$user_image', '$user_ip', '$user_address', '$user_mobile_number')";
+                  VALUES ('$user_username', '$user_email', '$$hashed_password', '$user_image', '$user_ip', '$user_address', '$user_mobile_number')";
 
         $result = mysqli_query($con, $query);
 

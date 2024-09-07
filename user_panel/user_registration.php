@@ -1,3 +1,5 @@
+<?php include('../include/connect.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +61,7 @@
                         <h4>SUN GSM Community</h4>
                     </div>
 
-                    <form action="">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <!-- username -->
                         <label for="username" class="form-label"> Username</label>
                         <div class="input-group mb-3">

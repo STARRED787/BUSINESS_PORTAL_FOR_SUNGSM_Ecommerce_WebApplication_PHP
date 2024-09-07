@@ -1,4 +1,10 @@
-<?php include('../include/connect.php'); ?>
+<?php
+
+// Include database connection
+include('../include/connect.php');  // Ensure this path is correct
+include('../functions/common_function.php');
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,11 +12,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SUN GSM | Registraion</title>
+    <title>SUN GSM | Registration</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="index.css" />
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -27,8 +31,6 @@
         width: 930px;
     }
 
-
-
     .bg-body {
         background: red;
     }
@@ -38,20 +40,20 @@
     }
 </style>
 
-<body class="font" style=" background:rgb(32, 30, 67)">
+<body class="font" style="background: rgb(32, 30, 67)">
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100 mt-2">
         <div class="row rounded-5 p-3 bg-white shadow box w-100">
             <!-- Left Box -->
             <div
                 class="col-md-6 col-12 rounded d-flex flex-column justify-content-center align-items-center p-3 mb-3 mb-md-0">
-                <div class="featured-img mb-3 ">
+                <div class="featured-img mb-3">
                     <img src="./images/rgistration.jpg" class="img-fluid rounded-4 w-100">
                 </div>
                 <p class="fs-2 text-center">Registration</p>
-                <a href="./user_login.php"><small class="text-wrap text-center">Already have acount login here
-                    </small></a>
-                <a href="../index/index.php"><small class="text-wrap text-center">Back to home click here </small></a>
+                <a href="./user_login.php"><small class="text-wrap text-center">Already have an account? Login
+                        here</small></a>
+                <a href="../index/index.php"><small class="text-wrap text-center">Back to home, click here</small></a>
             </div>
 
             <!-- Right Box -->
@@ -63,50 +65,49 @@
 
                     <form action="" method="post" enctype="multipart/form-data">
                         <!-- username -->
-                        <label for="username" class="form-label"> Username</label>
+                        <label for="username" class="form-label">Username</label>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="Enter your Username" id="username" name="username" required>
                         </div>
                         <!-- email -->
-                        <label for="email" class="form-label"> Email</label>
+                        <label for="email" class="form-label">Email</label>
                         <div class="input-group mb-3">
                             <input type="email" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="Enter your Email" id="email" name="email" required>
                         </div>
                         <!-- user image -->
-                        <label for="user_image" class="form-label"> User Image</label>
+                        <label for="user_image" class="form-label">User Image</label>
                         <div class="input-group mb-3">
-                            <input type="file" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="upload your Image" id="user_image" name="user_image" required>
+                            <input type="file" class="form-control form-control-lg bg-light fs-6" id="user_image"
+                                name="user_image" required>
                         </div>
                         <!-- password -->
-                        <label for="password" class="form-label"> Password</label>
+                        <label for="password" class="form-label">Password</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="type your password" id="password" name="password" required>
+                            <input type="password" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="Type your password" id="password" name="password" required>
                         </div>
                         <!-- confirm password -->
-                        <label for="confirm_password" class="form-label"> Confirm Password</label>
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="type your password" id="confirm_password" name="confirm_password" required>
+                            <input type="password" class="form-control form-control-lg bg-light fs-6"
+                                placeholder="Type your password" id="confirm_password" name="confirm_password" required>
                         </div>
-                        <!-- Address-->
+                        <!-- Address -->
                         <label for="address" class="form-label">Address</label>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="type your address" id="address" name="address" required>
+                                placeholder="Type your address" id="address" name="address" required>
                         </div>
-                        <!-- mobile number-->
-                        <label for="mobile_number" class="form-label"> Mobile Number</label>
+                        <!-- mobile number -->
+                        <label for="mobile_number" class="form-label">Mobile Number</label>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="type your address" id="mobile_number" name="mobile_number" required>
+                                placeholder="Type your mobile number" id="mobile_number" name="mobile_number" required>
                         </div>
 
-                        <!-- submit-->
-
+                        <!-- submit -->
                         <div class="btn mb-3">
                             <input type="submit" value="Register" class="bg-info py-2 px-3 rounded"
                                 name="user_registration">
@@ -120,3 +121,34 @@
 </body>
 
 </html>
+
+<!-- PHP code to handle registration -->
+<?php
+if (isset($_POST['user_registration'])) {
+    $user_username = $_POST['username'];
+    $user_email = $_POST['email'];
+    $user_password = $_POST['password'];
+    $user_confirm_password = $_POST['confirm_password'];
+    $user_address = $_POST['address'];
+    $user_mobile_number = $_POST['mobile_number'];
+    $user_image = $_FILES['user_image']['name'];
+    $user_image_tmp = $_FILES['user_image']['tmp_name'];
+    $user_ip = getIPAddress();
+
+    // Upload the image
+    move_uploaded_file($user_image_tmp, "./user_images/$user_image");
+
+    // Insert Query
+    $query = "INSERT INTO `user` (username, user_email, password, user_image, user_ip, user_address, user_mobile)
+              VALUES ('$user_username', '$user_email', '$user_password', '$user_image', '$user_ip', '$user_address', '$user_mobile_number')";
+
+    // Use $conn instead of $con
+    $result = mysqli_query($con, $query);
+
+    if ($result) {
+        echo "<script>alert('Registration Successful')</script>";
+    } else {
+        die(mysqli_error($con));  // Use $conn to get the error message
+    }
+}
+?>

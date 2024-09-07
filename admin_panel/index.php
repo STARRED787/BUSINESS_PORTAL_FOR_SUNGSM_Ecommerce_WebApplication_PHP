@@ -83,10 +83,10 @@
       <div>
         <?php
         if (isset($_GET['insert_categori'])) {
-          include ('insert_categories.php');
+          include('insert_categories.php');
         }
         if (isset($_GET['insert_brand'])) {
-          include ('insert_brand.php');
+          include('insert_brand.php');
         }
         ?>
       </div>

@@ -129,7 +129,7 @@ li .a:hover {
 }
 form {
   padding-bottom: 15px;
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #ccc;

@@ -25,8 +25,6 @@
         width: 930px;
     }
 
-
-
     .bg-body {
         background: red;
     }
@@ -51,7 +49,7 @@
             </div>
 
             <!-- Right Box -->
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 col-12 ">
                 <div class="row align-items-center">
                     <div class="header-text mb-4 text-center">
                         <h4>SUN GSM Community</h4>

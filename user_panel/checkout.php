@@ -325,10 +325,10 @@ include('../functions/common_function.php');
                 <!--products-->
                 <div class="row">
                     <?php
-                    if (!isset($_GET['username'])) {
+                    if (!isset($_SESSION['username'])) {
                         include('./user_login.php');
                     } else {
-                        include('./payemnt.php');
+                        include('../payemnt.php');
                     }
                     ?>
                 </div>

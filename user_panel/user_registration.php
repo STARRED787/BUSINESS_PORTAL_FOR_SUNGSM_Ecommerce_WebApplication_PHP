@@ -134,7 +134,6 @@ include('../functions/common_function.php');
 
 </html>
 
-<!-- PHP code to handle registration -->
 <?php
 if (isset($_POST['user_registration'])) {
     $user_username = $_POST['username'];
@@ -146,7 +145,7 @@ if (isset($_POST['user_registration'])) {
     $user_mobile_number = $_POST['mobile_number'];
     $user_image = $_FILES['user_image']['name'];
     $user_image_tmp = $_FILES['user_image']['tmp_name'];
-    $user_ip = getIPAddress();
+    $user_ip = getIPAddress(); // Use the function defined above
 
     // Check if user exists
     $check_query = "SELECT * FROM `user` WHERE user_email = '$user_email' AND username = '$user_username'";
@@ -155,17 +154,15 @@ if (isset($_POST['user_registration'])) {
 
     if ($rows_count > 0) {
         echo "<script>$(document).ready(function() { toastr.error('Username or Email Already exists'); });</script>";
-    }
-
-    if ($user_password != $user_confirm_password) {
-        echo "<script>$(document).ready(function() { toastr.error('Password is Not Match'); });</script>";
+    } elseif ($user_password != $user_confirm_password) {
+        echo "<script>$(document).ready(function() { toastr.error('Password does not match'); });</script>";
     } else {
         // Upload the image
         move_uploaded_file($user_image_tmp, "./user_images/$user_image");
 
         // Insert Query
         $query = "INSERT INTO `user` (username, user_email, password, user_image, user_ip, user_address, user_mobile)
-                  VALUES ('$user_username', '$user_email', '$$hashed_password', '$user_image', '$user_ip', '$user_address', '$user_mobile_number')";
+                  VALUES ('$user_username', '$user_email', '$hashed_password', '$user_image', '$user_ip', '$user_address', '$user_mobile_number')";
 
         $result = mysqli_query($con, $query);
 
@@ -174,6 +171,20 @@ if (isset($_POST['user_registration'])) {
         } else {
             echo "<script>$(document).ready(function() { toastr.error('Error: " . mysqli_error($con) . "'); });</script>";
         }
+    }
+
+    // Selecting cart items
+    $selecting_cart_items = "SELECT * FROM `cart` WHERE ip_address = '$user_ip'";
+    $result_cart_items = mysqli_query($con, $selecting_cart_items);
+    $rows_count = mysqli_num_rows($result_cart_items);
+    if ($rows_count > 0) {
+        $_SESSION['username'] = $user_username;
+        echo "<script>$(document).ready(function() { 
+            toastr.success('You have items in your cart');
+            setTimeout(function() { window.open('checkout.php','_self'); }, 2000); // Delay for 2 seconds
+        });</script>";
+    } else {
+        echo "<script>window.open('../index/index.php','_self')</script>";
     }
 }
 ?>

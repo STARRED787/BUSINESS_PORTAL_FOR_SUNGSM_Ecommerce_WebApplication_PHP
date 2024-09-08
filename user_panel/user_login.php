@@ -1,3 +1,13 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Include database connection
+include('../include/connect.php');  // Ensure this path is correct
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +29,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Anta&family=Barrio&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=RocknRoll+One&display=swap"
         rel="stylesheet">
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        referrerpolicy="no-referrer" />
 </head>
 <style>
     .box {
@@ -56,24 +69,18 @@
 
                     </div>
 
-                    <form action="">
+                    <form action="" method="post">
                         <!-- username -->
                         <label for="username" class="form-label"> Username</label>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="Enter your Username" id="username" name="username" required>
                         </div>
-                        <!-- email -->
-                        <label for="email" class="form-label"> Email</label>
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control form-control-lg bg-light fs-6"
-                                placeholder="Enter your Email" id="email" name="email" required>
-                        </div>
 
                         <!-- password -->
                         <label for="password" class="form-label"> Password</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-lg bg-light fs-6"
+                            <input type="password" class="form-control form-control-lg bg-light fs-6"
                                 placeholder="type your password" id="password" name="password" required>
 
                         </div>
@@ -94,7 +101,37 @@
                 </div>
             </div>
         </div>
+        <!-- jQuery (required for Toastr) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+        <!-- Toastr JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
+
+<!--PHP code for Loging Logic-->
+<?php
+if (isset($_POST['user_login'])) {
+    $user_username = $_POST['username'];
+    $user_password = $_POST['password'];
+
+    $select_query = "SELECT * FROM user WHERE username='$user_username'";
+    $result = mysqli_query($con, $select_query);
+    $rows_count = mysqli_num_rows($result);
+    $row = mysqli_fetch_assoc($result);
+    if ($rows_count > 0) {
+        if (password_verify($user_password, $row['password'])) {
+            echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";
+        } else {
+            echo "<script>$(document).ready(function() { toastr.error('Invalid Credentials'); });</script>";
+        }
+    } else {
+        echo "<script>$(document).ready(function() { toastr.error('Invalid Credentials'); });</script>";
+    }
+
+
+}
+
+?>

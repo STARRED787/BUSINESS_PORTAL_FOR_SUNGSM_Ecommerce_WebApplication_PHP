@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 include('../include/connect.php');  // Ensure this path is correct
 require_once('../functions/common_function.php');  // Ensure this path is correct
 
-session_start();
+@session_start();
 ?>
 
 <!DOCTYPE html>
@@ -131,6 +131,7 @@ if (isset($_POST['user_login'])) {
     $rows_count_cart = mysqli_num_rows($select_cart);
 
     if ($rows_count > 0) {
+        $_SESSION['username'] = $user_username;
         if (password_verify($user_password, $row['password'])) {
             if ($rows_count == 1 and $rows_count_cart == 0) {
                 echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";

@@ -3,7 +3,7 @@
 //database connection
 include('../include/connect.php');
 include('../functions/common_function.php');
-
+session_start();
 ?>
 
 
@@ -181,9 +181,18 @@ include('../functions/common_function.php');
                                     <sup><?php cart_item() ?></sup>
                                 </i></a>
                         </li>
-                        <li class="nav-item">
-                            <button style="border-radius: 12px" class="font ms-3 bg-danger">Loging</button></a>
-                        </li>
+                        <?php
+                        if (!isset($_SESSION['username'])) {
+                            echo " <li class='nav-item'>
+                           <a class='nav-link' href='../user_panel/user_loging'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Logout</button></a> 
+                        </li>";
+                        } else {
+                            echo " <li class='nav-item'>
+                          <a class='nav-link' href='../user_panel/user_logout'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Loging</button></a> 
+                        </li>";
+                        }
+
+                        ?>
                     </ul>
                     </form>
                 </div>

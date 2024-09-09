@@ -2,10 +2,11 @@
 
 //database connection
 include('../include/connect.php');
-include('../functions/common_function.php');
+require_once('../functions/common_function.php');  // Ensure this path is correct
+;
 session_start();
 ?>
-</style>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -264,45 +265,54 @@ session_start();
 
 
         ?>
-        <nav class="navbar navbar-expand-lg font">
+        <nav class="navbar navbar-expand-lg py-4 font">
             <div class=" container">
                 <a href="index.php"><img src="../index/images/loogo.png" alt="logo" width="100px" height="70px" /></a>
-                <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse animated-underline text-white" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item ">
-                            <a class="nav-link text-white" href="../index/index.php">Home</a>
-                        </li>
-
-                        <li class="nav-item ">
-                            <a class="nav-link text-white" href="../shop/shop.php">Shop</a>
+                <div class="collapse navbar-collapse animated-underline" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index/index.php">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Blog</a>
-                        </li>
-
-                        <li class="nav-item ">
-                            <a class="nav-link text-white" href="#">Cantact Us</a>
+                            <a class="nav-link" href="../shop/shop.php">Shop</a>
                         </li>
 
                         <li class="nav-item">
-                            <i class="fa-solid fa-user nav-link text-white"></i>
-                            <a href="../shop/cart.php"> <i class="fa-solid fa-cart-shopping nav-link text-white">
+                            <a class="nav-link" href="#">Blog</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Cantact Us</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <i class="fa-solid fa-user nav-link"></i>
+                            <a href="../shop/cart.php"> <i class="fa-solid fa-cart-shopping nav-link">
                                     <sup><?php cart_item() ?></sup>
                                 </i></a>
                             Total price Rs. <?php total_cart_price() ?>
 
-                        </li>
-                        <li class="nav-item">
-                            <button style="border-radius: 12px" class="font ms-3 bg-danger">Loging</button></a>
-                        </li>
-                    </ul>
 
+                        </li>
+
+                        <?php
+                        if (!isset($_SESSION['username'])) {
+                            echo " <li class='nav-item'>
+                           <a class='nav-link' href='../user_panel/user_loging'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Logout</button></a> 
+                        </li>";
+                        } else {
+                            echo " <li class='nav-item'>
+                          <a class='nav-link' href='../user_panel/user_logout'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Loging</button></a> 
+                        </li>";
+                        }
+                        ?>
+                    </ul>
 
                 </div>
 
@@ -330,7 +340,7 @@ session_start();
                     if (!isset($_SESSION['username'])) {
                         include('./user_login.php');
                     } else {
-                        include('./payemnt.php');
+                        include('../user_panel/payement.php');
                     }
                     ?>
                 </div>
@@ -382,11 +392,11 @@ session_start();
                     <i class="bx bxs-envelope" undefined></i>
                     <input type="text" placeholder="Enter Your Email ID" required />
                     <button type="submit">
-                        <i class="bx bxs-right-arrow-circle flex"></i>
+                        <i class="bx bxs-right-arrow-circle"></i>
                     </button>
                 </form>
                 <div class="social-icons">
-                    <h3 class=" mt-3">
+                    <h3>
                         Follow Us
                         <div class="underline"><span></span></div>
                     </h3>

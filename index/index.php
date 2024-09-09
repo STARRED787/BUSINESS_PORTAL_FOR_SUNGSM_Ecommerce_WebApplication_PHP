@@ -3,7 +3,7 @@
 //database connection
 include('../include/connect.php');
 include('../functions/common_function.php');
-
+session_start();
 ?>
 </style>
 
@@ -185,15 +185,22 @@ include('../functions/common_function.php');
 
             </li>
 
-            <li class="nav-item">
-              <button style="border-radius: 12px" class="font ms-3 bg-danger">Loging</button></a>
-            </li>
-
+            <?php
+            if (!isset($_SESSION['username'])) {
+              echo " <li class='nav-item'>
+                           <a class='nav-link' href='../user_panel/user_loging'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Logout </button></a> 
+                        </li>";
+            } else {
+              echo " <li class='nav-item'>
+                          <a class='nav-link' href='../user_panel/user_logout'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Loging <br> malitha</button></a> 
+                        </li>";
+            }
+            ?>
           </ul>
           <form class="d-flex" action="../shop/search.php" method="get">
 
-            <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search" style="width: 250px;"
-              name="search_data">
+            <input class="form-control m-2 " type="search" palceholder="Search" aria-label="Search"
+              style="width: 230px;" name="search_data">
 
             <input type="submit" value="search" class="btn-outline search" name="search_data_product">
           </form>

@@ -88,8 +88,7 @@ require_once('../functions/common_function.php');
                         <!-- submit-->
 
                         <div class="btn mb-3">
-                            <a href="./profile.php"><input type="submit" value="Login" class="bg-info py-2 px-3 rounded"
-                                    name="user_login"></a>
+                            <input type="submit" value="Login" class="bg-info py-2 px-3 rounded" name="user_login">
                         </div>
 
 

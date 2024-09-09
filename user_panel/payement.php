@@ -6,7 +6,6 @@ error_reporting(E_ALL);
 // Include database connection
 include('../include/connect.php');  // Ensure this path is correct
 require_once('../user_panel/checkout.php');  // Ensure this path is correct
-session_start();
 ?>
 
 

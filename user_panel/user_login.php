@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 
 // Include database connection
 include('../include/connect.php');  // Ensure this path is correct
+require_once('../functions/common_function.php');
 
 ?>
 
@@ -87,7 +88,8 @@ include('../include/connect.php');  // Ensure this path is correct
                         <!-- submit-->
 
                         <div class="btn mb-3">
-                            <input type="submit" value="Login" class="bg-info py-2 px-3 rounded" name="user_login">
+                            <a href="./profile.php"><input type="submit" value="Login" class="bg-info py-2 px-3 rounded"
+                                    name="user_login"></a>
                         </div>
 
 
@@ -117,35 +119,48 @@ if (isset($_POST['user_login'])) {
     $user_username = $_POST['username'];
     $user_password = $_POST['password'];
 
+    // Assume $con is your database connection
     $select_query = "SELECT * FROM user WHERE username='$user_username'";
     $result = mysqli_query($con, $select_query);
-    $rows_count = mysqli_num_rows($result);
-    $row = mysqli_fetch_assoc($result);
-    $user_ip = getIPAddress();
 
-    //cart item access
-    $select_query_cart = "SELECT * FROM cart WHERE ip_address='$user_ip'";
-    $select_cart = mysqli_query($con, $select_query);
-    $rows_count_cart = mysqli_num_rows($rows_count_cart);
+    if ($result) {
+        $rows_count = mysqli_num_rows($result);
 
-    if ($rows_count > 0) {
-        if (password_verify($user_password, $row['password'])) {
+        if ($rows_count > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $user_ip = getIPAddress();
 
-            if ($rows_count_cart == 1 and $rows_count_cart == 0) {
-                echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";
-                echo "<script>window.open('profile.php','_self')</script>";
+            // Cart item access
+            $select_query_cart = "SELECT * FROM cart WHERE ip_address='$user_ip'";
+            $select_cart = mysqli_query($con, $select_query_cart);
+
+            // Correctly use $select_cart for counting rows
+            if ($select_cart) {
+                $rows_count_cart = mysqli_num_rows($select_cart);
+
+                if (password_verify($user_password, $row['password'])) {
+                    if ($rows_count == 1 && $rows_count_cart == 0) {
+                        echo "<script>$(document).ready(function() { 
+                            toastr.success('Login Successful');
+                            setTimeout(function() { window.open('./profile.php','_self'); }, 2000); // Delay for 2 seconds
+                        });</script>";
+                    } else {
+                        echo "<script>$(document).ready(function() { 
+                            toastr.success('Login Successful');
+                            setTimeout(function() { window.open('./payement.php','_self'); }, 2000); // Delay for 2 seconds
+                        });</script>";
+                    }
+                } else {
+                    echo "<script>$(document).ready(function() { toastr.error('Invalid Credentials'); });</script>";
+                }
             } else {
-                echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";
-                echo "<script>window.open('payement.php','_self')</script>";
+                echo "<script>$(document).ready(function() { toastr.error('Error accessing cart information'); });</script>";
             }
         } else {
             echo "<script>$(document).ready(function() { toastr.error('Invalid Credentials'); });</script>";
         }
     } else {
-        echo "<script>$(document).ready(function() { toastr.error('Invalid Credentials'); });</script>";
+        echo "<script>$(document).ready(function() { toastr.error('Error accessing user information'); });</script>";
     }
-
-
 }
-
 ?>

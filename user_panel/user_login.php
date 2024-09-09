@@ -132,7 +132,7 @@ if (isset($_POST['user_login'])) {
 
     if ($rows_count > 0) {
         $_SESSION['username'] = $user_username; {
-            echo "<script>$(document).ready(function() { toastr.error('Already loging'); });</script>";
+
         }
         if (password_verify($user_password, $row['password'])) {
             if ($rows_count == 1 and $rows_count_cart == 0) {

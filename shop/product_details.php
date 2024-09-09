@@ -184,14 +184,14 @@ session_start();
                         <?php
                         if (!isset($_SESSION['username'])) {
                             echo " <li class='nav-item'>
-                           <a class='nav-link' href='../user_panel/user_loging'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Logout</button></a> 
+                           <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
                         </li>";
                         } else {
-                            echo " <li class='nav-item'>
-                          <a class='nav-link' href='../user_panel/user_logout'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Loging</button></a> 
-                        </li>";
+                            $username = substr($_SESSION['username'], 0, 5);
+                            echo "<li class='nav-item'>
+                        <a class='nav-link' href='../user_panel/user_logout.php'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Logout<br> " . $username . "</button></a> 
+                    </li>";
                         }
-
                         ?>
 
                     </ul>

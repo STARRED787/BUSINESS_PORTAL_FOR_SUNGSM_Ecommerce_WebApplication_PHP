@@ -14,7 +14,7 @@ include('../include/connect.php');  // Ensure this path is correct
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SUN GSM | Registraion</title>
+    <title>SUN GSM | Login</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="index.css" />
@@ -121,9 +121,23 @@ if (isset($_POST['user_login'])) {
     $result = mysqli_query($con, $select_query);
     $rows_count = mysqli_num_rows($result);
     $row = mysqli_fetch_assoc($result);
+    $user_ip = getIPAddress();
+
+    //cart item access
+    $select_query_cart = "SELECT * FROM cart WHERE ip_address='$user_ip'";
+    $select_cart = mysqli_query($con, $select_query);
+    $rows_count_cart = mysqli_num_rows($rows_count_cart);
+
     if ($rows_count > 0) {
         if (password_verify($user_password, $row['password'])) {
-            echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";
+
+            if ($rows_count_cart == 1 and $rows_count_cart == 0) {
+                echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";
+                echo "<script>window.open('profile.php','_self')</script>";
+            } else {
+                echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";
+                echo "<script>window.open('payement.php','_self')</script>";
+            }
         } else {
             echo "<script>$(document).ready(function() { toastr.error('Invalid Credentials'); });</script>";
         }

@@ -6,6 +6,8 @@ error_reporting(E_ALL);
 // Include database connection
 include('../include/connect.php');  // Ensure this path is correct
 require_once('../functions/common_function.php');  // Ensure this path is correct
+
+session_start();
 ?>
 
 <!DOCTYPE html>

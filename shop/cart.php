@@ -181,6 +181,9 @@ include('../functions/common_function.php');
                                     <sup><?php cart_item() ?></sup>
                                 </i></a>
                         </li>
+                        <li class="nav-item">
+                            <button style="border-radius: 12px" class="font ms-3 bg-danger">Loging</button></a>
+                        </li>
                     </ul>
                     </form>
                 </div>

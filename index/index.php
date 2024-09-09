@@ -23,6 +23,7 @@ include('../functions/common_function.php');
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <style>
   .buy-btn {
@@ -181,12 +182,17 @@ include('../functions/common_function.php');
                 </i></a>
               Total price Rs. <?php total_cart_price() ?>
 
+
+            </li>
+
+            <li class="nav-item">
+              <button style="border-radius: 12px" class="font ms-3 bg-danger">Loging</button></a>
             </li>
 
           </ul>
           <form class="d-flex" action="../shop/search.php" method="get">
 
-            <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search" style="width: 300px;"
+            <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search" style="width: 250px;"
               name="search_data">
 
             <input type="submit" value="search" class="btn-outline search" name="search_data_product">

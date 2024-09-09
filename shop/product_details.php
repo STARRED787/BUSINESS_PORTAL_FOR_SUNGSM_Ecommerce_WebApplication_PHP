@@ -181,6 +181,10 @@ include('../functions/common_function.php');
 
                         </li>
 
+                        <li class="nav-item">
+                            <button style="border-radius: 12px" class="font ms-3 bg-danger">Loging</button></a>
+                        </li>
+
                     </ul>
                     <form class="d-flex" action="search.php" method="get">
 

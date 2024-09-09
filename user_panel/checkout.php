@@ -3,7 +3,7 @@
 //database connection
 include('../include/connect.php');
 include('../functions/common_function.php');
-
+session_start();
 ?>
 </style>
 
@@ -298,7 +298,9 @@ include('../functions/common_function.php');
                             Total price Rs. <?php total_cart_price() ?>
 
                         </li>
-
+                        <li class="nav-item">
+                            <button style="border-radius: 12px" class="font ms-3 bg-danger">Loging</button></a>
+                        </li>
                     </ul>
 
 

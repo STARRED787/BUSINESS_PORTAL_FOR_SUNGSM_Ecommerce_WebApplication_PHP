@@ -49,18 +49,26 @@ require_once('../functions/common_function.php');  // Ensure this path is correc
         <h1 class="text-center mb-4">Payment Options</h1> <!-- Centered title with margin-bottom -->
         <div class="row justify-content-center">
             <!-- Column for Pay Online -->
-            <div class="col-md-6 col-12 text-center mb-4">
+            <div class="col-md-4 col-8 text-center mb-4">
                 <h2>Pay Online</h2>
                 <a href="https://www.paypal.com" target="_blank">
                     <img src="./images/e-wallet-digital-payment-online-transaction-with-woman-standing-and-holding-mobile-phone-concept-illustration-free-vector.jpg"
-                        alt="Pay Online Image" class="img-fluid">
+                        alt="Pay Online Image" class="img-fluid" width="50%">
                 </a>
             </div>
             <!-- Column for Pay Offline -->
-            <div class="col-md-6 col-12 text-center mb-4">
-                <h2>Pay Offline</h2>
+            <div class="col-md-4 col-8 text-center mb-4">
+                <h2>Delevery</h2>
+                <a href="./delevery.php?user_id=<?php echo $user_id ?>">
+                    <img src="./images/Delever.jpg" alt="Pay Offline Image" class="img-fluid" width="50%">
+                </a>
+            </div>
+
+            <!-- Column for Process Order -->
+            <div class="col-md-4 col-8 text-center mb-4">
+                <h2>Process Order</h2>
                 <a href="./orders.php?user_id=<?php echo $user_id ?>">
-                    <img src="./images/offline.jpg" alt="Pay Offline Image" class="img-fluid">
+                    <img src="./images/offline.jpg" alt="Pay Offline Image" class="img-fluid" width="50%">
                 </a>
             </div>
         </div>

@@ -26,42 +26,15 @@ session_start();
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
-    .buy-btn {
-        margin: 1px;
-        font-family: "Barrio";
-        font-size: 0.9rem;
-        font-weight: 700;
-        outline: none;
-        border: none;
-        background-color: rgb(255, 238, 1);
-        color: rgb(0, 2, 3);
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: 0.5s ease;
-        border-radius: 5px;
-    }
-
-    .buy-btn:hover {
-        background-color: rgba(0, 7, 2, 0.918);
-        border-radius: 12px;
-        color: rgb(255, 254, 254);
-        box-shadow: antiquewhite 5px;
-    }
-
-    #in-cate {
-        font-family: "Poppins";
-    }
-
-    .tx {
-        font-size: 50px;
-        font-weight: 700;
-        text-align: center;
-    }
-
     .logo {
         width: 100px;
         height: auto;
         margin-bottom: 30px;
+    }
+
+    .font {
+        font-family: "Anta";
+        font-weight: bold;
     }
 
     footer {
@@ -78,18 +51,7 @@ session_start();
         padding-left: 5rem;
     }
 
-    .search {
-        background-color: #f8f9fa;
-        color: #495057;
-        border-color: black;
-        border-radius: 0.25rem;
-        padding: 0.5rem 0.1rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        border-radius: 0.3rem;
-        margin-left: 10px;
 
-    }
 
     .row {
         width: 85%;
@@ -213,7 +175,7 @@ session_start();
     }
 </style>
 
-<body>
+<body style=" background-image: url(../index/images/bannerwp.jpg);">
 
     <!--Navigation Bar-->
     <section>
@@ -265,7 +227,7 @@ session_start();
 
 
         ?>
-        <nav class="navbar navbar-expand-lg py-4 font">
+        <nav class="navbar navbar-expand-lg py-4 font container">
             <div class=" container">
                 <a href="index.php"><img src="../index/images/loogo.png" alt="logo" width="100px" height="70px" /></a>
                 <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
@@ -319,24 +281,11 @@ session_start();
 
             </div>
         </nav>
-
-
-    </section>
-
-    <!--call cart function-->
-    <?php
-    cart();
-
-    ?>
-
-
-    <section>
-
         <!--fourth section-->
-        <div class="row m-5 justify-content-center align-items-center ">
-            <div class="col-md-10  ">
+        <div>
+            <div>
                 <!--products-->
-                <div class="row">
+                <div>
                     <?php
                     if (!isset($_SESSION['username'])) {
                         include('./user_login.php');
@@ -345,6 +294,14 @@ session_start();
                     }
                     ?>
                 </div>
+                <!--call cart function-->
+                <?php
+                cart();
+
+                ?>
+    </section>
+
+
     </section>
     <!--footer-------------->
     <footer class="footer col-md-12 col-lg-12 col-sm-12">

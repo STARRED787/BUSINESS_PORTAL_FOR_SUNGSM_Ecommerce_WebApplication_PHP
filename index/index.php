@@ -1,8 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 //database connection
 include('../include/connect.php');
 include('../functions/common_function.php');
+
 session_start();
 ?>
 </style>
@@ -23,6 +27,9 @@ session_start();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    referrerpolicy="no-referrer" />
 
 </head>
 <style>
@@ -178,9 +185,9 @@ session_start();
             <li class="nav-item">
               <i class="fa-solid fa-user nav-link"></i>
               <a href="../shop/cart.php"> <i class="fa-solid fa-cart-shopping nav-link">
-                  <sup><?php cart_item() ?></sup>
+                  <sup id="cart-count">0</sup>
                 </i></a>
-              Total price Rs. <?php total_cart_price() ?>
+              Total price Rs. <span id="total-price">0</span>
 
 
             </li>
@@ -341,7 +348,53 @@ session_start();
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 
-  <script src="../index/index.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Function to update cart item count
+      function updateCartCount() {
+        $.ajax({
+          url: 'ajax_handler.php',
+          type: 'GET',
+          data: { action: 'cart_count' },
+          success: function (data) {
+            // Update cart count in the DOM
+            $('.fa-cart-shopping sup').text(data);
+          }
+        });
+      }
+
+      // Function to update total cart price
+      function updateTotalPrice() {
+        $.ajax({
+          url: 'ajax_handler.php',
+          type: 'GET',
+          data: { action: 'total_price' },
+          success: function (data) {
+            // Update total price in the DOM
+            $('li:contains("Total price")').html('Total price Rs. ' + data);
+          }
+        });
+      }
+
+      // Call functions to update cart and price when the page loads
+      updateCartCount();
+      updateTotalPrice();
+
+      // Optional: Update cart count and price when adding/removing items (if you have those functions)
+      // $('.add-to-cart-button').on('click', function() {
+      //     // Your code for adding item to cart...
+      //     updateCartCount();
+      //     updateTotalPrice();
+      // });
+    });
+  </script>
+  <!-- jQuery (required for Toastr) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

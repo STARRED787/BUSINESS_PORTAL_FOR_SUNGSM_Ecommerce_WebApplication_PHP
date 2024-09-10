@@ -11,7 +11,6 @@
 include('../include/connect.php');
 
 
-
 // Display products
 function getproducts()
 {
@@ -74,7 +73,6 @@ function getUniqCategory()
             $product_price = $row['product_price'];
             $product_categoroy = $row['categorie_id'];
             $product_brand = $row['brand_id'];
-
             echo "
          <div class='col-md-4  mb-4' >
               <div class='card '>

@@ -72,7 +72,7 @@ while ($row_cart_price = mysqli_fetch_array($result_cart_price)) {
         $quantity = 1;
         $subtotal = $total_price;
     } else {
-        $quantity = $total_price;
+        $quantity = 1;
         $subtotal = $total_price * $quantity;
     }
 
@@ -92,5 +92,13 @@ while ($row_cart_price = mysqli_fetch_array($result_cart_price)) {
         });</script>";
     }
 
+    // orders pending
+    $insert_pending_orders = "INSERT INTO `orders_pending` (user_id, invoice_number, product_id, quantity, order_status) 
+    VALUES ( $user_id, $invoice_number, $product_id, $quantity, '$order_status')";
+    $result_pending = mysqli_query($con, $insert_pending_orders);
+
+    // deleting cart items
+    $delete_cart = "DELETE FROM `cart` WHERE ip_address='$get_ip_add'";
+    $result_delete = mysqli_query($con, $delete_cart);
 }
 ?>

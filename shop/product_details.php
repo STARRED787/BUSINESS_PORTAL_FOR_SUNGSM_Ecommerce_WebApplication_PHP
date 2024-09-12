@@ -190,10 +190,23 @@ session_start();
                            <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
                         </li>";
                         } else {
-                            $username = substr($_SESSION['username'], 0, 5);
-                            echo "<li class='nav-item'>
-                        <a class='nav-link' href='../user_panel/user_logout.php'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Logout<br> " . $username . "</button></a> 
-                    </li>";
+                            $username = $_SESSION['username'];
+                            $user_image = "SELECT * FROM `user` WHERE username='$username'";
+                            $user_image = mysqli_query($con, $user_image);
+                            $row_image = mysqli_fetch_array($user_image);
+                            $user_image = $row_image['user_image'];
+                            echo "
+                            <ul class='navbar-nav ms-auto'>
+                                <li class='nav-item dropdown'>
+                                    <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                        <img src='../user_panel/user_images/$user_image' width='50' height='50' class='rounded-circle border border-dark'>
+                                    </a>
+                                    <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='navbarDropdownMenuLink'>
+                                        <li><a class='dropdown-item' href='../user_panel/profile.php'>Profile</a></li>
+                                        <li><a class='dropdown-item' href='../user_panel/user_logout.php'>Log Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>";
                         }
                         ?>
 

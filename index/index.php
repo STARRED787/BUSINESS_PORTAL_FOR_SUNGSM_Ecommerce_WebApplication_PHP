@@ -185,23 +185,38 @@ session_start();
             <li class="nav-item">
               <i class="fa-solid fa-user nav-link"></i>
               <a href="../shop/cart.php"> <i class="fa-solid fa-cart-shopping nav-link">
-                  <sup id="cart-count">0</sup>
+                  <sup><?php cart_item() ?></sup>
                 </i></a>
-              Total price Rs. <span id="total-price">0</span>
+              Total price Rs. <?php total_cart_price() ?>
 
 
             </li>
 
             <?php
+
             if (!isset($_SESSION['username'])) {
               echo " <li class='nav-item'>
-                           <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
-                        </li>";
+              <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
+           </li>";
+
             } else {
-              $username = substr($_SESSION['username'], 0, 5);
-              echo "<li class='nav-item'>
-                        <a class='nav-link' href='../user_panel/user_logout.php'><button style='border-radius: 12px' class='font ms-3 bg-danger'>Logout<br> " . $username . "</button></a> 
-                    </li>";
+              $username = $_SESSION['username'];
+              $user_image = "SELECT * FROM `user` WHERE username='$username'";
+              $user_image = mysqli_query($con, $user_image);
+              $row_image = mysqli_fetch_array($user_image);
+              $user_image = $row_image['user_image'];
+              echo "
+              <ul class='navbar-nav ms-auto'>
+                  <li class='nav-item dropdown'>
+                      <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                          <img src='../user_panel/user_images/$user_image' width='50' height='50' class='rounded-circle border border-dark'>
+                      </a>
+                      <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='navbarDropdownMenuLink'>
+                          <li><a class='dropdown-item' href='../user_panel/profile.php'>Profile</a></li>
+                          <li><a class='dropdown-item' href='../user_panel/user_logout.php'>Log Out</a></li>
+                      </ul>
+                  </li>
+              </ul>";
             }
             ?>
           </ul>
@@ -349,46 +364,7 @@ session_start();
     crossorigin="anonymous"></script>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      // Function to update cart item count
-      function updateCartCount() {
-        $.ajax({
-          url: 'ajax_handler.php',
-          type: 'GET',
-          data: { action: 'cart_count' },
-          success: function (data) {
-            // Update cart count in the DOM
-            $('.fa-cart-shopping sup').text(data);
-          }
-        });
-      }
 
-      // Function to update total cart price
-      function updateTotalPrice() {
-        $.ajax({
-          url: 'ajax_handler.php',
-          type: 'GET',
-          data: { action: 'total_price' },
-          success: function (data) {
-            // Update total price in the DOM
-            $('li:contains("Total price")').html('Total price Rs. ' + data);
-          }
-        });
-      }
-
-      // Call functions to update cart and price when the page loads
-      updateCartCount();
-      updateTotalPrice();
-
-      // Optional: Update cart count and price when adding/removing items (if you have those functions)
-      // $('.add-to-cart-button').on('click', function() {
-      //     // Your code for adding item to cart...
-      //     updateCartCount();
-      //     updateTotalPrice();
-      // });
-    });
-  </script>
   <!-- jQuery (required for Toastr) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

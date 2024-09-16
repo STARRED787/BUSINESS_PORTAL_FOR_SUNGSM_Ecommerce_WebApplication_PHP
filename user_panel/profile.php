@@ -16,7 +16,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SUN GSM</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../index/index.css" />
+    <link rel="stylesheet" href="./user_page.css" />
 
     <!-- Corrected: Only one version of Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -247,11 +247,26 @@ session_start();
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
+
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="User Avatar" width="30" height="30"
-                                class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">loser</span>
+
+                            <?php
+                            if (!isset($_SESSION['username'])) {
+                                echo " <span class='d-none d-sm-inline mx-1'>Guest</span>";
+
+                            } else {
+                                $username = $_SESSION['username'];
+                                $user_image = "SELECT * FROM `user` WHERE username='$username'";
+                                $user_image = mysqli_query($con, $user_image);
+                                $row_image = mysqli_fetch_array($user_image);
+                                $user_image = $row_image['user_image'];
+                                echo "<img src='../user_panel/user_images/$user_image' alt='User Avatar' width='30' height='30'
+                                class='rounded-circle'>";
+                            }
+                            ?>
+
+
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="user_logout.php">Loging out</a></li>
@@ -261,7 +276,13 @@ session_start();
 
             </div>
             <div class="col py-3 text-white">
-                <h1>fuc</h1>
+                <div>
+                    <?php
+                    if (isset($_GET['edit_account'])) {
+                        include('edit_account.php');
+                    }
+                    ?>
+                </div>
             </div>
         </div>
 

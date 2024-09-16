@@ -229,14 +229,14 @@ session_start();
                                     Account</span></a>
                         </li>
                         <li>
-                            <a href="profile.php?my_orders" data-bs-toggle="collapse"
-                                class="nav-link px-0 align-middle ">
+                            <a href="profile.php?my_orders" class="nav-link align-middle px-0">
+
                                 <i class='bx bxs-user-check'></i><span class="ms-1 d-none d-sm-inline">My
                                     Orders</span></a>
                         </li>
                         <li>
-                            <a href="profile.php?delete_account" data-bs-toggle="collapse"
-                                class="nav-link px-0 align-middle">
+                            <a href="profile.php?delete_account" class="nav-link align-middle px-0">
+
                                 <i class='bx bxs-message-square-x'></i> <span class="ms-1 d-none d-sm-inline">Delete
                                     account</span>
                             </a>

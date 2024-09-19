@@ -24,7 +24,7 @@ include('../functions/common_function.php');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Anta&family=Barrio&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=RocknRoll+One&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Anta&family=Barrio&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=RocknRoll+One&display=swap"
         rel="stylesheet">
 
     <!-- Toastr CSS -->
@@ -130,6 +130,27 @@ include('../functions/common_function.php');
         <!-- Toastr JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
             referrerpolicy="no-referrer"></script>
+
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        </script>
+
 </body>
 
 </html>
@@ -139,7 +160,6 @@ if (isset($_POST['user_registration'])) {
     $user_username = $_POST['username'];
     $user_email = $_POST['email'];
     $user_password = $_POST['password'];
-    $hashed_password = password_hash($user_password, PASSWORD_DEFAULT);
     $user_confirm_password = $_POST['confirm_password'];
     $user_address = $_POST['address'];
     $user_mobile_number = $_POST['mobile_number'];
@@ -147,44 +167,76 @@ if (isset($_POST['user_registration'])) {
     $user_image_tmp = $_FILES['user_image']['tmp_name'];
     $user_ip = getIPAddress(); // Use the function defined above
 
-    // Check if user exists
-    $check_query = "SELECT * FROM `user` WHERE user_email = '$user_email' AND username = '$user_username'";
+    // Check if passwords match
+    if ($user_password != $user_confirm_password) {
+        echo "<script>$(document).ready(function() { toastr.error('Password does not match'); });</script>";
+        exit();
+    }
+
+    // Check if the user already exists by username or email
+    $check_query = "SELECT * FROM `user` WHERE user_email = '$user_email' OR username = '$user_username'";
     $check_result = mysqli_query($con, $check_query);
     $rows_count = mysqli_num_rows($check_result);
 
     if ($rows_count > 0) {
-        echo "<script>$(document).ready(function() { toastr.error('Username or Email Already exists'); });</script>";
-    } elseif ($user_password != $user_confirm_password) {
-        echo "<script>$(document).ready(function() { toastr.error('Password does not match'); });</script>";
-    } else {
-        // Upload the image
-        move_uploaded_file($user_image_tmp, "./user_images/$user_image");
-
-        // Insert Query
-        $query = "INSERT INTO `user` (username, user_email, password, user_image, user_ip, user_address, user_mobile)
-                  VALUES ('$user_username', '$user_email', '$hashed_password', '$user_image', '$user_ip', '$user_address', '$user_mobile_number')";
-
-        $result = mysqli_query($con, $query);
-
-        if ($result) {
-            echo "<script>$(document).ready(function() { toastr.success('Registration Successful'); });</script>";
-        } else {
-            echo "<script>$(document).ready(function() { toastr.error('Error: " . mysqli_error($con) . "'); });</script>";
-        }
+        echo "<script>$(document).ready(function() { toastr.error('Username or Email already exists'); });</script>";
+        exit();
     }
 
-    // Selecting cart items
-    $selecting_cart_items = "SELECT * FROM `cart` WHERE ip_address = '$user_ip'";
-    $result_cart_items = mysqli_query($con, $selecting_cart_items);
-    $rows_count = mysqli_num_rows($result_cart_items);
-    if ($rows_count > 0) {
+    // Handle the image upload (Add checks for the file upload)
+    if (!empty($user_image)) {
+        $image_extension = pathinfo($user_image, PATHINFO_EXTENSION);
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (!in_array(strtolower($image_extension), $allowed_extensions)) {
+            echo "<script>$(document).ready(function() { toastr.error('Invalid image format. Allowed: JPG, JPEG, PNG, GIF'); });</script>";
+            exit();
+        }
+
+        // Move the uploaded file to the desired folder
+        if (!move_uploaded_file($user_image_tmp, "./user_images/$user_image")) {
+            echo "<script>$(document).ready(function() { toastr.error('Failed to upload image.'); });</script>";
+            exit();
+        }
+    } else {
+        echo "<script>$(document).ready(function() { toastr.error('Please upload an image.'); });</script>";
+        exit();
+    }
+
+    // Hash the password
+    $hashed_password = password_hash($user_password, PASSWORD_DEFAULT);
+
+    // Insert the new user into the database
+    $insert_query = "INSERT INTO `user` (username, user_email, password, user_image, user_ip, user_address, user_mobile)
+                     VALUES ('$user_username', '$user_email', '$hashed_password', '$user_image', '$user_ip', '$user_address', '$user_mobile_number')";
+
+    $insert_result = mysqli_query($con, $insert_query);
+
+    if ($insert_result) {
+        echo "<script>$(document).ready(function() { toastr.success('Registration Successful'); });</script>";
+    } else {
+        echo "<script>$(document).ready(function() { toastr.error('Error: " . mysqli_error($con) . "'); });</script>";
+        exit();
+    }
+
+    // Check if the user has items in their cart
+    $select_cart_items = "SELECT * FROM `cart` WHERE ip_address = '$user_ip'";
+    $cart_items_result = mysqli_query($con, $select_cart_items);
+    $cart_rows_count = mysqli_num_rows($cart_items_result);
+
+    // If items exist in the cart, redirect to checkout, otherwise, redirect to home
+    if ($cart_rows_count > 0) {
         $_SESSION['username'] = $user_username;
         echo "<script>$(document).ready(function() { 
             toastr.success('You have items in your cart');
-            setTimeout(function() { window.open('checkout.php','_self'); }, 2000); // Delay for 2 seconds
+            setTimeout(function() { window.location.href = 'checkout.php'; }, 2000); // Delay for 2 seconds
         });</script>";
     } else {
-        echo "<script>window.open('../index/index.php','_self')</script>";
+        $_SESSION['username'] = $user_username;
+        echo "<script>$(document).ready(function() { 
+            toastr.success('You have Not items in your cart');
+            setTimeout(function() { window.location.href = '../index/index.php'; }, 2000); // Delay for 2 seconds
+        });</script>";
     }
 }
 ?>

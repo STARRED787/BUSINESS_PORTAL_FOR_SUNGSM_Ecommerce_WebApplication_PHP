@@ -280,12 +280,19 @@ session_start();
             <div class="col py-3 text-white">
                 <div>
                     <?php
+
+                    // display user dashboard functions
+                    
                     if (isset($_GET['edit_account'])) {
                         include('edit_account.php');
                     }
 
                     if (isset($_GET['my_orders'])) {
                         include('my_orders.php');
+                    }
+
+                    if (isset($_GET['delete_account'])) {
+                        include('delete_account.php');
                     }
 
                     ?>

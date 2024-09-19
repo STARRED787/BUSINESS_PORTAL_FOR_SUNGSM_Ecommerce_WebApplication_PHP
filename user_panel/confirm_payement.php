@@ -147,5 +147,7 @@ if (isset($_POST['payement_confirm'])) {
     } else {
         echo "<script>toastr.error('Payment Not Confirmed')</script>";
     }
+    $update_order_status = "UPDATE `orders` SET order_status = 'Complete' WHERE order_id = '$order_id'";
+    $result_update_order_status = mysqli_query($con, $update_order_status);
 }
 ?>

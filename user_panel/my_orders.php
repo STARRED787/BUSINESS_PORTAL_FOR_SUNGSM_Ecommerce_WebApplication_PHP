@@ -69,13 +69,23 @@
                             <td>  $order_total_products</td>
                             <td>  $order_invoice_number</td>
                             <td>  $order_date</td>
-                            <td> $order_status</td>
-                            <td><a href='./confirm_payement.php?order_id=$order_id'> Confirm</a></td>
-                        </tr>
-                            
+                            <td> $order_status</td>";
+                            ?>
+
+                        <?php
+                        //display status of order
+                        if ($order_status == 'Complete') {
+                            echo "<td>paid</td>";
+                        } else {
+                            echo " <td><a href='./confirm_payement.php?order_id=$order_id'> Confirm</a></td>
+                                </tr>
                             ";
-                            $sl_order++;
                         }
+
+                        $sl_order++;
+                        }
+
+
                         ?>
 
 

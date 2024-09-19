@@ -6,11 +6,21 @@ error_reporting(E_ALL);
 include('../include/connect.php');
 include('../functions/common_function.php');
 session_start();
+
+//check if user order id
 if (isset($_GET['order_id'])) {
     $order_id = $_GET['order_id'];
-
 }
+
+//get order details to confirm payement fields
+$select_order = "SELECT * FROM `orders` WHERE order_id = '$order_id'";
+$result_orders = mysqli_query($con, $select_order);
+$row_order = mysqli_fetch_assoc($result_orders);
+$order_id = $row_order['order_id'];
+$order_invoice_number = $row_order['invoice_number'];
+$order_total_products = $row_order['total_products'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,14 +56,16 @@ if (isset($_GET['order_id'])) {
                             <form class="px-md-2">
 
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <input type="text" id="form3Example1q" class="form-control" />
+                                    <input type="text" id="form3Example1q" class="form-control"
+                                        value="<?php echo $order_invoice_number ?>" />
                                     <label class="form-label" for="form3Example1q">Invoice Number</label>
                                 </div>
 
 
                                 <div data-mdb-input-init class="form-outline mb-4">
 
-                                    <input type="text" id="form3Example1q" class="form-control" />
+                                    <input type="text" id="form3Example1q" class="form-control"
+                                        value="<?php echo $order_total_products ?>" />
                                     <label class="form-label" for="form3Example1q">Amount</label>
                                 </div>
 
@@ -98,3 +110,7 @@ if (isset($_GET['order_id'])) {
 </body>
 
 </html>
+
+<?php
+
+?>

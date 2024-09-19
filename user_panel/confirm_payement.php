@@ -10,15 +10,21 @@ session_start();
 //check if user order id
 if (isset($_GET['order_id'])) {
     $order_id = $_GET['order_id'];
+
+
+    //get order details to confirm payement fields
+    $select_order = "SELECT * FROM `orders` WHERE order_id = '$order_id'";
+    $result_orders = mysqli_query($con, $select_order);
+    $row_order = mysqli_fetch_assoc($result_orders);
+    $order_id = $row_order['order_id'];
+    $order_invoice_number = $row_order['invoice_number'];
+    $order_total_products = $row_order['total_products'];
+
 }
 
-//get order details to confirm payement fields
-$select_order = "SELECT * FROM `orders` WHERE order_id = '$order_id'";
-$result_orders = mysqli_query($con, $select_order);
-$row_order = mysqli_fetch_assoc($result_orders);
-$order_id = $row_order['order_id'];
-$order_invoice_number = $row_order['invoice_number'];
-$order_total_products = $row_order['total_products'];
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +43,12 @@ $order_total_products = $row_order['total_products'];
 
     <title>Confirm Payement</title>
 </head>
+<style>
+    .toast-success {
+        background-color: #28a745 !important;
+        /* Hard green color */
+    }
+</style>
 
 <body>
     <section class="h-100 h-custom" style="background-color: #8fc4b7;">
@@ -53,10 +65,10 @@ $order_total_products = $row_order['total_products'];
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Confirm Payement</h3>
 
-                            <form class="px-md-2">
+                            <form class="px-md-2" method="POST" action="">
 
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <input type="text" id="form3Example1q" class="form-control"
+                                    <input type="text" id="invoice_number" name="invoice_number" class="form-control"
                                         value="<?php echo $order_invoice_number ?>" />
                                     <label class="form-label" for="form3Example1q">Invoice Number</label>
                                 </div>
@@ -64,23 +76,24 @@ $order_total_products = $row_order['total_products'];
 
                                 <div data-mdb-input-init class="form-outline mb-4">
 
-                                    <input type="text" id="form3Example1q" class="form-control"
+                                    <input type="text" id="total_amount" name="total_amount" class="form-control"
                                         value="<?php echo $order_total_products ?>" />
                                     <label class="form-label" for="form3Example1q">Amount</label>
                                 </div>
 
                                 <div class="mb-4">
-                                    <select class="form-select">
-                                        <option value="1" disabled selected>Select a Payement Option</option>
-                                        <option value="2">Paypal</option>
-                                        <option value="3">Cash On Delevery</option>
-
+                                    <select class="form-select" name="payement_mode" required>
+                                        <option value="" disabled selected>Select a Payment Option</option>
+                                        <!-- Empty value -->
+                                        <option value="Paypal">Paypal</option>
+                                        <option value="Cash On Delivery">Cash On Delivery</option>
                                     </select>
                                 </div>
 
+
                                 <div class="d-flex justify-content-center">
-                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                        class="btn btn-success btn-lg mb-1 ">Confirm</button>
+                                    <button type="submit" name="payement_confirm" data-mdb-button-init
+                                        data-mdb-ripple-init class="btn btn-success btn-lg mb-1 ">Confirm</button>
                                 </div>
 
 
@@ -113,4 +126,26 @@ $order_total_products = $row_order['total_products'];
 
 <?php
 
+// Insert payment details into `user_payments` table
+if (isset($_POST['payement_confirm'])) {
+    $invoice_number = $_POST['invoice_number'];
+    $order_total_amount = $_POST['total_amount'];
+    $payement_mode = $_POST['payement_mode'];
+
+
+    //insert query code
+    $insert_confirm_payement = "INSERT INTO `user_payements` (invoice_number, amount, payement_mode) 
+                                    VALUES ('$invoice_number', '$order_total_amount', '$payement_mode')";
+    $result_confirm_payement = mysqli_query($con, $insert_confirm_payement);
+
+    // Display success/error message for payment confirmation
+    if ($result_confirm_payement) {
+        echo "<script>$(document).ready(function() { 
+        toastr.success('Payment Successfully Confirmed');
+        setTimeout(function() { window.open('profile.php?my_orders','_self'); }, 2000); // Delay for 2 seconds
+    });</script>";
+    } else {
+        echo "<script>toastr.error('Payment Not Confirmed')</script>";
+    }
+}
 ?>

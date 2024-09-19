@@ -55,6 +55,11 @@
                             $order_order_date = $row_orders['order_date'];
                             $order_date = $row_orders['order_date'];
                             $order_status = $row_orders['order_status'];
+                            if ($order_status == 'Pending') {
+                                $order_status = "Incomplete";
+                            } else {
+                                $order_status = "Complete";
+                            }
 
                             echo "
                             <tr class='table-info'>
@@ -65,7 +70,7 @@
                             <td>  $order_invoice_number</td>
                             <td>  $order_date</td>
                             <td> $order_status</td>
-                            <td><a href='confirm.php'> Confirm</a></td>
+                            <td><a href='./confirm_payement.php?order_id=$order_id'> Confirm</a></td>
                         </tr>
                             
                             ";

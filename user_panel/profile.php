@@ -6,6 +6,8 @@ error_reporting(E_ALL);
 include('../include/connect.php');
 include('../functions/common_function.php');
 session_start();
+
+
 ?>
 
 <!DOCTYPE html>

@@ -62,15 +62,13 @@
                                 $result_count = mysqli_query($con, $get_total_sold_count);
                                 $count = mysqli_num_rows($result_count);
                                 echo $count;
-
-
                                 ?>
                             </td>
 
                             <td>
                                 <?php echo $status ?>
                             </td>
-                            <td><a href='edit_product'><i class='bx bx-edit text-success'></i></a></a></td>
+                            <td><a href='index.php?edit_product'><i class='bx bx-edit text-success'></i></a></a></td>
                             <td><a href='delete_product.php'><i class='bx bxs-trash mx-4 text-danger'></i></a></td>
                         </tr>
                         <?php

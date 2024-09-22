@@ -102,6 +102,9 @@ include('../functions/common_function.php');
         if (isset($_GET['view_product'])) {
           include('view_product.php');
         }
+        if (isset($_GET['edit_product'])) {
+          include('edit_product.php');
+        }
         ?>
       </div>
     </div>

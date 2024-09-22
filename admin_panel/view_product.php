@@ -19,6 +19,21 @@
 
                 <h1>view</h1>
 
+                <table class="table table-borderd mt-5">
+                    <thead class="bg-table-primary">
+                        <tr>
+                            <th scope="col">Sl no</th>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Amount Due</th>
+                            <th scope="col">Total products</th>
+                            <th scope="col">Invoice Number</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Complete/Incomplete</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                </table>
+
             </div>
         </div>
     </div>

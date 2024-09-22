@@ -43,35 +43,7 @@ h5 {
   font-weight: 400;
 }
 
-.buy-btn {
-  margin-top: 10px;
-  font-family: "Barrio";
-  font-size: 0.9rem;
-  font-weight: 700;
-  outline: none;
-  border: none;
-  background-color: rgb(255, 238, 1);
-  color: rgb(0, 2, 3);
-  padding: 13px 30px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: 0.5s ease;
-  border-radius: 12px;
-}
-
-.buy-btn:hover {
-  background-color: rgba(0, 7, 2, 0.918);
-  border-radius: 12px;
-  color: rgb(255, 254, 254);
-  box-shadow: antiquewhite 5px;
-}
-
-.adminbar {
-  font-family: "Anta";
-  color: #f30c00;
-  font-weight: bolder;
-}
-
+/*footer----------*/
 footer {
   width: 100%;
   bottom: 0;
@@ -85,14 +57,7 @@ footer {
   border-radius: 1px;
   padding-left: 3rem;
 }
-.row {
-  width: 85%;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-}
+
 .col {
   flex-basis: 25%;
   padding: 15px;
@@ -103,7 +68,7 @@ footer {
   flex-basis: 10%;
 }
 .logo {
-  width: 150px;
+  width: 50px;
   margin-bottom: 30px;
 }
 .col h3 {
@@ -129,7 +94,7 @@ li .a:hover {
 }
 form {
   padding-bottom: 15px;
-  display: block;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #ccc;

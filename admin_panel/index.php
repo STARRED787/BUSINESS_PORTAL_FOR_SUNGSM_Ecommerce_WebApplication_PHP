@@ -16,22 +16,22 @@
 
 <body>
   <!--Admin Bar-->
-  <div class="container-fluid">
+  <div class="container-fluid ">
     <div class="row flex-nowrap">
       <div class="adminbar col-auto col-md-3 col-xl-3 px-sm-2 px-0 bg-dark">
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 font">
           <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-5 d-none d-sm-inline">Admin Dashboard</span>
           </a>
 
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
-              <a href="insert_product.php" class="nav-link align-middle px-0 text-white">
+              <a href="index.php?insert_product" class="nav-link align-middle px-0 text-white">
                 <i class="bx bxs-home" style="font-weight: 900"></i>
                 <span class="ms-1 d-none d-sm-inline">Insert Products</span>
               </a>
 
-              <a href="#" class="nav-link align-middle px-0 text-white">
+              <a href="./index.php?view_product.php" class="nav-link align-middle px-0 text-white">
                 <i class="bx bxs-package"></i>
                 <span class="ms-1 d-none d-sm-inline">View Products</span>
               </a>
@@ -87,6 +87,9 @@
         }
         if (isset($_GET['insert_brand'])) {
           include('insert_brand.php');
+        }
+        if (isset($_GET['insert_product'])) {
+          include('insert_product.php');
         }
         ?>
       </div>

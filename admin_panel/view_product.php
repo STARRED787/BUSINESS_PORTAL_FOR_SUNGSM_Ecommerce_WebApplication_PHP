@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
         referrerpolicy="no-referrer" />
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        referrerpolicy="no-referrer" />
     <title>Edit Account</title>
 </head>
 
@@ -68,7 +71,8 @@
                             <td>
                                 <?php echo $status ?>
                             </td>
-                            <td><a href='index.php?edit_product'><i class='bx bx-edit text-success'></i></a></a></td>
+                            <td><a href='index.php?edit_product=<?php echo $Product_Id ?>'><i
+                                        class='bx bx-edit text-success'></i></a></a></td>
                             <td><a href='delete_product.php'><i class='bx bxs-trash mx-4 text-danger'></i></a></td>
                         </tr>
                         <?php

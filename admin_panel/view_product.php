@@ -15,23 +15,73 @@
     <div style="border-radius: 15px; font-family:Poppins">
         <div class="card">
             <div class="card-body">
-                <h1 class="text-center ">My Orders</h1>
-
-                <h1>view</h1>
-
-                <table class="table table-borderd mt-5">
-                    <thead class="bg-table-primary">
+                <h1 class="text-center ">View Products</h1>
+                <table class="table table-bordered mt-5">
+                    <thead class="table-primary text-center">
                         <tr>
-                            <th scope="col">Sl no</th>
-                            <th scope="col">Order Number</th>
-                            <th scope="col">Amount Due</th>
-                            <th scope="col">Total products</th>
-                            <th scope="col">Invoice Number</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Complete/Incomplete</th>
+                            <th scope="col">Product Id</th>
+                            <th scope="col">Product Title</th>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">product Price</th>
+                            <th scope="col">Total Sold</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
+                    <tbody class="bg-info text-center">
+
+                        <!---- PHP code to get orders table data to display my orders tble ----->
+
+                        <?php
+                        $get_product_details = "SELECT * FROM `products`";
+                        $result_product = mysqli_query($con, $get_product_details);
+                        while ($row_product = mysqli_fetch_assoc($result_product)) {
+
+                            $Product_Id = $row_product['product_id'];
+                            $Product_Title = $row_product['product_tittle'];
+                            $Product_Image = $row_product['product_image1'];
+                            $product_Price = $row_product['product_price'];
+                            $status = $row_product['status'];
+                            ?>
+
+                        <tr class='table-info'>
+                            <td>
+                                <?php echo $Product_Id ?>
+                            </td>
+                            <td>
+                                <?php echo $Product_Title ?>
+                            </td>
+                            <td><img src='../images/<?php echo $Product_Image ?>' width='70px' height='70px'></td>
+                            <td> Rs.
+                                <?php echo $product_Price ?>
+                            </td>
+                            <td>
+                                <?php
+                                $get_total_sold_count = "SELECT * FROM `orders_pending` WHERE product_id = '$Product_Id'";
+                                $result_count = mysqli_query($con, $get_total_sold_count);
+                                $count = mysqli_num_rows($result_count);
+                                echo $count;
+
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php echo $status ?>
+                            </td>
+                            <td><a href='edit_product'><i class='bx bx-edit text-success'></i></a></a></td>
+                            <td><a href='delete_product.php'><i class='bx bxs-trash mx-4 text-danger'></i></a></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+
+
+
+
+
+                    </tbody>
                 </table>
 
             </div>

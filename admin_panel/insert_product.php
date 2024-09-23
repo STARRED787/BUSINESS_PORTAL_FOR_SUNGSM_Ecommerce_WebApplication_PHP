@@ -1,7 +1,7 @@
 <?php
 include('../include/connect.php');
 if (isset($_POST['insert_product'])) {
-    $product_title = $_POST['product_title'];
+    $product_tittle = $_POST['product_tittle'];
     $product_description = $_POST['product_description'];
     $product_keyword = $_POST['product_keyword'];
     $product_categories = $_POST['product_categories'];
@@ -21,7 +21,7 @@ if (isset($_POST['insert_product'])) {
 
     // checking empty
     if (
-        $product_title == '' or $product_description == ''
+        $product_tittle == '' or $product_description == ''
         or $product_keyword == '' or $product_categories == ''
         or $product_brand == '' or $product_Price == ''
         or $product_image_1 == '' or $product_image_2 == ''
@@ -35,9 +35,9 @@ if (isset($_POST['insert_product'])) {
         move_uploaded_file($tmp_product_image_3, "../images/$product_image_3");
 
         //insert query
-        $insert_products = "INSERT INTO `products` (product_title, product_description, product_keyword, categorie_id,
+        $insert_products = "INSERT INTO `products` (product_tittle, product_description, product_keyword, categorie_id,
         brand_id, product_image1, product_image2, product_image3, product_price, date, status)
-        VALUES ('$product_title', '$product_description', '$product_keyword', '$product_categories',
+        VALUES ('$product_tittle', '$product_description', '$product_keyword', '$product_categories',
         '$product_brand', '$product_image_1', '$product_image_2', '$product_image_3',
         '$product_Price', NOW(), '$product_status')";
 
@@ -100,8 +100,8 @@ if (isset($_POST['insert_product'])) {
                 <!-- Title -->
                 <div class="col-12 col-md-6 mb-4">
                     <div class="form-outline">
-                        <label for="product_title" class="form-label">Product Title</label>
-                        <input type="text" name="product_title" id="product_title" class="form-control"
+                        <label for="product_tittle" class="form-label">Product Title</label>
+                        <input type="text" name="product_tittle" id="product_tittle" class="form-control"
                             placeholder="Enter Product Name" required>
                     </div>
                 </div>

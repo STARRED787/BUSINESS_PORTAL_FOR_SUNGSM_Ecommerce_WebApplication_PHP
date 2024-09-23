@@ -105,6 +105,10 @@ include('../functions/common_function.php');
         if (isset($_GET['edit_product'])) {
           include('edit_product.php');
         }
+
+        if (isset($_GET['delete_product'])) {
+          include('delete_product.php');
+        }
         ?>
       </div>
     </div>

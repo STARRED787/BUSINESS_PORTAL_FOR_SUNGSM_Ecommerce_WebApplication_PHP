@@ -53,7 +53,7 @@ include('../functions/common_function.php');
                 <i class="fa-solid fa-layer-group"></i>
                 <span class="ms-1 d-none d-sm-inline">Insert Categories</span>
               </a>
-              <a href="#" class="nav-link align-middle px-0 text-white">
+              <a href="index.php?view_categories" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-list"></i>
                 <span class="ms-1 d-none d-sm-inline">View Categories</span>
               </a>
@@ -61,7 +61,7 @@ include('../functions/common_function.php');
                 <i class="fa-solid fa-tag"></i>
                 <span class="ms-1 d-none d-sm-inline">Insert Brands</span>
               </a>
-              <a href="#" class="nav-link align-middle px-0 text-white">
+              <a href="index.php?view_brand" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-tags"></i>
                 <span class="ms-1 d-none d-sm-inline">View Brands</span>
               </a>
@@ -109,6 +109,14 @@ include('../functions/common_function.php');
         if (isset($_GET['delete_product'])) {
           include('delete_product.php');
         }
+
+        if (isset($_GET['view_categories'])) {
+          include('view_categories.php');
+        }
+        if (isset($_GET['view_brands'])) {
+          include('view_brands.php');
+        }
+
         ?>
       </div>
     </div>

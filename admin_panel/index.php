@@ -113,8 +113,17 @@ include('../functions/common_function.php');
         if (isset($_GET['view_categories'])) {
           include('view_categories.php');
         }
-        if (isset($_GET['view_brands'])) {
-          include('view_brands.php');
+        if (isset($_GET['edit_categories'])) {
+          include('edit_categories.php');
+        }
+        if (isset($_GET['delete_categories'])) {
+          include('delete_categories.php');
+        }
+        if (isset($_GET['edit_brands'])) {
+          include('edit_brands.php');
+        }
+        if (isset($_GET['delete_brands'])) {
+          include('delete_brands.php');
         }
 
         ?>

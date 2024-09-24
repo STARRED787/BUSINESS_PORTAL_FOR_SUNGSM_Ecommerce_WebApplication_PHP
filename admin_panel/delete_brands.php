@@ -50,19 +50,19 @@
 </body>
 
 <?php
-if (isset($_GET['delete_categories'])) {
-    $categories_id = $_GET['delete_categories']; // Get product_id from URL
+if (isset($_GET['delete_brands'])) {
+    $brand_id = $_GET['delete_brands']; // Get product_id from URL
 
     // Query to delete the product from the database
-    $delete_query = "DELETE FROM `categories` WHERE categorie_id ='$categories_id'";
+    $delete_query = "DELETE FROM `brands` WHERE brand_id ='$brand_id'";
     $result_delete = mysqli_query($con, $delete_query);
 
     // Check if the product was deleted successfully
     if ($result_delete) {
         echo "<script>
-            toastr.success('Product deleted successfully');
+            toastr.success('brand deleted successfully');
             setTimeout(function() {
-                window.open('index.php?view_categories', '_self');
+                window.open('index.php?view_brands', '_self');
             }, 2000); // 2 seconds delay before redirect
         </script>";
     } else {

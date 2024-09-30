@@ -18,7 +18,7 @@ if (isset($_GET['order_id'])) {
     $row_order = mysqli_fetch_assoc($result_orders);
     $order_id = $row_order['order_id'];
     $order_invoice_number = $row_order['invoice_number'];
-    $order_total_products = $row_order['total_products'];
+    $order_total_amount = $row_order['amount_due'];
 
 }
 
@@ -77,7 +77,7 @@ if (isset($_GET['order_id'])) {
                                 <div data-mdb-input-init class="form-outline mb-4">
 
                                     <input type="text" id="total_amount" name="total_amount" class="form-control"
-                                        value="<?php echo $order_total_products ?>" />
+                                        value="<?php echo $order_total_amount ?>" />
                                     <label class="form-label" for="form3Example1q">Amount</label>
                                 </div>
 
@@ -134,8 +134,8 @@ if (isset($_POST['payement_confirm'])) {
 
 
     //insert query code
-    $insert_confirm_payement = "INSERT INTO `user_payements` (invoice_number, amount, payement_mode) 
-                                    VALUES ('$invoice_number', '$order_total_amount', '$payement_mode')";
+    $insert_confirm_payement = "INSERT INTO `user_payements` (order_id, invoice_number, amount, payement_mode) 
+                                    VALUES ('$order_id', '$invoice_number', '$order_total_amount', '$payement_mode')";
     $result_confirm_payement = mysqli_query($con, $insert_confirm_payement);
 
     // Display success/error message for payment confirmation

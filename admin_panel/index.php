@@ -65,11 +65,11 @@ include('../functions/common_function.php');
                 <i class="fa-solid fa-tags"></i>
                 <span class="ms-1 d-none d-sm-inline">View Brands</span>
               </a>
-              <a href="index.php?all_orders" class="nav-link align-middle px-0 text-white">
+              <a href="index.php?view_orders" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-truck"></i>
                 <span class="ms-1 d-none d-sm-inline">All Orders</span>
               </a>
-              <a href="" class="nav-link align-middle px-0 text-white">
+              <a href="index.php?view_payements" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-credit-card"></i>
                 <span class="ms-1 d-none d-sm-inline">All Payments</span>
               </a>
@@ -128,10 +128,15 @@ include('../functions/common_function.php');
         if (isset($_GET['delete_brands'])) {
           include('delete_brands.php');
         }
-        if (isset($_GET['all_orders'])) {
-          include('all_orders.php');
+        if (isset($_GET['view_orders'])) {
+          include('view_orders.php');
         }
-
+        if (isset($_GET['view_payements'])) {
+          include('view_payements.php');
+        }
+        if (isset($_GET['delete_payements'])) {
+          include('delete_payements.php');
+        }
         ?>
       </div>
     </div>

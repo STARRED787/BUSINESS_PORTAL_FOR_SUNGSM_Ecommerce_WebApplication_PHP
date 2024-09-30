@@ -58,9 +58,7 @@
                     if ($order_status == 'Complete') {
                         echo "<td>paid</td>";
                     } else {
-                        echo " <td><a href='./confirm_payement.php?order_id=$order_id'> Confirm</a></td>
-                                </tr>
-                            ";
+                        echo "  <td>Unpaid</td>";
                     }
 
                     $sl_order++;

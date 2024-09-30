@@ -1,14 +1,3 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-//database connection
-include('../include/connect.php');
-include('../functions/common_function.php');
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,6 +30,10 @@ include('../functions/common_function.php');
           </a>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
+              <a href="index.php?count_board" class="nav-link align-middle px-0 text-white">
+                <i class='bx bxs-objects-vertical-bottom'></i>
+                <span class="ms-1 d-none d-sm-inline">Count Board</span>
+              </a>
               <a href="index.php?insert_product" class="nav-link align-middle px-0 text-white">
                 <i class="bx bxs-home"></i>
                 <span class="ms-1 d-none d-sm-inline">Insert Products</span>
@@ -73,7 +66,7 @@ include('../functions/common_function.php');
                 <i class="fa-solid fa-credit-card"></i>
                 <span class="ms-1 d-none d-sm-inline">All Payments</span>
               </a>
-              <a href="#" class="nav-link align-middle px-0 text-white">
+              <a href="index.php?view_users" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-user"></i>
                 <span class="ms-1 d-none d-sm-inline">List Users</span>
               </a>
@@ -87,14 +80,23 @@ include('../functions/common_function.php');
         </div>
       </div>
 
-      <!-- Content Area -->
+      <!-- Dynamic Content Area -->
       <div class="col py-3">
         <?php
         if (isset($_GET['insert_categori'])) {
           include('insert_categories.php');
         }
+        if (isset($_GET['count_board'])) {
+          include('count_board.php');
+        }
+        if (isset($_GET['view_categories'])) {
+          include('view_categories.php');
+        }
         if (isset($_GET['insert_brand'])) {
-          include('insert_brand.php');
+          include('insert_brands.php');
+        }
+        if (isset($_GET['view_brands'])) {
+          include('view_brands.php');
         }
         if (isset($_GET['insert_product'])) {
           include('insert_product.php');
@@ -102,59 +104,31 @@ include('../functions/common_function.php');
         if (isset($_GET['view_product'])) {
           include('view_product.php');
         }
-        if (isset($_GET['edit_product'])) {
-          include('edit_product.php');
-        }
-
-        if (isset($_GET['delete_product'])) {
-          include('delete_product.php');
-        }
-
-        if (isset($_GET['view_categories'])) {
-          include('view_categories.php');
-        }
-        if (isset($_GET['edit_categories'])) {
-          include('edit_categories.php');
-        }
-        if (isset($_GET['delete_categories'])) {
-          include('delete_categories.php');
-        }
-        if (isset($_GET['view_brands'])) {
-          include('view_brands.php');
-        }
-        if (isset($_GET['edit_brands'])) {
-          include('edit_brands.php');
-        }
-        if (isset($_GET['delete_brands'])) {
-          include('delete_brands.php');
-        }
         if (isset($_GET['view_orders'])) {
           include('view_orders.php');
         }
         if (isset($_GET['view_payements'])) {
-          include('view_payements.php');
+          include('view_payments.php');
         }
-        if (isset($_GET['delete_payements'])) {
-          include('delete_payements.php');
+        if (isset($_GET['view_users'])) {
+          include('view_users.php');
+        }
+        if (isset($_GET['delete_users'])) {
+          include('delete_users.php');
         }
         ?>
       </div>
     </div>
   </div>
 
-  <!--footer-->
-  <footer class="footer col-md-12 col-lg-12 col-sm-12">
-    <p class="copyright">IRISH Visuals © 2024 - All Right Reserved</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Toastr JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
     referrerpolicy="no-referrer"></script>
-  <script src="../index/index.js"></script>
-</body>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ZOvcITpNrnYq8Xiwb6Orp9+7DSgqe3pA/NYopSKkPAUDT60e1iEFOkM8UEkUviLv" crossorigin="anonymous">
+    </script>
+</body>
 
 </html>

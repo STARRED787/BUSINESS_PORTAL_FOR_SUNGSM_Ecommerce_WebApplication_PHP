@@ -1,4 +1,27 @@
 <!-- Content Area with Counts -->
+
+
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+//database connection
+include('../include/connect.php');
+
+
+
+// Query to get counts from the relevant tables
+$product_count = $con->query("SELECT COUNT(*) as count FROM products")->fetch_assoc()['count'];
+$category_count = $con->query("SELECT COUNT(*) as count FROM categories")->fetch_assoc()['count'];
+$brand_count = $con->query("SELECT COUNT(*) as count FROM brands")->fetch_assoc()['count'];
+$order_count = $con->query("SELECT COUNT(*) as count FROM orders")->fetch_assoc()['count'];
+$payment_count = $con->query("SELECT COUNT(*) as count FROM user_payements")->fetch_assoc()['count'];
+$user_count = $con->query("SELECT COUNT(*) as count FROM user")->fetch_assoc()['count'];
+
+?>
+
+
+
 <div class="col py-3">
     <div class="row">
         <!-- Product Count -->

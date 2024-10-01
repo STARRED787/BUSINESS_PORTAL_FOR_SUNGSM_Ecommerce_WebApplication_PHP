@@ -1,3 +1,12 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+//database connection
+include('../include/connect.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,7 +117,7 @@
           include('view_orders.php');
         }
         if (isset($_GET['view_payements'])) {
-          include('view_payments.php');
+          include('view_payements.php');
         }
         if (isset($_GET['view_users'])) {
           include('view_users.php');

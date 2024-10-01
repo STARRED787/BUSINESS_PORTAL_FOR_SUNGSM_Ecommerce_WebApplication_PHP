@@ -83,7 +83,7 @@ if (isset($_POST['delete_payment'])) {
                 $(document).ready(function() {
                     toastr.success('Payment deleted successfully!');
                     setTimeout(function() {
-                        window.location.href = 'index.php?view_payements'; // Redirect to the same page after deletion
+                        window.location.href = 'index_home.php?view_payements'; // Redirect to the same page after deletion
                     }, 2000); // Delay of 2 seconds before redirection
                 });
               </script>";

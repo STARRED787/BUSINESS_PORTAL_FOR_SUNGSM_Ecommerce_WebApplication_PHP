@@ -57,7 +57,7 @@ include('../include/connect.php');
                                 <td><?php echo $user_mobile ?></td>
                                 <td>
                                     <!-- Anchor tag for delete with confirmation -->
-                                    <a href="index.php?delete_users=<?php echo $user_id ?>"
+                                    <a href="index_home.php?delete_users=<?php echo $user_id ?>"
                                         onclick="return confirm('Are you sure you want to delete this product?')">
                                         <i class='bx bxs-trash mx-4 text-danger'></i>
                                     </a>

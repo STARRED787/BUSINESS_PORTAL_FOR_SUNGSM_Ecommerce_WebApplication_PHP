@@ -117,7 +117,7 @@ if (isset($_POST['categorie_update'])) {
     if ($result_update) {
         echo "<script>$(document).ready(function() { 
             toastr.success('Category updated successfully.');
-            setTimeout(function() { window.location.href = 'index.php?view_categories'; }, 2000); // Delay for 2 seconds
+            setTimeout(function() { window.location.href = 'index_home.php?view_categories'; }, 2000); // Delay for 2 seconds
         });</script>";
     } else {
         echo "<script>toastr.error('Category update failed.');</script>";

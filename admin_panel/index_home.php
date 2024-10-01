@@ -30,43 +30,43 @@
           </a>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
-              <a href="index.php?count_board" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?count_board" class="nav-link align-middle px-0 text-white">
                 <i class='bx bxs-objects-vertical-bottom'></i>
                 <span class="ms-1 d-none d-sm-inline">Count Board</span>
               </a>
-              <a href="index.php?insert_product" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?insert_product" class="nav-link align-middle px-0 text-white">
                 <i class="bx bxs-home"></i>
                 <span class="ms-1 d-none d-sm-inline">Insert Products</span>
               </a>
-              <a href="index.php?view_product" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?view_product" class="nav-link align-middle px-0 text-white">
                 <i class="bx bxs-package"></i>
                 <span class="ms-1 d-none d-sm-inline">View Products</span>
               </a>
-              <a href="index.php?insert_categori" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?insert_categori" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-layer-group"></i>
                 <span class="ms-1 d-none d-sm-inline">Insert Categories</span>
               </a>
-              <a href="index.php?view_categories" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?view_categories" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-list"></i>
                 <span class="ms-1 d-none d-sm-inline">View Categories</span>
               </a>
-              <a href="index.php?insert_brand" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?insert_brand" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-tag"></i>
                 <span class="ms-1 d-none d-sm-inline">Insert Brands</span>
               </a>
-              <a href="index.php?view_brands" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?view_brands" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-tags"></i>
                 <span class="ms-1 d-none d-sm-inline">View Brands</span>
               </a>
-              <a href="index.php?view_orders" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?view_orders" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-truck"></i>
                 <span class="ms-1 d-none d-sm-inline">All Orders</span>
               </a>
-              <a href="index.php?view_payements" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?view_payements" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-credit-card"></i>
                 <span class="ms-1 d-none d-sm-inline">All Payments</span>
               </a>
-              <a href="index.php?view_users" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?view_users" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-user"></i>
                 <span class="ms-1 d-none d-sm-inline">List Users</span>
               </a>

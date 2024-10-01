@@ -70,9 +70,9 @@ if (isset($_GET['delete_users'])) {
     // Check if the product was deleted successfully
     if ($result_delete) {
         echo "<script>
-            toastr.success('Product deleted successfully');
+            toastr.success('User deleted successfully');
             setTimeout(function() {
-                window.open('index.php?view_users', '_self');
+                window.open('index_home.php?view_users', '_self');
             }, 2000); // 2 seconds delay before redirect
         </script>";
     } else {

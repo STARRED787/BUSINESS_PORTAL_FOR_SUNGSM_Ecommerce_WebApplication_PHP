@@ -62,7 +62,7 @@ if (isset($_GET['delete_product'])) {
         echo "<script>
             toastr.success('Product deleted successfully');
             setTimeout(function() {
-                window.open('index.php?view_product', '_self');
+                window.open('index_home.php?view_product', '_self');
             }, 2000); // 2 seconds delay before redirect
         </script>";
     } else {

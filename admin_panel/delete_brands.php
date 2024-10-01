@@ -62,7 +62,7 @@ if (isset($_GET['delete_brands'])) {
         echo "<script>
             toastr.success('brand deleted successfully');
             setTimeout(function() {
-                window.open('index.php?view_brands', '_self');
+                window.open('index_home.php?view_brands', '_self');
             }, 2000); // 2 seconds delay before redirect
         </script>";
     } else {

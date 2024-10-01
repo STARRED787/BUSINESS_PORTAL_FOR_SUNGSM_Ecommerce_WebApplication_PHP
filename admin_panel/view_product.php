@@ -62,11 +62,11 @@ include('../include/connect.php');
                                     ?>
                                 </td>
                                 <td><?php echo $status ?></td>
-                                <td><a href='index.php?edit_product=<?php echo $Product_Id ?>'><i
+                                <td><a href='index_home.php?edit_product=<?php echo $Product_Id ?>'><i
                                             class='bx bx-edit text-success'></i></a></td>
                                 <td>
                                     <!-- Anchor tag for delete with confirmation -->
-                                    <a href="index.php?delete_product=<?php echo $Product_Id ?>"
+                                    <a href="index_home.php?delete_product=<?php echo $Product_Id ?>"
                                         onclick="return confirm('Are you sure you want to delete this product?')">
                                         <i class='bx bxs-trash mx-4 text-danger'></i>
                                     </a>

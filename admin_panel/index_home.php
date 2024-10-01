@@ -102,7 +102,7 @@ include('../include/connect.php');
           include('view_categories.php');
         }
         if (isset($_GET['insert_brand'])) {
-          include('insert_brands.php');
+          include('insert_brand.php');
         }
         if (isset($_GET['view_brands'])) {
           include('view_brands.php');

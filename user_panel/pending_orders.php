@@ -1,12 +1,40 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+@session_start();
+
+// Check if the username exists in the session
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+} else {
+    // If no username in the session, stop execution and show an error message
+    die('Username not found in session. Please login.');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SUN GSM</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./user_page.css" />
+
+    <!-- Corrected: Only one version of Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
         referrerpolicy="no-referrer" />
-    <title>Edit Account</title>
 </head>
 
 <body>
@@ -68,7 +96,7 @@
             <td>$order_invoice_number</td>
             <td>$order_order_date</td>
             <td>$order_status</td>
-            <td><a href='./confirm_payement.php?order_id=$order_id'>Confirm</a></td>
+            <td><a href='./go_pay.php?order_id=$order_id'>Confirm</a></td>
         </tr>";
 
                                 $sl_order++; // Increment after displaying the row

@@ -1,3 +1,20 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+@session_start();
+
+// Check if the username exists in the session
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+} else {
+    // If no username in the session, stop execution and show an error message
+    die('Username not found in session. Please login.');
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +36,7 @@
     $row_fetch = mysqli_fetch_assoc($result);
     $user_id = $row_fetch['user_id'];
     //echo $user_id;
+    
     ?>
 
     <div class="d-flex justify-content-center" style="border-radius: 15px; font-family:Poppins">

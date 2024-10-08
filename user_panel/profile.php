@@ -282,7 +282,10 @@ session_start();
                     <?php
 
                     // display user dashboard functions
-                    
+                    if (isset($_GET['pending_orders'])) {
+                        include('pending_orders.php');
+                    }
+
                     if (isset($_GET['edit_account'])) {
                         include('edit_account.php');
                     }

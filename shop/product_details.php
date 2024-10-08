@@ -214,7 +214,7 @@ session_start();
                     <form class="d-flex" action="search.php" method="get">
 
                         <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search"
-                            style="width: 240px;" name="search_data">
+                            style="width: 230px;" name="search_data">
 
                         <input type="submit" value="search" class="btn-outline search" name="search_data_product">
                     </form>

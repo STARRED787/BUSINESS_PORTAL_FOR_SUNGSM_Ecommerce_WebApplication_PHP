@@ -24,7 +24,7 @@
     <div class="d-flex justify-content-center" style="border-radius: 15px; font-family:Poppins">
         <div class="card" style="width:100%;">
             <div class="card-body">
-                <h1 class="text-center ">My Orders</h1>
+                <h1 class="text-center ">Pending Orders</h1>
 
                 <table class="table table-bordered mt-5 ">
                     <thead class="table-primary">
@@ -56,8 +56,8 @@
                             $order_status = $row_orders['order_status'];
 
                             // Only display orders with status 'Pending' (i.e., 'Incomplete')
-                            if ($order_status == 'Complete') {
-                                $order_status = "Complete";
+                            if ($order_status == 'Pending') {
+                                $order_status = "Incomplete";
 
                                 echo "
         <tr class='table-info'>
@@ -68,14 +68,13 @@
             <td>$order_invoice_number</td>
             <td>$order_order_date</td>
             <td>$order_status</td>
-            <td>Paid</a></td>
+            <td><a href='./confirm_payement.php?order_id=$order_id'>Confirm</a></td>
         </tr>";
 
                                 $sl_order++; // Increment after displaying the row
                             }
                         }
                         ?>
-
 
 
 

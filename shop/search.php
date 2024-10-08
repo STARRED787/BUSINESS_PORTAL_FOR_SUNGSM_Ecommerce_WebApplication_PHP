@@ -220,7 +220,6 @@ session_start();
             </div>
         </nav>
 
-
     </section>
 
     <!--call cart functio-->

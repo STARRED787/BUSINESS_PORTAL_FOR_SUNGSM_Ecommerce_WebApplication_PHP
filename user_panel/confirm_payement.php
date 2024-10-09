@@ -142,7 +142,7 @@ if (isset($_POST['payement_confirm'])) {
     if ($result_confirm_payement) {
         echo "<script>$(document).ready(function() { 
         toastr.success('Payment Successfully Confirmed');
-        setTimeout(function() { window.open('profile.php?my_orders','_self'); }, 2000); // Delay for 2 seconds
+        setTimeout(function() { window.open('receipt.php?order_id=$order_id','_self'); }, 2000); // Delay for 2 seconds
     });</script>";
     } else {
         echo "<script>toastr.error('Payment Not Confirmed')</script>";

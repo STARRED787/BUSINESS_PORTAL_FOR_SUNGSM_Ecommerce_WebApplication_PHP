@@ -21,14 +21,11 @@ if (isset($_SESSION['username'])) {
     <title>SUN GSM</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./user_page.css" />
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
         referrerpolicy="no-referrer" />
 </head>
@@ -45,64 +42,64 @@ if (isset($_SESSION['username'])) {
     <div class="d-flex justify-content-center" style="border-radius: 15px; font-family:Poppins">
         <div class="card" style="width:100%;">
             <div class="card-body">
-
+                <h1 class="text-center">Delivery Details</h1>
 
                 <?php
-                $get_orders_details = "SELECT * FROM `orders` WHERE user_id='$user_id'";
-                $result_orders = mysqli_query($con, $get_orders_details);
-                $order_count = mysqli_num_rows($result_orders); // Get the number of orders
-                $sl_order = 1;
-
-                if ($order_count > 0) {
-                    echo " <h1 class='text-center'>Pending Orders</h1>";
+                // Fetch delivery details
+                $get_delivery_details = "SELECT * FROM `delivery_details` WHERE user_id='$user_id'";
+                $result_delivery = mysqli_query($con, $get_delivery_details);
+                $delivery_count = mysqli_num_rows($result_delivery); // Get the number of delivery records
+                
+                if ($delivery_count > 0) {
+                    // If there are delivery records, show the table
                     echo '<table class="table table-bordered mt-5">';
                     echo '<thead class="table-primary">';
                     echo '<tr>';
-                    echo '<th scope="col">Sl no</th>';
-                    echo '<th scope="col">Order Number</th>';
-                    echo '<th scope="col">Amount Due</th>';
-                    echo '<th scope="col">Total products</th>';
-                    echo '<th scope="col">Invoice Number</th>';
-                    echo '<th scope="col">Date</th>';
-                    echo '<th scope="col">Complete/Incomplete</th>';
-                    echo '<th scope="col">Status</th>';
+                    echo '<th scope="col">Delivery ID</th>';
+                    echo '<th scope="col">Order ID</th>';
+                    echo '<th scope="col">Delivery Address</th>';
+                    echo '<th scope="col">Contact Number</th>';
+                    echo '<th scope="col">Delivery Status</th>';
+                    echo '<th scope="col">Delivery Date</th>';
+                    echo '<th scope="col">Shipping Method</th>';
+                    echo '<th scope="col">Delivery Partner</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
 
-                    while ($row_orders = mysqli_fetch_assoc($result_orders)) {
-                        $order_id = $row_orders['order_id'];
-                        $order_amount_due = $row_orders['amount_due'];
-                        $order_invoice_number = $row_orders['invoice_number'];
-                        $order_total_products = $row_orders['total_products'];
-                        $order_order_date = $row_orders['order_date'];
-                        $order_status = $row_orders['order_status'];
+                    // Display each delivery record
+                    while ($row_delivery = mysqli_fetch_assoc($result_delivery)) {
+                        $delivery_id = $row_delivery['delivery_id'];
+                        $order_id = $row_delivery['order_id'];
+                        $delivery_address = $row_delivery['delivery_address'];
+                        $contact_number = $row_delivery['contact_number'];
+                        $delivery_status = $row_delivery['delivery_status'];
+                        $delivery_date = $row_delivery['delivery_date'];
+                        $shipping_method = $row_delivery['shipping_method'];
+                        $delivery_partner = $row_delivery['delivery_partner'];
 
-                        // Only display orders with status 'Pending'
-                        if ($order_status == 'Pending') {
-                            $order_status = "Incomplete";
+                        // Check if the delivery date is NULL and set the display value
+                        $display_date = $delivery_date ? $delivery_date : "Not yet";
 
-                            echo "
-                            <tr class='table-info'>
-                                <td>$sl_order</td>
-                                <td>$order_id</td>
-                                <td>$order_amount_due</td>
-                                <td>$order_total_products</td>
-                                <td>$order_invoice_number</td>
-                                <td>$order_order_date</td>
-                                <td>$order_status</td>
-                                <td><a href='./go_pay.php?order_id=$order_id'>Confirm</a></td>
-                            </tr>";
-
-                            $sl_order++;
-                        }
+                        echo "
+                        <tr class='table-info'>
+                            <td>$delivery_id</td>
+                            <td>$order_id</td>
+                            <td>$delivery_address</td>
+                            <td>$contact_number</td>
+                            <td>$delivery_status</td>
+                            <td>$display_date</td>  <!-- Display date or 'Not yet' -->
+                            <td>$shipping_method</td>
+                            <td>$delivery_partner</td>
+                        </tr>";
                     }
 
                     echo '</tbody>';
                     echo '</table>';
                 } else {
+                    // No delivery details found, hide the table
                     echo "<div class='alert alert-warning' role='alert'>
-                            No pending orders found.
+                            No delivery details found.
                           </div>";
                 }
                 ?>

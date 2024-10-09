@@ -93,11 +93,6 @@ if (isset($_SESSION['username'])) {
                             }
                         }
                         ?>
-
-
-
-
-
                     </tbody>
                 </table>
 

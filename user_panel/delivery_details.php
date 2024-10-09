@@ -62,6 +62,14 @@ if (isset($_GET['order_id'])) {
                         </select>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="delivery_partner" class="form-label">Shipping Method</label>
+                        <select name="delivery_partner" id="delivery_partner" class="form-control">
+                            <option value="prompt express">prompt express</option>
+
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn text-dark fw-bold" style="background-color:#fc8505;">Submit
                         Delivery Details</button>
                 </form>
@@ -87,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $delivery_address = mysqli_real_escape_string($con, $_POST['delivery_address']);
     $contact_number = mysqli_real_escape_string($con, $_POST['contact_number']);
     $shipping_method = mysqli_real_escape_string($con, $_POST['shipping_method']);
+    $delivery_partner = mysqli_real_escape_string($con, $_POST['delivery_partner']);
 
     // Check if delivery details already exist for this order and user
     $check_delivery = "SELECT * FROM delivery_details WHERE user_id='$user_id' AND order_id='$order_id'";
@@ -101,8 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>";
     } else {
         // Insert delivery details into the database
-        $insert_delivery = "INSERT INTO delivery_details (user_id, order_id, delivery_address, contact_number, shipping_method) 
-                            VALUES ('$user_id', '$order_id', '$delivery_address', '$contact_number', '$shipping_method')";
+        $insert_delivery = "INSERT INTO delivery_details (user_id, order_id, delivery_address, contact_number, shipping_method, delivery_partner) 
+                            VALUES ('$user_id', '$order_id', '$delivery_address', '$contact_number', '$shipping_method', '$delivery_partner')";
         $result_insert = mysqli_query($con, $insert_delivery);
 
         if ($result_insert) {

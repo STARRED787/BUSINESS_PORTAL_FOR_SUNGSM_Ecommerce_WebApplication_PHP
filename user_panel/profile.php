@@ -225,6 +225,14 @@ session_start();
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="profile.php?delevery_orders" class="nav-link align-middle px-0">
+                                <i class='bx bxs-truck'></i> <span class="ms-1 d-none d-sm-inline">Delevery
+                                    Orders</span>
+                            </a>
+                        </li>
+
+
                         <li>
                             <a href="profile.php?edit_account" class="nav-link px-0 align-middle">
                                 <i class='bx bxs-user-account'></i> <span class="ms-1 d-none d-sm-inline">Edit
@@ -284,6 +292,9 @@ session_start();
                     // display user dashboard functions
                     if (isset($_GET['pending_orders'])) {
                         include('pending_orders.php');
+                    }
+                    if (isset($_GET['delevery_orders'])) {
+                        include('delevery_orders.php');
                     }
 
                     if (isset($_GET['edit_account'])) {

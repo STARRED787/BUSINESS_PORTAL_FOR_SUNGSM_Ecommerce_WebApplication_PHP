@@ -71,6 +71,10 @@ include('../include/connect.php');
                 <i class="fa-solid fa-truck"></i>
                 <span class="ms-1 d-none d-sm-inline">All Orders</span>
               </a>
+              <a href="index_home.php?view_delevery" class="nav-link align-middle px-0 text-white">
+                <i class="fa-solid fa-truck"></i>
+                <span class="ms-1 d-none d-sm-inline">All Delevery</span>
+              </a>
               <a href="index_home.php?view_payements" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-credit-card"></i>
                 <span class="ms-1 d-none d-sm-inline">All Payments</span>
@@ -112,6 +116,9 @@ include('../include/connect.php');
         }
         if (isset($_GET['view_product'])) {
           include('view_product.php');
+        }
+        if (isset($_GET['view_delevery'])) {
+          include('view_delevery.php');
         }
         if (isset($_GET['view_orders'])) {
           include('view_orders.php');

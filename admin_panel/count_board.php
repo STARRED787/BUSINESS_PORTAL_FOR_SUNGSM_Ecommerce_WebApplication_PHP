@@ -17,6 +17,7 @@ $brand_count = $con->query("SELECT COUNT(*) as count FROM brands")->fetch_assoc(
 $order_count = $con->query("SELECT COUNT(*) as count FROM orders")->fetch_assoc()['count'];
 $payment_count = $con->query("SELECT COUNT(*) as count FROM user_payements")->fetch_assoc()['count'];
 $user_count = $con->query("SELECT COUNT(*) as count FROM user")->fetch_assoc()['count'];
+$delevery_count = $con->query("SELECT COUNT(*) as count FROM delivery_details")->fetch_assoc()['count'];
 
 ?>
 
@@ -78,10 +79,20 @@ $user_count = $con->query("SELECT COUNT(*) as count FROM user")->fetch_assoc()['
 
         <!-- User Count -->
         <div class="col-md-4">
-            <div class="card text-white bg-secondary mb-3">
+            <div class="card text-white mb-3" style="background-color: #73014b;">
                 <div class="card-body">
                     <h5 class="card-title">Users</h5>
                     <p class="card-text">Total Users: <?php echo $user_count; ?></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- delevery_count -->
+        <div class="col-md-4">
+            <div class="card text-white mb-3" style="background-color: #e33500;">
+                <div class="card-body">
+                    <h5 class="card-title">Delevery</h5>
+                    <p class="card-text">Total Delevery: <?php echo $delevery_count; ?></p>
                 </div>
             </div>
         </div>

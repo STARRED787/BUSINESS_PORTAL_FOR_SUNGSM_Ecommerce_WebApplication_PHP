@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2024 at 11:56 AM
+-- Generation Time: Oct 09, 2024 at 01:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,6 +72,34 @@ INSERT INTO `categories` (`categorie_id`, `categorie_tittle`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `delivery_details`
+--
+
+CREATE TABLE `delivery_details` (
+  `delivery_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `delivery_address` varchar(255) NOT NULL,
+  `contact_number` varchar(15) NOT NULL,
+  `delivery_status` varchar(50) DEFAULT 'Pending',
+  `delivery_date` date DEFAULT NULL,
+  `shipping_method` varchar(100) DEFAULT 'Standard',
+  `delivery_partner` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `delivery_details`
+--
+
+INSERT INTO `delivery_details` (`delivery_id`, `user_id`, `order_id`, `delivery_address`, `contact_number`, `delivery_status`, `delivery_date`, `shipping_method`, `delivery_partner`, `created_at`) VALUES
+(2, 6, 7, '123', '0987654321', 'Pending', NULL, 'Standard', NULL, '2024-10-09 08:25:56'),
+(3, 6, 9, '212', '0987654321', 'Pending', NULL, 'Standard', NULL, '2024-10-09 09:30:57'),
+(6, 6, 8, '212', '0987654321', 'Pending', NULL, 'Standard', NULL, '2024-10-09 10:42:23');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -95,7 +123,10 @@ INSERT INTO `orders` (`order_id`, `user_id`, `amount_due`, `invoice_number`, `to
 (3, 1, 300, 1900198643, 1, '2024-09-19 17:58:38', 'Pending'),
 (4, 6, 600, 653967161, 1, '2024-09-26 20:08:14', 'Complete'),
 (5, 6, 600, 1830425035, 1, '2024-09-30 19:34:09', 'Complete'),
-(6, 6, 600, 585313617, 1, '2024-09-30 19:33:11', 'Pending');
+(6, 6, 600, 585313617, 1, '2024-10-08 17:46:11', 'Complete'),
+(7, 6, 4500, 986546924, 1, '2024-10-09 08:36:15', 'Complete'),
+(8, 6, 4500, 19571414, 1, '2024-10-09 10:45:03', 'Complete'),
+(9, 6, 4500, 2028979133, 1, '2024-10-09 09:31:05', 'Complete');
 
 -- --------------------------------------------------------
 
@@ -122,7 +153,10 @@ INSERT INTO `orders_pending` (`order_id`, `user_id`, `invoice_number`, `product_
 (3, 1, 1900198643, 6, 1, 'Pending'),
 (4, 6, 653967161, 7, 1, 'Pending'),
 (5, 6, 1830425035, 7, 1, 'Pending'),
-(6, 6, 585313617, 7, 1, 'Pending');
+(6, 6, 585313617, 7, 1, 'Pending'),
+(7, 6, 986546924, 1, 1, 'Pending'),
+(8, 6, 19571414, 1, 1, 'Pending'),
+(9, 6, 2028979133, 1, 1, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -198,7 +232,10 @@ CREATE TABLE `user_payements` (
 
 INSERT INTO `user_payements` (`payement_id`, `order_id`, `invoice_number`, `amount`, `payement_mode`, `date`) VALUES
 (3, 4, 653967161, 1, 'Paypal', '2024-09-26 20:08:14'),
-(4, 5, 1830425035, 600, 'Paypal', '2024-09-30 19:34:09');
+(4, 5, 1830425035, 600, 'Paypal', '2024-09-30 19:34:09'),
+(5, 6, 585313617, 600, 'Cash On Delivery', '2024-10-08 17:46:11'),
+(18, 9, 2028979133, 4500, 'Cash On Delivery', '2024-10-09 09:31:05'),
+(19, 8, 19571414, 4500, 'Cash On Delivery', '2024-10-09 10:45:03');
 
 --
 -- Indexes for dumped tables
@@ -221,6 +258,12 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`categorie_id`);
+
+--
+-- Indexes for table `delivery_details`
+--
+ALTER TABLE `delivery_details`
+  ADD PRIMARY KEY (`delivery_id`);
 
 --
 -- Indexes for table `orders`
@@ -269,16 +312,22 @@ ALTER TABLE `categories`
   MODIFY `categorie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `delivery_details`
+--
+ALTER TABLE `delivery_details`
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `orders_pending`
 --
 ALTER TABLE `orders_pending`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -296,7 +345,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_payements`
 --
 ALTER TABLE `user_payements`
-  MODIFY `payement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `payement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

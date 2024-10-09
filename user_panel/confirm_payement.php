@@ -11,7 +11,6 @@ session_start();
 if (isset($_GET['order_id'])) {
     $order_id = $_GET['order_id'];
 
-
     //get order details to confirm payement fields
     $select_order = "SELECT * FROM `orders` WHERE order_id = '$order_id'";
     $result_orders = mysqli_query($con, $select_order);
@@ -22,7 +21,12 @@ if (isset($_GET['order_id'])) {
 
 }
 
-
+// Fetch the user's details from session
+$username = $_SESSION['username'];
+$get_user = "SELECT * FROM `user` WHERE username='$username'";
+$result_user = mysqli_query($con, $get_user);
+$user_data = mysqli_fetch_assoc($result_user);
+$user_id = $user_data['user_id'];
 
 
 ?>
@@ -140,13 +144,18 @@ if (isset($_POST['payement_confirm'])) {
 
     // Display success/error message for payment confirmation
     if ($result_confirm_payement) {
-        echo "<script>$(document).ready(function() { 
-        toastr.success('Payment Successfully Confirmed');
-        setTimeout(function() { window.open('receipt.php?order_id=$order_id','_self'); }, 2000); // Delay for 2 seconds
-    });</script>";
+        echo "<script>
+            $(document).ready(function() { 
+                toastr.success('Payment Successfully Confirmed');
+                setTimeout(function() { 
+                    window.open('receipt.php?order_id=" . $order_id . "&user_id=" . $user_id . "', '_self'); 
+                }, 2000); // Delay for 2 seconds
+            });
+        </script>";
     } else {
         echo "<script>toastr.error('Payment Not Confirmed')</script>";
     }
+
     $update_order_status = "UPDATE `orders` SET order_status = 'Complete' WHERE order_id = '$order_id'";
     $result_update_order_status = mysqli_query($con, $update_order_status);
 }

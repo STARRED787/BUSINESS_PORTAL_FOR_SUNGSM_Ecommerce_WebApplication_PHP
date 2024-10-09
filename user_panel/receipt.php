@@ -1,13 +1,22 @@
 <?php
 include('../include/connect.php'); // Include database connection
-
+session_start();
 // Get the user ID and order ID from the URL
 if (isset($_GET['order_id']) && isset($_GET['user_id'])) {
     $order_id = $_GET['order_id'];
     $user_id = $_GET['user_id'];
 } else {
-    die('Order ID or User ID not provided.');
+    // Output Toastr library
+    echo "
+    <script>
+        alert('Please follow the order process.');
+        window.location.href = '../index/index.php'; // Redirect to index page
+    </script>
+    ";
+    exit; // Stop further execution
 }
+
+
 
 // Fetch user details
 $get_user = "SELECT * FROM `user` WHERE user_id='$user_id'";
@@ -57,15 +66,19 @@ $date = date('Y-m-d');
                 display: none;
             }
         }
+
+        .no-underline {
+            text-decoration: none;
+        }
     </style>
 </head>
 
-<body>
-    <div class="container mt-5">
-        <div class="card">
+<body style="background-color:#ff6c3b">
+    <div class="container mt-5 mb-5 ">
+        <div class="card rounded-5" style="background-color:#eac9ff">
             <div class="card-header text-center">
                 <h2>Order Receipt</h2>
-                <h4>SUNGSM Shop</h4>
+                <h4 class="text-primary">SUNGSM Shop</h4>
             </div>
             <div class="card-body row">
                 <div class="col-md-6">
@@ -78,12 +91,12 @@ $date = date('Y-m-d');
                     </div>
 
                     <!-- User Details -->
-                    <h4>User Details</h4>
+                    <h4 class="text-primary">User Details</h4>
                     <p><strong>Name:</strong> <?php echo $user_data['username']; ?></p>
                     <p><strong>Email:</strong> <?php echo $user_data['user_email']; ?></p>
 
                     <!-- Delivery Details -->
-                    <h4>Delivery Details</h4>
+                    <h4 class="text-primary">Delivery Details</h4>
                     <p><strong>Address:</strong> <?php echo $delivery_data['delivery_address']; ?></p>
                     <p><strong>Contact Number:</strong> <?php echo $delivery_data['contact_number']; ?></p>
                     <p><strong>Shipping Method:</strong> <?php echo $delivery_data['shipping_method']; ?></p>
@@ -91,7 +104,7 @@ $date = date('Y-m-d');
 
                 <div class="col-md-6">
                     <!-- Ordered Products -->
-                    <h4>Ordered Products</h4>
+                    <h4 class="text-primary">Ordered Products</h4>
                     <ul class="list-group">
                         <p><strong>Order ID:</strong> <?php echo $order_data['order_id']; ?></p>
 
@@ -103,16 +116,22 @@ $date = date('Y-m-d');
                                     <?php echo number_format($product_data['product_price'] * $product_data['quantity'], 2); ?></span>
                             </li>
                         <?php } ?>
-                        <p class="text-end mt-3"><strong>Total Amount:</strong>
-                            <?php echo "Rs " . number_format($order_data['amount_due'], 2); ?></p>
+                        <p class="text-end mt-3 text-danger"><strong>Total Amount:
+                                <?php echo "Rs " . number_format($order_data['amount_due'], 2); ?></p></strong>
                     </ul>
                 </div>
             </div>
 
             <!-- Button to print the receipt -->
-            <div class="text-center mt-4 no-print ">
+            <div class="text-center mt-4 no-print mb-3">
                 <button onclick="window.print()" class="btn btn-primary">Print Receipt</button>
+                <a href="download_receipt.php?order_id=<?php echo $order_id; ?>&user_id=<?php echo $user_id; ?>">
+                    <button class="btn btn-warning no-underline">Download Receipt</button>
+                </a>
+                <a href="../index/index.php" class="btn btn-success no-underline">Home</a>
             </div>
+
+
         </div>
     </div>
 

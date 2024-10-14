@@ -125,31 +125,58 @@ if (isset($_POST['user_login'])) {
     $row = mysqli_fetch_assoc($result);
     $user_ip = getIPAddress();
 
-    //cart item access
-    $select_query_cart = "SELECT * FROM cart WHERE ip_address='$user_ip'";
-    $select_cart = mysqli_query($con, $select_query_cart);
-    $rows_count_cart = mysqli_num_rows($select_cart);
-
+    // Check if user exists
     if ($rows_count > 0) {
-        $_SESSION['username'] = $user_username; {
-
-        }
         if (password_verify($user_password, $row['password'])) {
-            if ($rows_count == 1 and $rows_count_cart == 0) {
-                echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";
-                echo "<script>window.open('profile.php','_self')</script>";
+            // Set session variables
+            $_SESSION['username'] = $user_username;
+            $_SESSION['user_id'] = $row['user_id']; // Store user_id in the session
+
+            // Check if the cart has items
+            $select_query_cart = "SELECT * FROM cart WHERE ip_address='$user_ip'";
+            $select_cart = mysqli_query($con, $select_query_cart);
+            $rows_count_cart = mysqli_num_rows($select_cart);
+
+            if ($rows_count == 1 && $rows_count_cart == 0) {
+                // Redirect to profile if no items in cart
+                echo "
+                <script>
+                    $(document).ready(function() {
+                        toastr.success('Login Successful');
+                        setTimeout(function() {
+                            window.open('profile.php', '_self');
+                        }, 2000);
+                    });
+                </script>";
             } else {
-                echo "<script>$(document).ready(function() { toastr.error('Loging Sucssesfull'); });</script>";
-                echo "<script>window.open('payement.php','_self')</script>";
+                // Redirect to payment if there are items in the cart
+                echo "
+                <script>
+                    $(document).ready(function() {
+                        toastr.success('Login Successful');
+                        setTimeout(function() {
+                            window.open('payement.php', '_self');
+                        }, 2000);
+                    });
+                </script>";
             }
         } else {
-            echo "<script>$(document).ready(function() { toastr.error('Invalid Credentials'); });</script>";
+            echo "
+            <script>
+                $(document).ready(function() {
+                    toastr.error('Invalid Credentials');
+                });
+            </script>";
         }
     } else {
-        echo "<script>$(document).ready(function() { toastr.error('Invalid Credentials'); });</script>";
+        echo "
+        <script>
+            $(document).ready(function() {
+                toastr.error('Invalid Credentials');
+            });
+        </script>";
     }
-
-
 }
+
 
 ?>

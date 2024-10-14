@@ -3,11 +3,22 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Include database connection
-include('../include/connect.php');  // Ensure this path is correct
-require_once('../functions/common_function.php');  // Ensure this path is correct
-?>
+// Database connection
+include('../include/connect.php');
+require_once('../functions/common_function.php');
+session_start();
 
+// Check if the user is logged in (user_id stored in session when user logs in)
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if not logged in
+    header('Location: ../user_panel/user_login.php');
+    exit();
+}
+
+$user_id = $_SESSION['user_id']; // Retrieve user_id from session
+
+// Payment page content...
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +36,7 @@ require_once('../functions/common_function.php');  // Ensure this path is correc
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Anta&family=Barrio&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=RocknRoll+One&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Anta&family=Barrio&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=RocknRoll+One&display=swap"
         rel="stylesheet">
 
     <!-- Toastr CSS -->
@@ -35,40 +46,15 @@ require_once('../functions/common_function.php');  // Ensure this path is correc
 
 <body>
     <!--php code to access user id -->
-    <?php
-    // Ensure the getIPAddress() function is defined
-    $user_ip = getIPAddress(); // Define the function if not already done
-    $get_user = "SELECT * FROM `user` WHERE user_ip = '$user_ip'";
-    $run_user = mysqli_query($con, $get_user);
-    $run_query = mysqli_fetch_array($run_user);
-    $user_id = $run_query['user_id'];
-    ?>
-
-    <!-- Payment Options Section -->
     <div class="d-flex flex-column align-items-center justify-content-center">
-        <h1 class="text-center mb-4">Payment Options</h1> <!-- Centered title with margin-bottom -->
+        <h1 class="text-center mb-4">Payment Options</h1>
         <div class="row justify-content-center">
-            <!-- Column for Pay Online -->
-            <div class="col-md-4 col-8 text-center mb-4">
-                <h2>Pay Online</h2>
-                <a href="https://www.paypal.com" target="_blank">
-                    <img src="./images/e-wallet-digital-payment-online-transaction-with-woman-standing-and-holding-mobile-phone-concept-illustration-free-vector.jpg"
-                        alt="Pay Online Image" class="img-fluid" width="50%">
-                </a>
-            </div>
-            <!-- Column for Pay Offline -->
-            <div class="col-md-4 col-8 text-center mb-4">
-                <h2>Delevery</h2>
-                <a href="./delevery.php?user_id=<?php echo $user_id ?>">
-                    <img src="./images/Delever.jpg" alt="Pay Offline Image" class="img-fluid" width="50%">
-                </a>
-            </div>
 
             <!-- Column for Process Order -->
-            <div class="col-md-4 col-8 text-center mb-4">
+            <div class=" text-center mb-4">
                 <h2>Process Order</h2>
                 <a href="./orders.php?user_id=<?php echo $user_id ?>">
-                    <img src="./images/offline.jpg" alt="Pay Offline Image" class="img-fluid" width="50%">
+                    <img src="./images/offline.jpg" alt="Process Order Image" class="img-fluid" width="50%">
                 </a>
             </div>
         </div>
@@ -76,11 +62,9 @@ require_once('../functions/common_function.php');  // Ensure this path is correc
 
     <!-- Call cart function and search product -->
     <?php
-    // Ensure that the cart() and search_Product() functions are only outputting what they need
     cart();
     search_Product();
     ?>
-
 
     <!-- jQuery (required for Toastr) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

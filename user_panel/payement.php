@@ -5,7 +5,9 @@ error_reporting(E_ALL);
 
 // Database connection
 include('../include/connect.php');
+include('../functions/send_email.php');
 require_once('../functions/common_function.php');
+
 session_start();
 
 // Check if the user is logged in (user_id stored in session when user logs in)

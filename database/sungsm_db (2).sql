@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2024 at 01:55 PM
+-- Generation Time: Oct 29, 2024 at 06:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -85,17 +85,19 @@ CREATE TABLE `delivery_details` (
   `delivery_date` date DEFAULT NULL,
   `shipping_method` varchar(100) DEFAULT 'Standard',
   `delivery_partner` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `email_sent` tinyint(1) DEFAULT 0,
+  `tracking_no` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `delivery_details`
 --
 
-INSERT INTO `delivery_details` (`delivery_id`, `user_id`, `order_id`, `delivery_address`, `contact_number`, `delivery_status`, `delivery_date`, `shipping_method`, `delivery_partner`, `created_at`) VALUES
-(2, 6, 7, '123', '0987654321', 'Pending', NULL, 'Standard', NULL, '2024-10-09 08:25:56'),
-(3, 6, 9, '212', '0987654321', 'Pending', NULL, 'Standard', NULL, '2024-10-09 09:30:57'),
-(6, 6, 8, '212', '0987654321', 'Pending', NULL, 'Standard', NULL, '2024-10-09 10:42:23');
+INSERT INTO `delivery_details` (`delivery_id`, `user_id`, `order_id`, `delivery_address`, `contact_number`, `delivery_status`, `delivery_date`, `shipping_method`, `delivery_partner`, `created_at`, `email_sent`, `tracking_no`) VALUES
+(2, 6, 7, '123', '0987654321', 'Success', '2024-10-31', 'Standard', NULL, '2024-10-09 08:25:56', 1, 'werrrttt'),
+(29, 6, 31, '212', '0987354321', 'Success', '2024-11-01', 'Standard', 'prompt express', '2024-10-29 15:52:24', 1, '1212wq11111'),
+(30, 6, 32, '23araa', '0987354321', 'Success', '2024-11-01', 'Standard', 'prompt express', '2024-10-29 16:04:14', 1, '11111wweee');
 
 -- --------------------------------------------------------
 
@@ -110,23 +112,43 @@ CREATE TABLE `orders` (
   `invoice_number` int(255) NOT NULL,
   `total_products` int(255) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `order_status` varchar(255) NOT NULL
+  `order_status` varchar(255) NOT NULL,
+  `email_sent` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`) VALUES
-(1, 1, 500, 877400724, 1, '2024-09-19 17:48:58', 'Complete'),
-(2, 1, 500, 1239271143, 1, '2024-09-19 17:58:08', 'Complete'),
-(3, 1, 300, 1900198643, 1, '2024-09-19 17:58:38', 'Pending'),
-(4, 6, 600, 653967161, 1, '2024-09-26 20:08:14', 'Complete'),
-(5, 6, 600, 1830425035, 1, '2024-09-30 19:34:09', 'Complete'),
-(6, 6, 600, 585313617, 1, '2024-10-08 17:46:11', 'Complete'),
-(7, 6, 4500, 986546924, 1, '2024-10-09 08:36:15', 'Complete'),
-(8, 6, 4500, 19571414, 1, '2024-10-09 10:45:03', 'Complete'),
-(9, 6, 4500, 2028979133, 1, '2024-10-09 09:31:05', 'Complete');
+INSERT INTO `orders` (`order_id`, `user_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`, `email_sent`) VALUES
+(1, 1, 500, 877400724, 1, '2024-09-19 17:48:58', 'Complete', 0),
+(2, 1, 500, 1239271143, 1, '2024-09-19 17:58:08', 'Complete', 0),
+(3, 1, 300, 1900198643, 1, '2024-09-19 17:58:38', 'Pending', 0),
+(4, 6, 600, 653967161, 1, '2024-09-26 20:08:14', 'Complete', 0),
+(5, 6, 600, 1830425035, 1, '2024-09-30 19:34:09', 'Complete', 0),
+(6, 6, 600, 585313617, 1, '2024-10-08 17:46:11', 'Complete', 0),
+(7, 6, 4500, 986546924, 1, '2024-10-29 14:46:50', 'Complete', 1),
+(8, 6, 4500, 19571414, 1, '2024-10-09 10:45:03', 'Complete', 0),
+(9, 6, 4500, 2028979133, 1, '2024-10-09 09:31:05', 'Complete', 0),
+(10, 6, 4500, 1286272620, 1, '2024-10-09 12:20:32', 'Complete', 0),
+(11, 6, 4500, 805452810, 1, '2024-10-14 11:31:41', 'Complete', 0),
+(12, 6, 4500, 1935404846, 1, '2024-10-28 07:34:23', 'Complete', 0),
+(13, 6, 4500, 568267631, 1, '2024-10-28 08:56:02', 'Complete', 0),
+(14, 6, 4500, 145144097, 1, '2024-10-28 09:03:13', 'Complete', 0),
+(17, 6, 4500, 549150907, 1, '2024-10-28 09:53:06', 'Complete', 0),
+(18, 6, 4500, 814127556, 1, '2024-10-28 09:59:48', 'Complete', 0),
+(19, 6, 4500, 1681275654, 1, '2024-10-28 10:08:06', 'Complete', 1),
+(20, 6, 4500, 763011101, 1, '2024-10-28 10:13:58', 'Complete', 1),
+(23, 6, 4500, 1353501053, 1, '2024-10-28 11:03:35', 'Complete', 1),
+(24, 6, 4500, 1392196130, 1, '2024-10-28 11:06:15', 'Complete', 1),
+(25, 6, 4500, 482229686, 1, '2024-10-29 11:05:58', 'Complete', 1),
+(26, 6, 4500, 2057417999, 1, '2024-10-29 11:25:25', 'Complete', 1),
+(27, 6, 4500, 1071760397, 1, '2024-10-29 11:51:50', 'Complete', 1),
+(28, 6, 4500, 1237650867, 1, '2024-10-29 12:01:28', 'Complete', 1),
+(29, 6, 4500, 1262447493, 1, '2024-10-29 15:01:39', 'Complete', 1),
+(30, 6, 4500, 1472319219, 1, '2024-10-29 15:24:42', 'Complete', 1),
+(31, 6, 4500, 1505671068, 1, '2024-10-29 15:52:35', 'Complete', 1),
+(32, 6, 4500, 1808075806, 1, '2024-10-29 16:04:27', 'Complete', 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +178,29 @@ INSERT INTO `orders_pending` (`order_id`, `user_id`, `invoice_number`, `product_
 (6, 6, 585313617, 7, 1, 'Pending'),
 (7, 6, 986546924, 1, 1, 'Pending'),
 (8, 6, 19571414, 1, 1, 'Pending'),
-(9, 6, 2028979133, 1, 1, 'Pending');
+(9, 6, 2028979133, 1, 1, 'Pending'),
+(10, 6, 1286272620, 1, 1, 'Pending'),
+(11, 6, 805452810, 1, 1, 'Pending'),
+(12, 6, 1935404846, 1, 1, 'Pending'),
+(13, 6, 568267631, 1, 1, 'Pending'),
+(14, 6, 145144097, 1, 1, 'Pending'),
+(15, 6, 883661456, 1, 1, 'Pending'),
+(16, 6, 1911998492, 1, 1, 'Pending'),
+(18, 6, 814127556, 1, 1, 'Pending'),
+(19, 6, 1681275654, 1, 1, 'Pending'),
+(20, 6, 763011101, 1, 1, 'Pending'),
+(21, 6, 774413401, 1, 1, 'Pending'),
+(22, 6, 1370217228, 1, 1, 'Pending'),
+(23, 6, 1353501053, 1, 1, 'Pending'),
+(24, 6, 1392196130, 1, 1, 'Pending'),
+(25, 6, 482229686, 1, 1, 'Pending'),
+(26, 6, 2057417999, 1, 1, 'Pending'),
+(27, 6, 1071760397, 1, 1, 'Pending'),
+(28, 6, 1237650867, 1, 1, 'Pending'),
+(29, 6, 1262447493, 1, 1, 'Pending'),
+(30, 6, 1472319219, 1, 1, 'Pending'),
+(31, 6, 1505671068, 1, 1, 'Pending'),
+(32, 6, 1808075806, 1, 1, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -195,7 +239,7 @@ INSERT INTO `products` (`product_id`, `product_tittle`, `product_description`, `
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(250) NOT NULL,
-  `user_email` varchar(20) NOT NULL,
+  `user_email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `user_image` varchar(100) NOT NULL,
   `user_ip` varchar(100) NOT NULL,
@@ -208,7 +252,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `user_email`, `password`, `user_image`, `user_ip`, `user_address`, `user_mobile`) VALUES
-(6, 'malitha', 'mal@gmail.com', '$2y$10$57vig2z39dg31PP2sh24e.XSYXts17SkoFCOoPK/IxKxZCkjZNUYq', 'rgistration.jpg', '::1', '193', '0717798678'),
+(6, 'malitha', 'malithamalshan7@gmail.com', '$2y$10$57vig2z39dg31PP2sh24e.XSYXts17SkoFCOoPK/IxKxZCkjZNUYq', 'rgistration.jpg', '::1', '193', '0717798678'),
 (7, 'sdsds', 'we@gmai.com', '12345', 'qwer.jpg', '1', '', '1234567890');
 
 -- --------------------------------------------------------
@@ -235,7 +279,25 @@ INSERT INTO `user_payements` (`payement_id`, `order_id`, `invoice_number`, `amou
 (4, 5, 1830425035, 600, 'Paypal', '2024-09-30 19:34:09'),
 (5, 6, 585313617, 600, 'Cash On Delivery', '2024-10-08 17:46:11'),
 (18, 9, 2028979133, 4500, 'Cash On Delivery', '2024-10-09 09:31:05'),
-(19, 8, 19571414, 4500, 'Cash On Delivery', '2024-10-09 10:45:03');
+(19, 8, 19571414, 4500, 'Cash On Delivery', '2024-10-09 10:45:03'),
+(20, 10, 1286272620, 4500, 'Cash On Delivery', '2024-10-09 12:20:32'),
+(21, 11, 805452810, 4500, 'Cash On Delivery', '2024-10-14 11:31:41'),
+(22, 12, 1935404846, 4500, 'Cash On Delivery', '2024-10-28 07:34:23'),
+(23, 13, 568267631, 4500, 'Cash On Delivery', '2024-10-28 08:56:02'),
+(24, 14, 145144097, 4500, 'Cash On Delivery', '2024-10-28 09:03:13'),
+(25, 15, 883661456, 4500, 'Cash On Delivery', '2024-10-28 09:15:03'),
+(27, 17, 549150907, 4500, 'Cash On Delivery', '2024-10-28 09:56:42'),
+(28, 18, 814127556, 4500, 'Cash On Delivery', '2024-10-28 09:59:48'),
+(38, 23, 1353501053, 4500, 'Cash On Delivery', '2024-10-28 11:03:30'),
+(39, 24, 1392196130, 4500, 'Cash On Delivery', '2024-10-28 11:06:10'),
+(40, 25, 482229686, 4500, 'Cash On Delivery', '2024-10-29 11:05:51'),
+(41, 26, 2057417999, 4500, 'Cash On Delivery', '2024-10-29 11:25:15'),
+(42, 27, 1071760397, 4500, 'Cash On Delivery', '2024-10-29 11:51:45'),
+(43, 28, 1237650867, 4500, 'Cash On Delivery', '2024-10-29 12:01:12'),
+(44, 29, 1262447493, 4500, 'Cash On Delivery', '2024-10-29 15:01:33'),
+(45, 30, 1472319219, 4500, 'Cash On Delivery', '2024-10-29 15:24:37'),
+(46, 31, 1505671068, 4500, 'Cash On Delivery', '2024-10-29 15:52:30'),
+(47, 32, 1808075806, 4500, 'Cash On Delivery', '2024-10-29 16:04:22');
 
 --
 -- Indexes for dumped tables
@@ -315,19 +377,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `delivery_details`
 --
 ALTER TABLE `delivery_details`
-  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `orders_pending`
 --
 ALTER TABLE `orders_pending`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -345,7 +407,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_payements`
 --
 ALTER TABLE `user_payements`
-  MODIFY `payement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `payement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

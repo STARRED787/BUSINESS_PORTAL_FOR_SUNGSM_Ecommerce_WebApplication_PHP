@@ -125,7 +125,6 @@ function getUniqbrand()
                          object-fit:contain'>
             <div class='card-body '>
              <h5 class='card-title'> $product_title</h5>
-            <p class='card-text'>$product_description</p>
             <p class='card-text'>$product_price</p>
             <a href='shop.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
              <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>

@@ -24,12 +24,13 @@ $result_user = mysqli_query($con, $get_user);
 $user_data = mysqli_fetch_assoc($result_user);
 
 // Fetch order details
-$get_order = "SELECT * FROM `orders` WHERE order_id='$order_id'";
+$get_order = "SELECT * FROM `orders` WHERE order_id='$order_id' AND user_id='$user_id'";
 $result_order = mysqli_query($con, $get_order);
 $order_data = mysqli_fetch_assoc($result_order);
 
+
 // Fetch delivery details
-$get_delivery = "SELECT * FROM `delivery_details` WHERE order_id='$order_id'";
+$get_delivery = "SELECT * FROM `delivery_details` WHERE order_id='$order_id' AND user_id='$user_id'";
 $result_delivery = mysqli_query($con, $get_delivery);
 $delivery_data = mysqli_fetch_assoc($result_delivery);
 

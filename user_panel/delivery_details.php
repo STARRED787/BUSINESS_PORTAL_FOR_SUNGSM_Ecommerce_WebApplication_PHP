@@ -13,6 +13,8 @@ $get_user = "SELECT * FROM `user` WHERE username='$username'";
 $result_user = mysqli_query($con, $get_user);
 $user_data = mysqli_fetch_assoc($result_user);
 $user_id = $user_data['user_id'];
+$contact_number = $user_data['user_mobile']; // Fetch contact number from user table
+$delivery_address = $user_data['user_address']; // Fetch address from user table
 
 // Get the order ID from URL
 if (isset($_GET['order_id'])) {
@@ -46,12 +48,14 @@ if (isset($_GET['order_id'])) {
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="delivery_address" class="form-label">Delivery Address</label>
-                        <input type="text" name="delivery_address" class="form-control" id="delivery_address" required>
+                        <input type="text" name="delivery_address" class="form-control" id="delivery_address"
+                            value="<?php echo htmlspecialchars($delivery_address); ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="contact_number" class="form-label">Contact Number</label>
-                        <input type="text" name="contact_number" class="form-control" id="contact_number" required>
+                        <input type="text" name="contact_number" class="form-control" id="contact_number"
+                            value="<?php echo htmlspecialchars($contact_number); ?>" required>
                     </div>
 
                     <div class="mb-3">
@@ -63,10 +67,9 @@ if (isset($_GET['order_id'])) {
                     </div>
 
                     <div class="mb-3">
-                        <label for="delivery_partner" class="form-label">Shipping Method</label>
+                        <label for="delivery_partner" class="form-label">Delivery Partner</label>
                         <select name="delivery_partner" id="delivery_partner" class="form-control">
-                            <option value="prompt express">prompt express</option>
-
+                            <option value="Prompt Express">Prompt Express</option>
                         </select>
                     </div>
 

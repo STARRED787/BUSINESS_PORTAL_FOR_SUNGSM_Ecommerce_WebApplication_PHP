@@ -16,40 +16,42 @@ function getproducts()
 {
     global $con;
 
-    // condition to is set or not
-    if (!isset($_GET['category'])) {
-        if (!isset($_GET['brand'])) {
-            $select_query = "SELECT * from `products` order by product_tittle ASC limit 0,9";
-            $result_query = mysqli_query($con, $select_query);
-            while ($row = mysqli_fetch_assoc($result_query)) {
-                $product_id = $row['product_id'];
-                $product_title = $row['product_tittle'];
-                $product_description = $row['product_description'];
-                $product_image1 = $row['product_image1'];
-                $product_price = $row['product_price'];
-                $product_categoroy = $row['categorie_id'];
-                $product_brand = $row['brand_id'];
+    // Check if neither category nor brand is set
+    if (!isset($_GET['category']) && !isset($_GET['brand'])) {
+        // Modified query to include category name
+        $select_query = "SELECT p.*, c.categorie_tittle 
+                         FROM `products` AS p 
+                         JOIN `categories` AS c ON p.categorie_id = c.categorie_id 
+                         ORDER BY p.product_tittle ASC 
+                         LIMIT 0,9";
 
-                echo "
-         <div class='col-md-4  mb-4' >
-              <div class='card '>
-                      <img src='../images/$product_image1' class='card-img-top' alt='...' style=' width: 100%;
-                         height: 200px; 
-                         object-fit:contain'>
-            <div class='card-body '>
-             <h5 class='card-title'> $product_title</h5>
-            <p class='card-text'>$product_description</p>
-            <p class='card-text'>Rs.$product_price</p>
-            <a href='shop.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
-             <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
-         </div>
-      </div>
-    </div>      
-      ";
-            }
+        $result_query = mysqli_query($con, $select_query);
+
+        while ($row = mysqli_fetch_assoc($result_query)) {
+            $product_id = $row['product_id'];
+            $product_title = $row['product_tittle'];
+            $product_description = $row['product_description'];
+            $product_image1 = $row['product_image1'];
+            $product_price = $row['product_price'];
+            $category_name = $row['categorie_tittle']; // Get category name
+
+            echo "
+            <div class='col-md-4 mb-4'>
+                <div class='card'>
+                    <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 200px; object-fit: contain;'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>$product_title</h5>
+                        <p class='card-text'> $category_name</p>
+                        <p class='card-text'>Rs.$product_price</p>
+                        <a href='shop.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
+                        <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
+                    </div>
+                </div>
+            </div>";
         }
     }
 }
+
 
 //geting uniq category
 function getUniqCategory()

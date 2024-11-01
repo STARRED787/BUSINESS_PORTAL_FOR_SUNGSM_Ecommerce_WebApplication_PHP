@@ -98,7 +98,7 @@ include('../include/connect.php'); // Verify path to connect.php
                 <i class='bx bx-mail-send'></i>
                 <span class="ms-1 d-none d-sm-inline">View Blog</span>
               </a>
-              <a href="index_home.php?view_cantact" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?view_feedbacks" class="nav-link align-middle px-0 text-white">
                 <i class='bx bxl-messenger'></i>
                 <span class="ms-1 d-none d-sm-inline">View Feedbacks</span>
               </a>
@@ -157,8 +157,8 @@ include('../include/connect.php'); // Verify path to connect.php
         if (isset($_GET['blog_view'])) {
           include('blog_view.php');
         }
-        if (isset($_GET['view_cantact'])) {
-          include('view_cantact.php');
+        if (isset($_GET['view_feedbacks'])) {
+          include('view_feedbacks.php');
         }
         if (isset($_GET['logout'])) {
           include('admin_logout.php');

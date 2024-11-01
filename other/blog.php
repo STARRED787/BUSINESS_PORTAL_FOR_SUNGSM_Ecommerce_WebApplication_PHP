@@ -181,7 +181,7 @@ $result = mysqli_query($con, $sql);
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Cantact Us</a>
+                            <a class="nav-link" href="../other/cantact.php">Cantact Us</a>
                         </li>
 
                         <li class="nav-item">

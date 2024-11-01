@@ -150,8 +150,8 @@ function getCategory()
         $category_title = $row_data['categorie_tittle'];
         $category_id = $row_data['categorie_id'];
         echo "
-          <li class='nav-item bg-info'>
-            <a href= '../shop/shop.php?category=$category_id' class='nav-link'>
+          <li class='nav-item bg-info '>
+            <a href= '../shop/shop.php?category=$category_id' class='nav-link text-black text-center'>
              $category_title
             </a> ";
     }
@@ -170,8 +170,8 @@ function getBrands()
         $brand_title = $row_data['brand_tittle'];
         $brand_id = $row_data['brand_id'];
         echo "
-          <li class='nav-item bg-info'>
-            <a href='../shop/shop.php?brand=$brand_id' class='nav-link'>
+          <li class='nav-item bg-info text-black'>
+            <a href='../shop/shop.php?brand=$brand_id' class='nav-link text-black text-center'>
              $brand_title
             </a> ";
     }
@@ -184,7 +184,12 @@ function search_Product()
     global $con;
     if (isset($_GET['search_data_product'])) {
         $search_data_value = mysqli_real_escape_string($con, $_GET['search_data']);
-        $search_query = "SELECT * FROM products WHERE product_keyword LIKE '%$search_data_value%'";
+        $search_query = "
+        SELECT p.*, c.categorie_tittle 
+        FROM products p 
+        JOIN categories c ON p.categorie_id = c.categorie_id 
+        WHERE p.product_keyword LIKE '%$search_data_value%'
+    ";
         $result_query = mysqli_query($con, $search_query);
 
         if (mysqli_num_rows($result_query) > 0) {
@@ -194,27 +199,29 @@ function search_Product()
                 $product_description = $row['product_description'];
                 $product_image1 = $row['product_image1'];
                 $product_price = $row['product_price'];
-                $product_categoroy = $row['categorie_id'];
+                $product_tittle = $row['categorie_tittle']; // Get the category name
                 $product_brand = $row['brand_id'];
 
                 echo "
-                <div class='col-md-4 mb-4'>
-                    <div class='card'>
-                        <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 200px; object-fit: contain'>
-                        <div class='card-body'>
-                            <h5 class='card-title'>$product_title</h5>
-                            <p class='card-text'>$product_description</p>
-                            <p class='card-text'>$$product_price</p>
-                            <a href='search.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
-                            <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
-                        </div>
+            <div class='col-md-4 mb-4'>
+                <div class='card'>
+                    <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 200px; object-fit: contain'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>$product_title</h5>
+                      
+                        <p class='card-text'>Rs.$product_price</p>
+                        <p class='card-text'>$product_tittle</p> <!-- Display the category name -->
+                        <a href='search.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
+                        <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
                     </div>
-                </div>";
+                </div>
+            </div>";
             }
         } else {
-            echo "<p >No products found matching your search criteria.</p>";
+            echo "<p>No products found matching your search criteria.</p>";
         }
     }
+
 }
 
 

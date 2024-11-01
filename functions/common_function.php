@@ -58,39 +58,46 @@ function getUniqCategory()
 {
     global $con;
 
-    // condition to is set or not
+    // Check if the category is set
     if (isset($_GET['category'])) {
-        $categoroy_id = $_GET['category'];
-        $select_query = "SELECT * from `products` where categorie_id='$categoroy_id'";
+        $category_id = mysqli_real_escape_string($con, $_GET['category']); // Sanitize the input
+
+        // Modify the query to join with the categories table
+        $select_query = "
+            SELECT p.*, c.categorie_tittle
+            FROM `products` p 
+            JOIN `categories` c ON p.categorie_id = c.categorie_id 
+            WHERE c.categorie_id = '$category_id'"; // Adjusted to filter by category ID
+
         $result_query = mysqli_query($con, $select_query);
         $num_of_rows = mysqli_num_rows($result_query);
+
         if ($num_of_rows == 0) {
-            echo "<h2 class='text-center '> Stock Out </h2>";
-        }
-        while ($row = mysqli_fetch_assoc($result_query)) {
-            $product_id = $row['product_id'];
-            $product_title = $row['product_tittle'];
-            $product_description = $row['product_description'];
-            $product_image1 = $row['product_image1'];
-            $product_price = $row['product_price'];
-            $product_categoroy = $row['categorie_id'];
-            $product_brand = $row['brand_id'];
-            echo "
-         <div class='col-md-4  mb-4' >
-              <div class='card '>
-                      <img src='../images/$product_image1' class='card-img-top' alt='...' style=' width: 100%;
-                         height: 200px; 
-                         object-fit:contain'>
-            <div class='card-body '>
-             <h5 class='card-title'> $product_title</h5>
-            <p class='card-text'>$product_description</p>
-            <p class='card-text'>Rs.$product_price</p>
-            <a href='shop.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
-             <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
-         </div>
-      </div>
-    </div>      
-      ";
+            echo "<h2 class='text-center font-semibold text-danger justify-center flex'> Stock Out </h2>";
+        } else {
+            // Display category name and description if necessary
+            while ($row = mysqli_fetch_assoc($result_query)) {
+                $product_id = $row['product_id'];
+                $product_tittle = $row['product_tittle']; // Corrected product_title
+                $product_description = $row['product_description'];
+                $product_image1 = $row['product_image1'];
+                $product_price = $row['product_price'];
+                $category_name = $row['categorie_tittle']; // Get the category name
+
+                echo "
+                <div class='col-md-4 mb-4'>
+                    <div class='card'>
+                        <img src='../images/$product_image1' class='card-img-top' alt='$product_tittle' style='width: 100%; height: 200px; object-fit:contain'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>$product_tittle</h5>
+                            <p class='card-text'>$category_name</p> <!-- Display category name -->
+                            <p class='card-text'>Rs. $product_price</p>
+                            <a href='shop.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
+                            <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
+                        </div>
+                    </div>
+                </div>";
+            }
         }
     }
 }
@@ -101,42 +108,49 @@ function getUniqbrand()
 {
     global $con;
 
-    // condition to is set or not
+    // Check if the brand is set
     if (isset($_GET['brand'])) {
-        $brand_id = $_GET['brand'];
-        $select_query = "SELECT * from `products` where brand_id='$brand_id'";
+        $brand_id = mysqli_real_escape_string($con, $_GET['brand']); // Sanitize the input
+
+        // Modify the query to join with the categories table
+        $select_query = "
+            SELECT p.*, c.categorie_tittle
+            FROM `products` p 
+            JOIN `categories` c ON p.categorie_id = c.categorie_id 
+            WHERE p.brand_id = '$brand_id'";
+
         $result_query = mysqli_query($con, $select_query);
         $num_of_rows = mysqli_num_rows($result_query);
-        if ($num_of_rows == 0) {
-            echo "<h2 class=' text-center font-semibold text-danger justyfy-center flex'> Stock Out </h2>";
-        }
-        while ($row = mysqli_fetch_assoc($result_query)) {
-            $product_id = $row['product_id'];
-            $product_title = $row['product_tittle'];
-            $product_description = $row['product_description'];
-            $product_image1 = $row['product_image1'];
-            $product_price = $row['product_price'];
-            $product_categoroy = $row['categorie_id'];
-            $product_brand = $row['brand_id'];
 
-            echo "
-         <div class='col-md-4  mb-4' >
-              <div class='card '>
-                      <img src='../images/$product_image1' class='card-img-top' alt='...' style=' width: 100%;
-                         height: 200px; 
-                         object-fit:contain'>
-            <div class='card-body '>
-             <h5 class='card-title'> $product_title</h5>
-            <p class='card-text'>$product_price</p>
-            <a href='shop.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
-             <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
-         </div>
-      </div>
-    </div>      
-      ";
+        if ($num_of_rows == 0) {
+            echo "<h2 class='text-center font-semibold text-danger justify-center flex'> Stock Out </h2>";
+        } else {
+            while ($row = mysqli_fetch_assoc($result_query)) {
+                $product_id = $row['product_id'];
+                $product_title = $row['product_tittle']; // Fixed typo from product_tittle to product_title
+                $product_description = $row['product_description'];
+                $product_image1 = $row['product_image1'];
+                $product_price = $row['product_price'];
+                $category_name = $row['categorie_tittle']; // Get the category name
+
+                echo "
+                <div class='col-md-4 mb-4'>
+                    <div class='card'>
+                        <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 200px; object-fit:contain'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>$product_title</h5>
+                            <p class='card-text'>$category_name</p> <!-- Display category name -->
+                            <p class='card-text'>Rs. $product_price</p>
+                            <a href='shop.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
+                            <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
+                        </div>
+                    </div>
+                </div>";
+            }
         }
     }
 }
+
 
 
 //display category
@@ -150,8 +164,8 @@ function getCategory()
         $category_title = $row_data['categorie_tittle'];
         $category_id = $row_data['categorie_id'];
         echo "
-          <li class='nav-item bg-info '>
-            <a href= '../shop/shop.php?category=$category_id' class='nav-link text-black text-center'>
+          <li class='nav-item bg-info'>
+            <a href= '../shop/shop.php?category=$category_id' class='nav-link text-center text-black'>
              $category_title
             </a> ";
     }
@@ -170,8 +184,8 @@ function getBrands()
         $brand_title = $row_data['brand_tittle'];
         $brand_id = $row_data['brand_id'];
         echo "
-          <li class='nav-item bg-info text-black'>
-            <a href='../shop/shop.php?brand=$brand_id' class='nav-link text-black text-center'>
+          <li class='nav-item bg-info'>
+            <a href='../shop/shop.php?brand=$brand_id' class='nav-link text-center text-black'>
              $brand_title
             </a> ";
     }
@@ -208,9 +222,8 @@ function search_Product()
                     <img src='../images/$product_image1' class='card-img-top' alt='$product_title' style='width: 100%; height: 200px; object-fit: contain'>
                     <div class='card-body'>
                         <h5 class='card-title'>$product_title</h5>
-                      
                         <p class='card-text'>Rs.$product_price</p>
-                        <p class='card-text'>$product_tittle</p> <!-- Display the category name -->
+                        <p class='card-text'>Category: $product_tittle</p> <!-- Display the category name -->
                         <a href='search.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
                         <a href='product_details.php?product_id=$product_id' class='btn btn-primary m-1 buy-btn'>View more</a>
                     </div>

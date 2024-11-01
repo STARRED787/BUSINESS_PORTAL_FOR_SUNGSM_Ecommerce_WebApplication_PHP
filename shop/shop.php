@@ -277,22 +277,21 @@ session_start();
 
       <div class="col-md-2 mb-4 bg-light p-3 shadow">
         <!-- Side Navigation -->
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <h4 class="text-center mb-3">Categories</h4>
-            <a href="#" class="nav-link bg-info text-black rounded mb-2">All Categories</a>
+        <ul class="nav flex-column text-black">
+          <li class="nav-item text-black">
+            <h4 class="text-center mb-3 text-black ">Categories</h4>
+            <a href="#" class="nav-link bg-info text-white rounded mb-2 text-black">All Categories</a>
             <!-- PHP code to display categories in DB -->
             <?php getCategory(); ?>
           </li>
-          <li class="nav-item mt-4">
-            <h4 class="text-center mb-3">Brands</h4>
-            <a href="#" class="nav-link bg-info text-black rounded mb-2">All Brands</a>
+          <li class="nav-item mt-4 text-black">
+            <h4 class="text-center mb-3 text-black">Brands</h4>
+            <a href="#" class="nav-link bg-info text-white rounded mb-2 text-black">All Brands</a>
             <!-- PHP code to display brands in DB -->
             <?php getBrands(); ?>
           </li>
         </ul>
       </div>
-
 
   </section>
   <!--footer-------------->

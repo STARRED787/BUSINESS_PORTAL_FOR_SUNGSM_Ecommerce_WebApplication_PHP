@@ -45,14 +45,17 @@ include('../include/connect.php');
                             <tr class='table-info'>
                                 <td><?php echo $brand_id ?></td>
                                 <td><?php echo $brand_title ?></td>
-                                <td><a href='index_home.php?edit_brands=<?php echo $brand_id ?>'><i
-                                            class='bx bx-edit text-success'></i></a></td>
                                 <td>
-                                    <!-- Anchor tag for delete with confirmation -->
-                                    <a href="index_home.php?delete_brands=<?php echo $brand_id ?>"
-                                        onclick="return confirm('Are you sure you want to delete this product?')">
-                                        <i class='bx bxs-trash mx-4 text-danger'></i>
+                                    <a href='edit_product.php?edit_brands=<?php echo $brand_id ?>'>
+                                        <i class='bx bx-edit text-success'></i>s
                                     </a>
+                                </td>
+
+                                <!-- Anchor tag for delete with confirmation -->
+                                <a href="index_home.php?delete_brands=<?php echo $brand_id ?>"
+                                    onclick="return confirm('Are you sure you want to delete this product?')">
+                                    <i class='bx bxs-trash mx-4 text-danger'></i>
+                                </a>
                                 </td>
 
                             </tr>

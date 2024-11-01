@@ -2,10 +2,34 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-//database connection
-include('../include/connect.php');
-?>
 
+// Database connection
+include('../include/connect.php');
+
+// Check if the delete_product parameter is set in the URL
+if (isset($_GET['delete_product'])) {
+    $product_id = $_GET['delete_product']; // Get product_id from URL
+
+    // Query to delete the product from the database
+    $delete_query = "DELETE FROM `products` WHERE product_id='$product_id'";
+    $result_delete = mysqli_query($con, $delete_query);
+
+    // Check if the product was deleted successfully
+    if ($result_delete) {
+        echo "<script>
+            toastr.success('Product deleted successfully');
+            setTimeout(function() {
+                window.open('index_home.php?view_product', '_self');
+            }, 2000); // 2 seconds delay before redirect
+        </script>";
+    } else {
+        // Display error message
+        echo "<script>
+            toastr.error('Error deleting product: " . mysqli_error($con) . "');
+        </script>";
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,11 +86,11 @@ include('../include/connect.php');
                                     ?>
                                 </td>
                                 <td><?php echo $status ?></td>
-                                <td><a href='index_home.php?edit_product=<?php echo $Product_Id ?>'><i
+                                <td><a href='edit_product.php?edit_product=<?php echo $Product_Id ?>'><i
                                             class='bx bx-edit text-success'></i></a></td>
                                 <td>
                                     <!-- Anchor tag for delete with confirmation -->
-                                    <a href="index_home.php?delete_product=<?php echo $Product_Id ?>"
+                                    <a href="delete_product.php?delete_product=<?php echo $Product_Id ?>"
                                         onclick="return confirm('Are you sure you want to delete this product?')">
                                         <i class='bx bxs-trash mx-4 text-danger'></i>
                                     </a>

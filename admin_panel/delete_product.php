@@ -50,6 +50,7 @@
 </body>
 
 <?php
+// Check if the delete_product parameter is set in the URL
 if (isset($_GET['delete_product'])) {
     $product_id = $_GET['delete_product']; // Get product_id from URL
 
@@ -62,12 +63,13 @@ if (isset($_GET['delete_product'])) {
         echo "<script>
             toastr.success('Product deleted successfully');
             setTimeout(function() {
-                window.open('index_home.php?view_product', '_self');
+                window.open('index_home.php', '_self');
             }, 2000); // 2 seconds delay before redirect
         </script>";
     } else {
+        // Display error message
         echo "<script>
-            toastr.error('Error deleting product');
+            toastr.error('Error deleting product: " . mysqli_error($con) . "');
         </script>";
     }
 }

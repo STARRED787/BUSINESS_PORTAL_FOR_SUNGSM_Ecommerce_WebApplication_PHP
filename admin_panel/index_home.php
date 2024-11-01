@@ -90,6 +90,18 @@ include('../include/connect.php'); // Verify path to connect.php
                 <i class="fa-solid fa-user"></i>
                 <span class="ms-1 d-none d-sm-inline">List Users</span>
               </a>
+              <a href="index_home.php?admin_blog_form" class="nav-link align-middle px-0 text-white">
+                <i class='bx bxl-blogger'></i>
+                <span class="ms-1 d-none d-sm-inline">Add Blog</span>
+              </a>
+              <a href="index_home.php?blog_view" class="nav-link align-middle px-0 text-white">
+                <i class='bx bx-mail-send'></i>
+                <span class="ms-1 d-none d-sm-inline">View Blog</span>
+              </a>
+              <a href="index_home.php?view_cantact" class="nav-link align-middle px-0 text-white">
+                <i class='bx bxl-messenger'></i>
+                <span class="ms-1 d-none d-sm-inline">View Feedbacks</span>
+              </a>
               <a href="index_home.php?logout" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span class="ms-1 d-none d-sm-inline">Logout</span>
@@ -138,6 +150,15 @@ include('../include/connect.php'); // Verify path to connect.php
         }
         if (isset($_GET['delete_users'])) {
           include('delete_users.php');
+        }
+        if (isset($_GET['admin_blog_form'])) {
+          include('admin_blog_form.php');
+        }
+        if (isset($_GET['blog_view'])) {
+          include('blog_view.php');
+        }
+        if (isset($_GET['view_cantact'])) {
+          include('view_cantact.php');
         }
         if (isset($_GET['logout'])) {
           include('admin_logout.php');

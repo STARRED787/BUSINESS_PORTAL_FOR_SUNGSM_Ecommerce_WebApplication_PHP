@@ -1,9 +1,16 @@
 <?php
+session_start(); // Start the session
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-//database connection
-include('../include/connect.php');
+
+if (!isset($_SESSION['admin_username'])) {
+  header("Location: index.php"); // Redirect to login page if not logged in
+  exit();
+}
+
+// Database connection
+include('../include/connect.php'); // Verify path to connect.php
 ?>
 
 
@@ -83,7 +90,7 @@ include('../include/connect.php');
                 <i class="fa-solid fa-user"></i>
                 <span class="ms-1 d-none d-sm-inline">List Users</span>
               </a>
-              <a href="#" class="nav-link align-middle px-0 text-white">
+              <a href="index_home.php?logout" class="nav-link align-middle px-0 text-white">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span class="ms-1 d-none d-sm-inline">Logout</span>
               </a>
@@ -131,6 +138,9 @@ include('../include/connect.php');
         }
         if (isset($_GET['delete_users'])) {
           include('delete_users.php');
+        }
+        if (isset($_GET['logout'])) {
+          include('admin_logout.php');
         }
         ?>
       </div>

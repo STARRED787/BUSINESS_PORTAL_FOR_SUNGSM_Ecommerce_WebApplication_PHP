@@ -109,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<script>
         $(document).ready(function() { 
             toastr.warning('Delivery details already exist for this order.');
+           
         });
     </script>";
     } else {

@@ -144,7 +144,7 @@ if (isset($_POST['user_login'])) {
                     $(document).ready(function() {
                         toastr.success('Login Successful');
                         setTimeout(function() {
-                            window.open('profile.php', '_self');
+                            window.open('../shop.php', '_self');
                         }, 2000);
                     });
                 </script>";

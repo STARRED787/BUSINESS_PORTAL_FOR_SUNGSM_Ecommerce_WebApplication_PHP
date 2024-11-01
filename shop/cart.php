@@ -176,16 +176,29 @@ session_start();
                         </li>
 
                         <li class="nav-item">
-                            <i class="fa-solid fa-user nav-link"></i>
-                            <a href="../shop/cart.php"> <i class="fa-solid fa-cart-shopping nav-link">
-                                    <sup><?php cart_item() ?></sup>
-                                </i></a>
+
+                            <div data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true"
+                                data-bs-placement="bottom" data-bs-content="<strong>Cart is here</strong>">
+                                <a href="../shop/cart.php">
+                                    <i class="fa-solid fa-cart-shopping nav-link">
+                                        <sup><?php cart_item() ?></sup>
+                                    </i>
+                                </a>
+
+                            </div>
                         </li>
+
+                        <li class="nav-item">
+                            Total price Rs. <?php total_cart_price() ?>
+                        </li>
+
                         <?php
+
                         if (!isset($_SESSION['username'])) {
                             echo " <li class='nav-item'>
-                           <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
-                        </li>";
+              <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
+           </li>";
+
                         } else {
                             $username = $_SESSION['username'];
                             $user_image = "SELECT * FROM `user` WHERE username='$username'";
@@ -193,20 +206,26 @@ session_start();
                             $row_image = mysqli_fetch_array($user_image);
                             $user_image = $row_image['user_image'];
                             echo "
-                            <ul class='navbar-nav ms-auto'>
-                                <li class='nav-item dropdown'>
-                                    <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                        <img src='../user_panel/user_images/$user_image' width='50' height='50' class='rounded-circle border border-dark'>
-                                    </a>
-                                    <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='navbarDropdownMenuLink'>
-                                        <li><a class='dropdown-item' href='../user_panel/profile.php'>Profile</a></li>
-                                        <li><a class='dropdown-item' href='../user_panel/user_logout.php'>Log Out</a></li>
-                                    </ul>
-                                </li>
-                            </ul>";
+              <ul class='navbar-nav ms-auto'>
+                  <li class='nav-item dropdown'>
+                      <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                          <img src='../user_panel/user_images/$user_image' width='50' height='50' class='rounded-circle border border-dark'>
+                      </a>
+                      <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='navbarDropdownMenuLink'>
+                          <li><a class='dropdown-item' href='../user_panel/profile.php'>Profile</a></li>
+                          <li><a class='dropdown-item' href='../user_panel/user_logout.php'>Log Out</a></li>
+                      </ul>
+                  </li>
+              </ul>";
                         }
                         ?>
                     </ul>
+                    <form class="d-flex" action="../shop/search.php" method="get">
+
+                        <input class="form-control m-2 " type="search" palceholder="Search" aria-label="Search"
+                            style="width: 230px;" name="search_data">
+
+                        <input type="submit" value="search" class="btn-outline search" name="search_data_product">
                     </form>
                 </div>
 
@@ -323,8 +342,17 @@ session_start();
                                 <td><img src="../images/<?php echo $product_image1; ?>"
                                         style="width: 100%; height: 70px; object-fit:contain;"></td>
                                 <td>
-                                    <input type="text" name="qty[<?php echo $product_id; ?>]" value="<?php echo $quantity; ?>"
-                                        class="form-input w-50 bg-white rounded px-3 py-2 text-black">
+                                    <div class="quantity-control">
+                                        <button type="button" class="quantity-btn btn btn-info"
+                                            onclick="updateQuantity(<?php echo $product_id; ?>, -1)">-</button>
+                                        <input type="text" name="qty[<?php echo $product_id; ?>]"
+                                            value="<?php echo $quantity; ?>"
+                                            class="form-input w-50 text-center bg-white bg-danger px-1 py-2 border-0 rounded m-1 text-dark"
+                                            readonly>
+
+                                        <button type="button" class="quantity-btn btn btn-info"
+                                            onclick="updateQuantity(<?php echo $product_id; ?>, 1)">+</button>
+                                    </div>
                                 </td>
                                 <td> Rs. <?php echo $product_price * $quantity; ?></td>
                                 <td><input type="checkbox" name="removeitem[]" value="<?php echo $product_id ?>"></td>
@@ -446,6 +474,29 @@ session_start();
         crossorigin="anonymous"></script>
 
     <script src="../index/index.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl);
+            });
+        });
+    </script>
+    <!-- JavaScript for incrementing and decrementing quantity -->
+    <script>
+        function updateQuantity(productId, change) {
+            const inputField = document.querySelector(`input[name="qty[${productId}]"]`);
+            let currentQuantity = parseInt(inputField.value);
+            if (isNaN(currentQuantity)) currentQuantity = 1;
+            const newQuantity = currentQuantity + change;
+
+            if (newQuantity >= 1) {
+                inputField.value = newQuantity;
+            }
+        }
+    </script>
+
 </body>
 
 </html>

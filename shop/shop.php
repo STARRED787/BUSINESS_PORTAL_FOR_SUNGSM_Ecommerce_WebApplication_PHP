@@ -174,43 +174,54 @@ session_start();
             </li>
 
             <li class="nav-item">
-              <i class="fa-solid fa-user nav-link"></i>
-              <a href="../shop/cart.php"> <i class="fa-solid fa-cart-shopping nav-link">
-                  <sup><?php cart_item() ?></sup>
-                </i></a>
-              Total price Rs. <?php total_cart_price() ?>
 
+              <div data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-placement="bottom"
+                data-bs-content="<strong>Cart is here</strong>">
+                <a href="../shop/cart.php">
+                  <i class="fa-solid fa-cart-shopping nav-link">
+                    <sup><?php cart_item() ?></sup>
+                  </i>
+                </a>
+
+              </div>
             </li>
+
+            <li class="nav-item">
+              Total price Rs. <?php total_cart_price() ?>
+            </li>
+
             <?php
+
             if (!isset($_SESSION['username'])) {
               echo " <li class='nav-item'>
-                           <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
-                        </li>";
+              <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
+           </li>";
+
             } else {
               $username = $_SESSION['username'];
               $user_image = "SELECT * FROM `user` WHERE username='$username'";
               $user_image = mysqli_query($con, $user_image);
               $row_image = mysqli_fetch_array($user_image);
               $user_image = $row_image['user_image'];
-              echo " <ul class='navbar-nav ms-auto'>
-                                <li class='nav-item dropdown'>
-                                    <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                        <img src='../user_panel/user_images/$user_image' width='50' height='50' class='rounded-circle border border-dark'>
-                                    </a>
-                                    <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='navbarDropdownMenuLink'>
-                                        <li><a class='dropdown-item' href='../user_panel/profile.php'>Profile</a></li>
-                                        <li><a class='dropdown-item' href='../user_panel/user_logout.php'>Log Out</a></li>
-                                    </ul>
-                                </li>
-                            </ul>";
+              echo "
+              <ul class='navbar-nav ms-auto'>
+                  <li class='nav-item dropdown'>
+                      <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                          <img src='../user_panel/user_images/$user_image' width='50' height='50' class='rounded-circle border border-dark'>
+                      </a>
+                      <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='navbarDropdownMenuLink'>
+                          <li><a class='dropdown-item' href='../user_panel/profile.php'>Profile</a></li>
+                          <li><a class='dropdown-item' href='../user_panel/user_logout.php'>Log Out</a></li>
+                      </ul>
+                  </li>
+              </ul>";
             }
             ?>
-
           </ul>
-          <form class="d-flex" action="search.php" method="get">
+          <form class="d-flex" action="../shop/search.php" method="get">
 
-            <input class="form-control m-2" type="search" palceholder="Search" aria-label="Search" style="width: 230px;"
-              name="search_data">
+            <input class="form-control m-2 " type="search" palceholder="Search" aria-label="Search"
+              style="width: 230px;" name="search_data">
 
             <input type="submit" value="search" class="btn-outline search" name="search_data_product">
           </form>
@@ -368,6 +379,14 @@ session_start();
   <!-- Toastr JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
     referrerpolicy="no-referrer"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl);
+      });
+    });
+  </script>
 </body>
 
 </html>

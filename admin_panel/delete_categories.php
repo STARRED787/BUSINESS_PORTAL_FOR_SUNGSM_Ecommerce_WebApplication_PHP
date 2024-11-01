@@ -50,6 +50,7 @@
 </body>
 
 <?php
+include("../include/connect.php");
 if (isset($_GET['delete_categories'])) {
     $categories_id = $_GET['delete_categories']; // Get product_id from URL
 
@@ -59,12 +60,11 @@ if (isset($_GET['delete_categories'])) {
 
     // Check if the product was deleted successfully
     if ($result_delete) {
-        echo "<script>
-            toastr.success('Product deleted successfully');
-            setTimeout(function() {
-                window.open('index_home.php?view_categories', '_self');
-            }, 2000); // 2 seconds delay before redirect
-        </script>";
+        echo "<script>$(document).ready(function() { 
+            toastr.success('Category updated successfully.');
+            setTimeout(function() { window.location.href = 'index_home.php?view_categories'; }, 2000); // Delay for 2 seconds
+        });</script>";
+        ;
     } else {
         echo "<script>
             toastr.error('Error deleting product');

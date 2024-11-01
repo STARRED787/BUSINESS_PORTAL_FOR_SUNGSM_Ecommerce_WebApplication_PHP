@@ -50,6 +50,7 @@
 </body>
 
 <?php
+include("../include/connect.php");
 if (isset($_GET['delete_brands'])) {
     $brand_id = $_GET['delete_brands']; // Get product_id from URL
 

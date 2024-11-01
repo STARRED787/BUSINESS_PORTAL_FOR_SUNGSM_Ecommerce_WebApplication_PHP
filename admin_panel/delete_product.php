@@ -50,6 +50,7 @@
 </body>
 
 <?php
+include("../include/connect.php");
 // Check if the delete_product parameter is set in the URL
 if (isset($_GET['delete_product'])) {
     $product_id = $_GET['delete_product']; // Get product_id from URL

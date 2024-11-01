@@ -21,63 +21,46 @@ if (isset($_GET['edit_product'])) {
 }
 ?>
 
-<head>
 
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        div {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 
-<style>
-    .buy-btn {
-        margin-top: 10px;
-        font-family: "Barrio";
-        font-size: 0.9rem;
-        font-weight: 700;
-        outline: none;
-        border: none;
-        background-color: rgb(255, 238, 1);
-        color: rgb(0, 2, 3);
-        padding: 13px 30px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: 0.5s ease;
-        border-radius: 12px;
-    }
-
-    .buy-btn:hover {
-        background-color: rgba(0, 7, 2, 0.918);
-        border-radius: 12px;
-        color: rgb(255, 254, 254);
-        box-shadow: antiquewhite 5px;
-    }
-
-    #in-cate {
-        font-family: "Poppins";
-    }
-</style>
-
 <body>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edit Product</title>
-
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Toastr CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-            referrerpolicy="no-referrer" />
-    </head>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         referrerpolicy="no-referrer"></script>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
-<div class="d-flex justify-content-center" style="border-radius: 15px; font-family:Poppins">
+
+
+<div class="d-flex justify-content-center mt-4" style="border-radius: 15px; font-family:Poppins">
     <div class="card" style="width:100%; max-width: 600px;">
         <div class="card-body">
             <h1 class="text-center">Edit Product</h1>
@@ -218,13 +201,6 @@ if (isset($_GET['edit_product'])) {
 </div>
 </div>
 </div>
-
-<!-- jQuery (required for Toastr) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-    referrerpolicy="no-referrer"></script>
 
 <script>
     toastr.options = {

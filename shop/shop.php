@@ -166,13 +166,12 @@ session_start();
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Blog</a>
+              <a class="nav-link" href="../other/blog.php">Blog</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Cantact Us</a>
+              <a class="nav-link" href="../other/cantact.php">Cantact Us</a>
             </li>
-
             <li class="nav-item">
 
               <div data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-placement="bottom"

@@ -32,7 +32,7 @@ include('../include/connect.php');
                             <th scope="col">Image</th>
                             <th scope="col">Adress</th>
                             <th scope="col">Phone Number</th>
-                            <th scope="col">Delete</th>
+
                         </tr>
                     </thead>
                     <tbody class="bg-info text-center">
@@ -55,13 +55,7 @@ include('../include/connect.php');
                                 <td><img src='../images/<?php echo $user_image ?>' width='70px' height='70px'></td>
                                 <td> <?php echo $user_address ?></td>
                                 <td><?php echo $user_mobile ?></td>
-                                <td>
-                                    <!-- Anchor tag for delete with confirmation -->
-                                    <a href="delete_users.php?delete_users=<?php echo $user_id ?>"
-                                        onclick="return confirm('Are you sure you want to delete this product?')">
-                                        <i class='bx bxs-trash mx-4 text-danger'></i>
-                                    </a>
-                                </td>
+
                             </tr>
                             <?php
                         }

@@ -45,8 +45,6 @@ include('../include/connect.php');
                                 <td><?php echo $brand_id ?></td>
                                 <td><?php echo $brand_title ?></td>
 
-
-
                             </tr>
                             <?php
                         }

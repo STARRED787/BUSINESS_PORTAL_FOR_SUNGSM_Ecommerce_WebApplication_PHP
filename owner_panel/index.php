@@ -7,8 +7,8 @@ error_reporting(E_ALL);
 // Database connection
 include('../include/connect.php'); // Verify path to connect.php
 
-// Check if the user is already logged in
-if (isset($_SESSION['admin_username'])) {
+// Check if the owner is already logged in
+if (isset($_SESSION['owner_username'])) {
     header("Location: index_home.php?count_board"); // Redirect to dashboard
     exit();
 }
@@ -20,7 +20,7 @@ if (isset($_SESSION['admin_username'])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>
+    <title>Owner Dashboard</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -43,32 +43,32 @@ if (isset($_SESSION['admin_username'])) {
 
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="card shadow" style="width: 400px; padding: 20px; border-radius: 10px;">
-        <h3 class="text-center">Admin Login</h3>
+        <h3 class="text-center">Owner Login</h3>
         <form method="POST" action="">
             <div class="mb-3">
-                <label for="admin_username" class="form-label">Username</label>
-                <input type="text" class="form-control" name="admin_username" id="admin_username" required>
+                <label for="owner_username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="owner_username" id="owner_username" required>
             </div>
             <div class="mb-3">
-                <label for="admin_password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="admin_password" id="admin_password" required>
+                <label for="owner_password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="owner_password" id="owner_password" required>
             </div>
-            <button type="submit" name="admin_login" class="btn btn-primary w-100">Login</button>
+            <button type="submit" name="owner_login" class="btn btn-primary w-100">Login</button>
         </form>
     </div>
 </div>
 <?php
 // Check if form is submitted
-if (isset($_POST['admin_login'])) {
-    $admin_username = mysqli_real_escape_string($con, $_POST['admin_username']);
-    $admin_password = mysqli_real_escape_string($con, $_POST['admin_password']); // Use the original password
+if (isset($_POST['owner_login'])) {
+    $owner_username = mysqli_real_escape_string($con, $_POST['owner_username']);
+    $owner_password = mysqli_real_escape_string($con, $_POST['owner_password']); // Use the original password
 
-    // Query to check if admin credentials are correct
-    $query = "SELECT * FROM `admin` WHERE username='$admin_username' AND password='$admin_password'";
+    // Query to check if owner credentials are correct
+    $query = "SELECT * FROM `owners` WHERE owner_username='$owner_username' AND password='$owner_password'";
     $result = mysqli_query($con, $query);
 
     if (mysqli_num_rows($result) === 1) {
-        $_SESSION['admin_username'] = $admin_username; // Set session variable
+        $_SESSION['owner_username'] = $owner_username; // Set session variable
         echo "<script>
             toastr.success('Login successful!');
             setTimeout(function() {

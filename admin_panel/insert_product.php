@@ -1,31 +1,31 @@
 <?php
 include('../include/connect.php');
 if (isset($_POST['insert_product'])) {
-    $product_tittle = $_POST['product_tittle'];
-    $product_description = $_POST['product_description'];
-    $product_keyword = $_POST['product_keyword'];
-    $product_categories = $_POST['product_categories'];
-    $product_brand = $_POST['product_brands'];
-    $product_Price = $_POST['product_Price'];
+    $product_tittle = mysqli_real_escape_string($con, $_POST['product_tittle']);
+    $product_description = mysqli_real_escape_string($con, $_POST['product_description']);
+    $product_keyword = mysqli_real_escape_string($con, $_POST['product_keyword']);
+    $product_categories = mysqli_real_escape_string($con, $_POST['product_categories']);
+    $product_brand = mysqli_real_escape_string($con, $_POST['product_brands']);
+    $product_Price = mysqli_real_escape_string($con, $_POST['product_Price']);
     $product_status = 'true';
 
-    //image accessing
+    // Image accessing
     $product_image_1 = $_FILES['product_image_1']['name'];
     $product_image_2 = $_FILES['product_image_2']['name'];
     $product_image_3 = $_FILES['product_image_3']['name'];
 
-    //image accessing tmp
+    // Image accessing tmp
     $tmp_product_image_1 = $_FILES['product_image_1']['tmp_name'];
     $tmp_product_image_2 = $_FILES['product_image_2']['tmp_name'];
     $tmp_product_image_3 = $_FILES['product_image_3']['tmp_name'];
 
-    // checking empty
+    // Checking empty
     if (
-        $product_tittle == '' or $product_description == ''
-        or $product_keyword == '' or $product_categories == ''
-        or $product_brand == '' or $product_Price == ''
-        or $product_image_1 == '' or $product_image_2 == ''
-        or $product_image_3 == ''
+        $product_tittle == '' || $product_description == ''
+        || $product_keyword == '' || $product_categories == ''
+        || $product_brand == '' || $product_Price == ''
+        || $product_image_1 == '' || $product_image_2 == ''
+        || $product_image_3 == ''
     ) {
         echo "<script>alert('Please Fill all available fields')</script>";
         exit();
@@ -34,7 +34,7 @@ if (isset($_POST['insert_product'])) {
         move_uploaded_file($tmp_product_image_2, "../images/$product_image_2");
         move_uploaded_file($tmp_product_image_3, "../images/$product_image_3");
 
-        //insert query
+        // Insert query
         $insert_products = "INSERT INTO `products` (product_tittle, product_description, product_keyword, categorie_id,
         brand_id, product_image1, product_image2, product_image3, product_price, date, status)
         VALUES ('$product_tittle', '$product_description', '$product_keyword', '$product_categories',
@@ -44,10 +44,13 @@ if (isset($_POST['insert_product'])) {
         $result_query = mysqli_query($con, $insert_products);
         if ($result_query) {
             echo "<script>alert('Successfully inserted product')</script>";
+        } else {
+            echo "<script>alert('Error inserting product: " . mysqli_error($con) . "')</script>";
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

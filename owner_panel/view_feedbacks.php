@@ -13,11 +13,12 @@ $result = mysqli_query($con, $sql);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin - View Feedback</title>
-    < </head>
+    <title>Owner - View Feedback</title>
+
+</head>
 
 <body>
-    <div class="container ">
+    <div class="container mt-5">
         <h1 class="text-center">Customer Feedbacks</h1>
         <div class="row">
             <?php if (mysqli_num_rows($result) > 0): ?>
@@ -44,7 +45,6 @@ $result = mysqli_query($con, $sql);
             <?php endif; ?>
         </div>
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>

@@ -12,7 +12,7 @@ include('../include/connect.php');
         <div class="card-body">
             <h1 class="text-center ">All Payments</h1>
 
-            <table class="table table-bordered mt-5 ">
+            <table class="table table-bordered mt-5">
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">Payment ID</th>
@@ -25,41 +25,55 @@ include('../include/connect.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- PHP code to get orders table data -->
                     <?php
+                    // Fetching payments details from the database
                     $get_payments_details = "SELECT * FROM `user_payements`";
                     $result_payments = mysqli_query($con, $get_payments_details);
 
-                    while ($row_orders = mysqli_fetch_assoc($result_payments)) {
-                        $payment_id = $row_orders['payement_id'];
-                        $payment_order_id = $row_orders['order_id'];
-                        $payment_invoice_number = $row_orders['invoice_number'];
-                        $payment_amount = $row_orders['amount'];
-                        $payment_payment_mode = $row_orders['payement_mode'];
-                        $payment_date = $row_orders['date'];
+                    // Check if the query was successful
+                    if (!$result_payments) {
+                        echo "<tr><td colspan='7' class='text-center'>Error: " . mysqli_error($con) . "</td></tr>";
+                    } else {
+                        // Check if there are results
+                        if (mysqli_num_rows($result_payments) > 0) {
+                            // Fetch each payment record and display it in the table
+                            while ($row_orders = mysqli_fetch_assoc($result_payments)) {
+                                $payment_id = $row_orders['payement_id'];
+                                $payment_order_id = $row_orders['order_id'];
+                                $payment_invoice_number = $row_orders['invoice_number'];
+                                $payment_amount = $row_orders['amount'];
+                                $payment_payment_mode = $row_orders['payement_mode'];
+                                $payment_date = $row_orders['date'];
 
-                        echo "
-                            <tr class='table-info'>
-                                <td>$payment_id</td>
-                                <td>$payment_order_id</td>
-                                <td>$payment_invoice_number</td>
-                                <td>$payment_amount</td>
-                                <td>$payment_payment_mode</td>
-                                <td>$payment_date</td>
-                                <td>
-                                    <form action='' method='POST' onsubmit=\"return confirm('Are you sure you want to delete this payment?')\">
-                                        <input type='hidden' name='delete_payment' value='$payment_id'>
-                                        <button type='submit' class='btn btn-danger'>
-                                            <i class='bx bxs-trash mx-4 text-white'></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        ";
+                                echo "
+                        <tr class='table-info'>
+                            <td>$payment_id</td>
+                            <td>$payment_order_id</td>
+                            <td>$payment_invoice_number</td>
+                            <td>$payment_amount</td>
+                            <td>$payment_payment_mode</td>
+                            <td>$payment_date</td>
+                            <td>
+                                <form action='' method='POST' onsubmit=\"return confirm('Are you sure you want to delete this payment?')\">
+                                    <input type='hidden' name='delete_payment' value='$payment_id'>
+                                    <button type='submit' class='btn btn-danger'>
+                                        <i class='bx bxs-trash mx-4 text-white'></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    ";
+                            }
+                        } else {
+                            // No payments found; still display headings
+                            echo "<tr><td colspan='7' class='text-center'>No payments found.</td></tr>";
+                        }
                     }
                     ?>
                 </tbody>
             </table>
+
+
 
         </div>
     </div>

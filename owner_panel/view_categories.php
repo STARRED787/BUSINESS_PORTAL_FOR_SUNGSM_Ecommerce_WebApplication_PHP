@@ -28,8 +28,7 @@ include('../include/connect.php');
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Categorie</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
+
                         </tr>
                     </thead>
                     <tbody class="bg-info text-center">
@@ -45,16 +44,6 @@ include('../include/connect.php');
                             <tr class='table-info'>
                                 <td><?php echo $categories_id ?></td>
                                 <td><?php echo $categories_title ?></td>
-                                <td><a href='edit_categories.php?edit_categories=<?php echo $categories_id ?>'><i
-                                            class='bx bx-edit text-success'></i></a></td>
-                                <td>
-                                    <!-- Anchor tag for delete with confirmation -->
-                                    <a href="delete_categories.php?delete_categories=<?php echo $categories_id ?>"
-                                        onclick="return confirm('Are you sure you want to delete this product?')">
-                                        <i class='bx bxs-trash mx-4 text-danger'></i>
-                                    </a>
-                                </td>
-
                             </tr>
                             <?php
                         }

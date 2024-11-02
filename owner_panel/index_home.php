@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if (!isset($_SESSION['admin_username'])) {
+if (!isset($_SESSION['owner_username'])) {
   header("Location: index.php"); // Redirect to login page if not logged in
   exit();
 }
@@ -20,7 +20,7 @@ include('../include/connect.php'); // Verify path to connect.php
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard</title>
+  <title>Owner Dashboard</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="./index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -42,7 +42,7 @@ include('../include/connect.php'); // Verify path to connect.php
       <div class="col-auto col-md-3 col-xl-3 px-sm-2 px-0 bg-dark">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 font">
           <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-5 d-none d-sm-inline">Admin Dashboard</span>
+            <span class="fs-5 d-none d-sm-inline">Owner Dashboard</span>
           </a>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
@@ -138,7 +138,7 @@ include('../include/connect.php'); // Verify path to connect.php
           include('view_feedbacks.php');
         }
         if (isset($_GET['logout'])) {
-          include('admin_logout.php');
+          include('owner_logout.php');
         }
         ?>
       </div>

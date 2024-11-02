@@ -8,7 +8,7 @@ include('../include/connect.php');
 require_once('../functions/common_function.php');  // Ensure this path is correct
 
 // Example order_id retrieval, ensure this is populated based on your application's logic
-$order_id = $_GET['order_id'] ?? '';  // Adjust as needed
+$order_id = $_GET['order_id'];  // Adjust as needed
 
 // Check if the username exists in the session
 if (isset($_SESSION['username'])) {
@@ -36,7 +36,6 @@ if (isset($_SESSION['username'])) {
 
     <style>
         body {
-
             background-size: cover;
             background-position: center;
             color: #fff;
@@ -67,16 +66,20 @@ if (isset($_SESSION['username'])) {
             font-size: 1.5rem;
             margin-top: 10px;
         }
+
+        .back-button {
+            margin-top: 10rem;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container py-5">
+    <div class="container">
         <h1 class="text-center mb-5">Choose Your Payment Method</h1>
         <div class="row justify-content-center">
             <!-- Cash on Delivery Option -->
             <div class="col-md-4 mb-4">
-                <a href="./go_pay.php?order_id=<?= $order_id ?>">
+                <a href="./go_pay.php?order_id=<?php echo $order_id ?>">
                     <div class="payment-option">
                         <img src="../images/cash_on_delivery.jpg" alt="Cash on Delivery">
                         <h3>Cash on Delivery</h3>
@@ -87,7 +90,7 @@ if (isset($_SESSION['username'])) {
 
             <!-- Online Payment Option -->
             <div class="col-md-4 mb-4">
-                <a href="./online_pay.php?order_id=<?= $order_id ?>">
+                <a href="./online_pay.php?order_id=<?php echo $order_id ?>">
                     <div class="payment-option">
                         <img src="../images/online_payment.jpg" alt="Online Payment">
                         <h3>Online Payment</h3>
@@ -95,6 +98,11 @@ if (isset($_SESSION['username'])) {
                     </div>
                 </a>
             </div>
+        </div>
+
+        <!-- Back Button - This div should be outside the row -->
+        <div class="text-center back-button">
+            <a href="./profile.php?pending_orders" class="btn btn-danger">Back to Profile</a>
         </div>
     </div>
 

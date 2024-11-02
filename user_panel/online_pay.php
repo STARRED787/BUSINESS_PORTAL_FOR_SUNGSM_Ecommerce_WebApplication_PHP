@@ -1,3 +1,22 @@
+<?php
+session_start();
+include("../include/connect.php");  // Include your database connection
+
+// Check if the username is set in the session
+if (isset($_SESSION['username'])) {
+    $current_username = $_SESSION['username']; // Retrieve the username
+} else {
+    $current_username = 'Guest'; // Default value if not logged in
+}
+
+// Retrieve the order_id from the URL
+if (isset($_GET['order_id'])) {
+    $order_id = intval($_GET['order_id']); // Ensure it's treated as an integer
+} else {
+    die('Order ID not found. Please confirm your order.');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,11 +104,9 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-top text-center">
-                <a href="#" class="text-muted"></a>
                 <span id="logo" class="ms-4">SUN GSM Online Business Portal</span>
             </div>
             <div class="card-body">
-
                 <div class="row">
                     <div class="col-md-7">
                         <div class="p-4 bg-white border rounded">
@@ -103,7 +120,6 @@
                                 </div>
                             </div>
                             <form method="POST" action="">
-                                <!-- Specify the action for the form -->
                                 <div class="mb-3">
                                     <label for="cardholder-name" class="form-label">Cardholder's name:</label>
                                     <input type="text" id="cardholder-name" placeholder="Linda Williams"
@@ -129,11 +145,9 @@
                                     <input type="checkbox" class="form-check-input" id="save_card">
                                     <label class="form-check-label" for="save_card">Save card details to wallet</label>
                                 </div>
-                                <button type="submit" class="btn mt-3 w-100">Pay Now</button> <!-- Submit button -->
+                                <button type="submit" class="btn mt-3 w-100">Pay Now</button>
                             </form>
-
-                            <a href="./checkout.php"><button class="btn mt-3 w-100">Back</button>
-                            </a>
+                            <a href="./checkout.php"><button class="btn mt-3 w-100">Back</button></a>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -141,12 +155,6 @@
                             <div class="header">Order Summary</div>
 
                             <?php
-                            // Database connection
-                            include("../include/connect.php");
-
-                            // Example order_id (replace with actual order ID)
-                            $order_id = 1;
-
                             // Prepare and execute the query
                             $stmt = $con->prepare("SELECT op.quantity, o.amount_due, o.total_products, p.product_tittle, p.product_image1  
                                                     FROM orders_pending op 
@@ -154,7 +162,7 @@
                                                     JOIN products p ON op.product_id = p.product_id 
                                                     WHERE op.order_id = ?");
 
-                            if ($stmt) { // Check if the statement was prepared successfully
+                            if ($stmt) {
                                 $stmt->bind_param("i", $order_id);
                                 $stmt->execute();
                                 $result = $stmt->get_result();
@@ -165,8 +173,7 @@
                                     <?php while ($row = $result->fetch_assoc()): ?>
                                         <div class="d-flex justify-content-between align-items-center border-bottom py-2">
                                             <div><img src="../images/<?php echo htmlspecialchars($row['product_image1']); ?>"
-                                                    class="img-fluid"
-                                                    alt="./images/<?php echo htmlspecialchars($row['product_tittle']); ?>"
+                                                    class="img-fluid" alt="<?php echo htmlspecialchars($row['product_tittle']); ?>"
                                                     width="50"></div>
                                             <div>
                                                 <b>Rs.<?php echo number_format($row['amount_due'], 2); ?></b>
@@ -198,25 +205,27 @@
                             <?php } else { ?>
                                 <p>Error fetching order summary.</p>
                             <?php } ?>
-
                             <p class="text-muted text-center mt-3">Complimentary Shipping & Returns</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 
-
     <script>
-        // Show Toastr success message
-        toastr.success('Payment processed successfully!');
+        // Check if the payment was processed successfully (you can adjust this condition based on your logic)
+        var paymentSuccess = true; // This should be set based on your payment processing logic
 
-        // Redirect to index.php after 3 seconds
-        setTimeout(function () {
-            window.location.href = 'index.php';
-        }, 3000);
+        if (paymentSuccess) {
+            // Show Toastr success message
+            toastr.success('Payment processed successfully!');
+
+            // Redirect to index.php after 3 seconds
+            setTimeout(function () {
+                window.location.href = 'index.php';
+            }, 3000);
+        }
     </script>
 
     <!-- Bootstrap JS (Optional for interactive components) -->

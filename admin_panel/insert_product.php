@@ -1,5 +1,6 @@
 <?php
 include('../include/connect.php');
+
 if (isset($_POST['insert_product'])) {
     $product_tittle = mysqli_real_escape_string($con, $_POST['product_tittle']);
     $product_description = mysqli_real_escape_string($con, $_POST['product_description']);
@@ -30,26 +31,37 @@ if (isset($_POST['insert_product'])) {
         echo "<script>alert('Please Fill all available fields')</script>";
         exit();
     } else {
-        move_uploaded_file($tmp_product_image_1, "../images/$product_image_1");
-        move_uploaded_file($tmp_product_image_2, "../images/$product_image_2");
-        move_uploaded_file($tmp_product_image_3, "../images/$product_image_3");
+        // Check if the product already exists
+        $check_product_query = "SELECT * FROM `products` WHERE product_tittle='$product_tittle'";
+        $check_result = mysqli_query($con, $check_product_query);
 
-        // Insert query
-        $insert_products = "INSERT INTO `products` (product_tittle, product_description, product_keyword, categorie_id,
-        brand_id, product_image1, product_image2, product_image3, product_price, date, status)
-        VALUES ('$product_tittle', '$product_description', '$product_keyword', '$product_categories',
-        '$product_brand', '$product_image_1', '$product_image_2', '$product_image_3',
-        '$product_Price', NOW(), '$product_status')";
-
-        $result_query = mysqli_query($con, $insert_products);
-        if ($result_query) {
-            echo "<script>alert('Successfully inserted product')</script>";
+        if (mysqli_num_rows($check_result) > 0) {
+            // Product already exists
+            echo "<script>alert('Product already exists!')</script>";
+            exit();
         } else {
-            echo "<script>alert('Error inserting product: " . mysqli_error($con) . "')</script>";
+            move_uploaded_file($tmp_product_image_1, "../images/$product_image_1");
+            move_uploaded_file($tmp_product_image_2, "../images/$product_image_2");
+            move_uploaded_file($tmp_product_image_3, "../images/$product_image_3");
+
+            // Insert query
+            $insert_products = "INSERT INTO `products` (product_tittle, product_description, product_keyword, categorie_id,
+            brand_id, product_image1, product_image2, product_image3, product_price, date, status)
+            VALUES ('$product_tittle', '$product_description', '$product_keyword', '$product_categories',
+            '$product_brand', '$product_image_1', '$product_image_2', '$product_image_3',
+            '$product_Price', NOW(), '$product_status')";
+
+            $result_query = mysqli_query($con, $insert_products);
+            if ($result_query) {
+                echo "<script>alert('Successfully inserted product')</script>";
+            } else {
+                echo "<script>alert('Error inserting product: " . mysqli_error($con) . "')</script>";
+            }
         }
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>

@@ -175,7 +175,6 @@ session_start();
                             <a class="nav-link" href="../other/cantact.php">Cantact Us</a>
                         </li>
                         <li class="nav-item">
-
                             <div data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true"
                                 data-bs-placement="bottom" data-bs-content="<strong>Cart is here</strong>">
                                 <a href="../shop/cart.php">

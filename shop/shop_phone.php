@@ -265,46 +265,57 @@ session_start();
                     search_Product();
                     ?>
                     <?php
-                    // Query to fetch only "Phone" category products
+                    // Database connection
+                    include('../include/connect.php');
+
+                    // Query to fetch only "PHONE" category products
                     $sql = "
-                        SELECT products.*
-                        FROM products
-                        JOIN categories ON products.categorie_id = categories.categorie_id
-                        WHERE categories.categorie_tittle = 'Phone'
-                    ";
+    SELECT products.*, categories.categorie_tittle
+    FROM products
+    JOIN categories ON products.categorie_id = categories.categorie_id
+    WHERE categories.categorie_tittle = 'PHONE'
+";
                     $result = mysqli_query($con, $sql);
                     ?>
 
+                    <div class="container">
 
-                    <div class="row">
-                        <?php if (mysqli_num_rows($result) > 0): ?>
-                            <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                                <div class="col-md-4 mb-4">
-                                    <div class="card">
-                                        <img src="../images/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top"
-                                            alt="<?php echo htmlspecialchars($row['name']); ?>">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><?php echo htmlspecialchars($row['name']); ?></h5>
-                                            <p class="card-text">Price: <?php echo htmlspecialchars($row['price']); ?> USD</p>
-                                            <a href="product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View
-                                                Details</a>
+                        <div class="row">
+                            <?php if (mysqli_num_rows($result) > 0): ?>
+                                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card">
+                                            <img src="../images/<?php echo htmlspecialchars($row['product_image1']); ?>"
+                                                class="card-img-top"
+                                                alt="<?php echo htmlspecialchars($row['product_tittle']); ?>"
+                                                style="width: 100%; height: 200px; object-fit: contain;">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo htmlspecialchars($row['product_tittle']); ?>
+                                                </h5>
+                                                <p class="card-text">Rs.
+                                                    <?php echo htmlspecialchars($row['product_price']); ?>
+                                                </p>
+                                                <a href="shop.php?add_to_cart=<?php echo $row['product_id']; ?>"
+                                                    class="btn btn-primary flex buy-btn">Add to cart</a>
+                                                <a href="product_details.php?product_id=<?php echo $row['product_id']; ?>"
+                                                    class="btn btn-primary m-1 buy-btn">View more</a>
+                                            </div>
                                         </div>
                                     </div>
+                                <?php endwhile; ?>
+                            <?php else: ?>
+                                <div class="col-12 text-center">
+                                    <div class="alert alert-info">No products found.</div>
                                 </div>
-                            <?php endwhile; ?>
-                        <?php else: ?>
-                            <div class="col-12 text-center">
-                                <div class="alert alert-info">No phones found.</div>
-                            </div>
-                        <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
                     </div>
+
+
+                    <!-- row end-->
                 </div>
-
-
-                <!-- row end-->
+                <!-- column end-->
             </div>
-            <!-- column end-->
-        </div>
 
 
 

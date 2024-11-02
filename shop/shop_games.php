@@ -264,6 +264,7 @@ session_start();
                     <?php
                     search_Product();
                     ?>
+
                     <?php
                     // Database connection
                     include('../include/connect.php');
@@ -279,7 +280,7 @@ session_start();
                     ?>
 
                     <div class="container">
-                        <h1 class="text-center mb-4">Games Category</h1>
+
                         <div class="row">
                             <?php if (mysqli_num_rows($result) > 0): ?>
                                 <?php while ($row = mysqli_fetch_assoc($result)): ?>

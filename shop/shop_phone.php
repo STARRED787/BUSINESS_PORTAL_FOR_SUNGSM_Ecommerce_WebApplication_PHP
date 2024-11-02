@@ -257,41 +257,56 @@ session_start();
 
                     <!--PHP code to display products in DB-->
                     <?php
-
                     search_Product();
-                    getproducts();
-                    getUniqCategory();
-                    getUniqbrand();
                     getIPAddress();
                     ?>
-
                     <!--Search Function call-->
                     <?php
                     search_Product();
                     ?>
+                    <?php
+                    // Query to fetch only "Phone" category products
+                    $sql = "
+                        SELECT products.*
+                        FROM products
+                        JOIN categories ON products.categorie_id = categories.categorie_id
+                        WHERE categories.categorie_tittle = 'Phone'
+                    ";
+                    $result = mysqli_query($con, $sql);
+                    ?>
 
-                    <!-- row end-->
+
+                    <div class="row">
+                        <?php if (mysqli_num_rows($result) > 0): ?>
+                            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <img src="../images/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top"
+                                            alt="<?php echo htmlspecialchars($row['name']); ?>">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?php echo htmlspecialchars($row['name']); ?></h5>
+                                            <p class="card-text">Price: <?php echo htmlspecialchars($row['price']); ?> USD</p>
+                                            <a href="product.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View
+                                                Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <div class="col-12 text-center">
+                                <div class="alert alert-info">No phones found.</div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <!-- column end-->
-            </div>
 
-            <div class="col-md-2 mb-4 bg-light p-3 shadow">
-                <!-- Side Navigation -->
-                <ul class="nav flex-column text-black">
-                    <li class="nav-item text-black">
-                        <h4 class="text-center mb-3 text-black ">Categories</h4>
-                        <a href="#" class="nav-link bg-info text-white rounded mb-2 text-black">All Categories</a>
-                        <!-- PHP code to display categories in DB -->
-                        <?php getCategory(); ?>
-                    </li>
-                    <li class="nav-item mt-4 text-black">
-                        <h4 class="text-center mb-3 text-black">Brands</h4>
-                        <a href="#" class="nav-link bg-info text-white rounded mb-2 text-black">All Brands</a>
-                        <!-- PHP code to display brands in DB -->
-                        <?php getBrands(); ?>
-                    </li>
-                </ul>
+
+                <!-- row end-->
             </div>
+            <!-- column end-->
+        </div>
+
+
 
     </section>
     <!--footer-------------->

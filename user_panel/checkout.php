@@ -36,6 +36,7 @@ if (isset($_SESSION['username'])) {
 
     <style>
         body {
+            background-image: url('./images/pexels-emirkhan-bal-221704-953864.jpg');
             background-size: cover;
             background-position: center;
             color: #fff;
@@ -45,9 +46,17 @@ if (isset($_SESSION['username'])) {
             text-align: center;
             padding: 30px;
             border-radius: 10px;
-            background: rgba(0, 0, 0, 0.7);
+            background: navy;
+            /* Change to navy blue */
             color: #fff;
             transition: transform 0.3s ease;
+            text-decoration: none;
+            /* Remove underline from links */
+        }
+
+        .text {
+            text-decoration: none;
+            /* Remove underline from links */
         }
 
         .payment-option:hover {
@@ -66,22 +75,19 @@ if (isset($_SESSION['username'])) {
             font-size: 1.5rem;
             margin-top: 10px;
         }
-
-        .back-button {
-            margin-top: 10rem;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1 class="text-center mb-5">Choose Your Payment Method</h1>
+        <h1 class="text-center mb-5 text-dark"></h1>
         <div class="row justify-content-center">
             <!-- Cash on Delivery Option -->
             <div class="col-md-4 mb-4">
-                <a href="./go_pay.php?order_id=<?php echo $order_id ?>">
+                <a class="text" href="./go_pay.php?order_id=<?php echo $order_id ?>">
                     <div class="payment-option">
-                        <img src="../images/cash_on_delivery.jpg" alt="Cash on Delivery">
+                        <img src="./images/bearded-delivery-man-red-uniform-cap-holding-box-package-making-call-me-gesture-smiling-standing-orange-wall_141793-48121.jpg"
+                            alt="Cash on Delivery">
                         <h3>Cash on Delivery</h3>
                         <p>Pay at the time of delivery. Safe and easy for all customers.</p>
                     </div>
@@ -90,9 +96,9 @@ if (isset($_SESSION['username'])) {
 
             <!-- Online Payment Option -->
             <div class="col-md-4 mb-4">
-                <a href="./online_pay.php?order_id=<?php echo $order_id ?>">
+                <a class="text" href="./online_pay.php?order_id=<?php echo $order_id ?>">
                     <div class="payment-option">
-                        <img src="../images/online_payment.jpg" alt="Online Payment">
+                        <img src="./images/hand-showing-credit-card-laptop_23-2148304996.jpg" alt="Online Payment">
                         <h3>Online Payment</h3>
                         <p>Secure online payments for a faster, convenient experience.</p>
                     </div>
@@ -100,10 +106,7 @@ if (isset($_SESSION['username'])) {
             </div>
         </div>
 
-        <!-- Back Button - This div should be outside the row -->
-        <div class="text-center back-button">
-            <a href="./profile.php?pending_orders" class="btn btn-danger">Back to Profile</a>
-        </div>
+
     </div>
 
     <!-- jQuery (required for Toastr) -->

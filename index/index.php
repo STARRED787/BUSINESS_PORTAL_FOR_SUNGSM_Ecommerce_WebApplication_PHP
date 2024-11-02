@@ -277,8 +277,7 @@ session_start();
         <img src="../index/images/accessories.jfif" alt="" class="img-fluid" />
         <div class="details">
           <h2>Mobile Accessories</h2>
-
-          <button class="text-uppercase" id="newbtn">Shop Now</button>
+          <a href="../shop/shop_accessories.php"><button class="text-uppercase" id="newbtn">Shop Now</button></a>
         </div>
       </div>
 
@@ -286,7 +285,7 @@ session_start();
         <img src="../index/images/laptop.jpg" alt="" class="img-fluid" />
         <div class="details">
           <h2>Laptop for Study</h2>
-          <button class="text-uppercase" id="newbtn">Shop Now</button>
+          <a href="../shop/shop_laptop.php"><button class="text-uppercase" id="newbtn">Shop Now</button></a>
         </div>
       </div>
 
@@ -294,7 +293,7 @@ session_start();
         <img src="../index/images/movies.jpg" alt="" class="img-fluid" />
         <div class="details">
           <h2>Buy DVD Games</h2>
-          <button class="text-uppercase" id="newbtn">Shop Now</button>
+          <a href="../shop/shop_games.php"><button class="text-uppercase" id="newbtn">Shop Now</button></a>
         </div>
       </div>
     </div>

@@ -89,8 +89,7 @@ if (isset($_GET['order_id'])) {
                     ?>
                     <a href="delivery_details.php?order_id=<?php echo $order_id; ?>" class="btn  blur-effect">Proceed to
                         Delivery Details</a>
-                    <a href="delivery_details.php?order_id=<?php echo $order_id; ?>" class="btn  blur-effect">Proceed to
-                        Delivery Details</a>
+                    <a href="profile.php?pending_orders" class="btn  blur-effect m-2"> Back</a>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ function getproducts()
                          FROM `products` AS p 
                          JOIN `categories` AS c ON p.categorie_id = c.categorie_id 
                          ORDER BY p.product_tittle ASC 
-                         LIMIT 0,9";
+                         ";
 
         $result_query = mysqli_query($con, $select_query);
 

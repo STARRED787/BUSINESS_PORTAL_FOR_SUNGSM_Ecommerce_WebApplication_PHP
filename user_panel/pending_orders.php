@@ -119,7 +119,7 @@ if (isset($_SESSION['username'])) {
                                         <td>$order_invoice_number</td>
                                         <td>$order_order_date</td>
                                         <td>$order_status_display</td>
-                                        <td class='text-center'><a href='./go_pay.php?order_id=$order_id' class='btn btn-primary btn-sm'>Confirm</a></td>
+                                        <td class='text-center'><a href='./checkout.php?order_id=$order_id' class='btn btn-primary btn-sm'>Confirm</a></td>
                                     </tr>";
 
                                 $sl_order++;

@@ -269,7 +269,7 @@ session_start();
         <img src="../index/images/phone.jpg" alt="" class="img-fluid" />
         <div class="details">
           <h2>Get New Phone</h2>
-          <button class="text-uppercase" id="newbtn">Shop Now</button>
+          <a href="../shop/shop_phone.php"><button class="text-uppercase" id="newbtn">Shop Now</button></a>
         </div>
       </div>
 

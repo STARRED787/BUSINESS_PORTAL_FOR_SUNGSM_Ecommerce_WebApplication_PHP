@@ -26,8 +26,7 @@ if (isset($_GET['order_id'])) {
     <title>Payment Form</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -43,7 +42,7 @@ if (isset($_GET['order_id'])) {
             background-color: rgb(0, 0, 34);
             font-size: 0.9rem;
             color: #333;
-            font-family: 'Anta', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         .card {
@@ -125,7 +124,7 @@ if (isset($_GET['order_id'])) {
                                     <img src="https://img.icons8.com/color/48/000000/maestro.png" alt="Maestro">
                                 </div>
                             </div>
-                            <form method="POST" action="">
+                            <form id="paymentForm" method="POST" action="">
                                 <div class="mb-3">
                                     <label for="cardholder-name" class="form-label">Cardholder's name:</label>
                                     <input type="text" id="cardholder-name" placeholder="Linda Williams"
@@ -219,27 +218,54 @@ if (isset($_GET['order_id'])) {
         </div>
     </div>
 
-    <script>
-        // Check if the payment was processed successfully (you can adjust this condition based on your logic)
-        var paymentSuccess = true; // This should be set based on your payment processing logic
-
-        if (paymentSuccess) {
-            // Show Toastr success message
-            toastr.success('Payment processed successfully!');
-
-            // Redirect to index.php after 3 seconds
-            setTimeout(function () {
-                window.location.href = 'index.php';
-            }, 3000);
-        }
-    </script>
-
-    <!-- Bootstrap JS (Optional for interactive components) -->
+    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-whQZDDk2MZLx3Fr6ISrku+53YKYB+HGpyDBy3LMxnH3kQUEmE4mHY4T94Crr+7j4"
+        integrity="sha384-33oe7rM8U+cYqzD1vYVtKi+j2dr8jpXJm9yhiP+OYSHd7aYFG8GxDgh8hCtE72q4"
         crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#paymentForm').on('submit', function (e) {
+                e.preventDefault(); // Prevent form submission
+
+                // Get form values
+                var cardholderName = $('#cardholder-name').val().trim();
+                var cardNumber = $('#card-number').val().trim();
+                var expiryDate = $('#expiry-date').val().trim();
+                var cvv = $('#cvv').val().trim();
+
+                // Validate fields
+                if (cardholderName === "" || cardNumber === "" || expiryDate === "" || cvv === "") {
+                    toastr.error("All fields are required.");
+                    return;
+                }
+
+                // Validate card number format (e.g., using regex)
+                var cardNumberPattern = /^\d{4} \d{4} \d{4} \d{4}$/;
+                if (!cardNumberPattern.test(cardNumber)) {
+                    toastr.error("Invalid card number format. Use 0000 0000 0000 0000 format.");
+                    return;
+                }
+
+                // Validate CVV (3 or 4 digits)
+                var cvvPattern = /^\d{3,4}$/; // Matches 3 or 4 digits
+                if (!cvvPattern.test(cvv)) {
+                    toastr.error("Invalid CVV. It should be 3 or 4 digits.");
+                    return;
+
+                }
+
+                // Simulate a successful payment process
+                toastr.success("Payment processed successfully!");
+                setTimeout(() => {
+                    window.location.href = "profile.php?pending_orders"; // Redirect to the home page after processing
+                }, 2000);
+            });
+        });
+    </script>
 </body>
 
 </html>

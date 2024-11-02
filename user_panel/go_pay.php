@@ -86,7 +86,6 @@ if (isset($_GET['order_id'])) {
                         $row_orders = mysqli_fetch_assoc($result_orders);
                         $order_id = $row_orders['order_id'];
                     }
-
                     ?>
                     <a href="delivery_details.php?order_id=<?php echo $order_id; ?>" class="btn  blur-effect">Proceed to
                         Delivery Details</a>

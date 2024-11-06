@@ -1,4 +1,5 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -109,7 +110,6 @@ $result = mysqli_query($con, $sql);
 
     <!--Navigation Bar-->
     <section>
-
         <?php
         //number of cart items
         function cart_item()
@@ -135,12 +135,12 @@ $result = mysqli_query($con, $sql);
             $get_ip_add = getIPAddress();
             $total_price = 0;
             $cart_query = "Select * from `cart` where
-                    ip_address='$get_ip_add'";
+                      ip_address='$get_ip_add'";
             $result = mysqli_query($con, $cart_query);
             while ($row = mysqli_fetch_array($result)) {
                 $product_id = $row['product_id'];
                 $select_products = "Select * from `products` where
-                    product_id='$product_id'";
+                      product_id='$product_id'";
                 $result_products = mysqli_query($con, $select_products);
                 while ($row_product_price = mysqli_fetch_array($result_products)) {
                     $product_price = array($row_product_price['product_price']);
@@ -149,13 +149,13 @@ $result = mysqli_query($con, $sql);
                     $product_image1 = $row_product_price['product_image1'];
                     $product_values = array_sum($product_price); // [500]
                     $total_price += $product_values; //500
-        
                 }
             }
 
             // Output the total price
             echo $total_price;
         }
+
 
         ?>
         <nav class="navbar navbar-expand-lg py-4 font">
@@ -183,7 +183,6 @@ $result = mysqli_query($con, $sql);
                         <li class="nav-item">
                             <a class="nav-link" href="../other/cantact.php">Cantact Us</a>
                         </li>
-
                         <li class="nav-item">
 
                             <div data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true"
@@ -201,33 +200,6 @@ $result = mysqli_query($con, $sql);
                             Total price Rs. <?php total_cart_price() ?>
                         </li>
 
-                        <?php
-
-                        if (!isset($_SESSION['username'])) {
-                            echo " <li class='nav-item'>
-              <a class='nav-link' href='#'><button style='border-radius: 12px' class='font ms-3 bg-danger '>Guest</button></a> 
-           </li>";
-
-                        } else {
-                            $username = $_SESSION['username'];
-                            $user_image = "SELECT * FROM `user` WHERE username='$username'";
-                            $user_image = mysqli_query($con, $user_image);
-                            $row_image = mysqli_fetch_array($user_image);
-                            $user_image = $row_image['user_image'];
-                            echo "
-              <ul class='navbar-nav ms-auto'>
-                  <li class='nav-item dropdown'>
-                      <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                          <img src='../user_panel/user_images/$user_image' width='50' height='50' class='rounded-circle border border-dark'>
-                      </a>
-                      <ul class='dropdown-menu dropdown-menu-end' aria-labelledby='navbarDropdownMenuLink'>
-                          <li><a class='dropdown-item' href='../user_panel/profile.php'>Profile</a></li>
-                          <li><a class='dropdown-item' href='../user_panel/user_logout.php'>Log Out</a></li>
-                      </ul>
-                  </li>
-              </ul>";
-                        }
-                        ?>
                     </ul>
                     <form class="d-flex" action="../shop/search.php" method="get">
 
@@ -252,26 +224,26 @@ $result = mysqli_query($con, $sql);
 
     <!--Blog Section-->
 
-    <div class="container ">
+    <div class="container">
         <h1 class="text-center">Blog Posts</h1>
 
         <?php if (mysqli_num_rows($result) > 0): ?>
             <?php while ($post = mysqli_fetch_assoc($result)): ?>
                 <div class="card mb-4">
-                    <div class="d-flex flex-row">
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                <h2 class="card-title"><?php echo htmlspecialchars($post['title']); ?></h2>
-                                <p class="card-text"><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
-
-                            </div>
-                        </div>
+                    <div class="row g-0">
                         <?php if ($post['image']): ?>
                             <div class="col-md-6">
                                 <img src="../admin_panel/<?php echo htmlspecialchars($post['image']); ?>" alt="Blog Image"
-                                    class="img-fluid rounded-start" style="height: 100%; object-fit: cover;">
+                                    class="img-fluid rounded-start w-100" style="height: 100%; object-fit: cover;">
                             </div>
                         <?php endif; ?>
+
+                        <div class="col-md-6 d-flex flex-column">
+                            <div class="card-body">
+                                <h2 class="card-title"><?php echo htmlspecialchars($post['title']); ?></h2>
+                                <p class="card-text"><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php endwhile; ?>
@@ -281,6 +253,7 @@ $result = mysqli_query($con, $sql);
         <h2>No blog posts available.</h2>
     <?php endif; ?>
     </div>
+
 
 
 

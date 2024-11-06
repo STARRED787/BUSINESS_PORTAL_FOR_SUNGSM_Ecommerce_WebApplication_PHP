@@ -57,7 +57,7 @@ require_once('../functions/common_function.php');  // Ensure this path is correc
             <div
                 class="col-md-6 col-12 rounded d-flex flex-column justify-content-center align-items-center p-3 mb-3 mb-md-0">
                 <div class="featured-img mb-3">
-                    <img src="./images/rgistration.jpg" class="img-fluid mt-2 rounded-4 w-100">
+                    <img src="./images/rgiback.jpg" class="img-fluid mt-2 rounded-4 w-100">
                     <p class="fs-2 text-center">Login</p>
                 </div>
 
@@ -144,7 +144,7 @@ if (isset($_POST['user_login'])) {
                     $(document).ready(function() {
                         toastr.success('Login Successful');
                         setTimeout(function() {
-                            window.open('../shop.php', '_self');
+                            window.open('../shop/shop.php', '_self');
                         }, 2000);
                     });
                 </script>";

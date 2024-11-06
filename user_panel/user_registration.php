@@ -54,7 +54,7 @@ include('../functions/common_function.php');
             <div
                 class="col-md-6 col-12 rounded d-flex flex-column justify-content-center align-items-center p-3 mb-3 mb-md-0">
                 <div class="featured-img mb-3">
-                    <img src="./images/rgistration.jpg" class="img-fluid rounded-4 w-100">
+                    <img src="./images/us.jpg" class="img-fluid rounded-4 w-100">
                 </div>
                 <p class="fs-2 text-center">Registration</p>
                 <a href="./user_login.php"><small class="text-wrap text-center">Already have an account? Login

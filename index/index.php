@@ -102,7 +102,7 @@ session_start();
   }
 </style>
 
-<body>
+<body style=" background-image: url('../index/images/back.jpg');">
 
 
 

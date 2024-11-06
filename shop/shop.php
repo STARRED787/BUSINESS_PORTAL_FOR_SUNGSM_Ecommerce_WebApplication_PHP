@@ -18,7 +18,7 @@ session_start();
   <title>SUN GSM</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="shop.css" />
+  <link rel="stylesheet" href="./shop.css" />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -96,7 +96,15 @@ session_start();
   }
 </style>
 
-<body>
+<body style="
+  background-image: url(../shop/images/back.jpg);
+  height: 580px; 
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-attachment: fixed;
+">
 
   <!--Navigation Bar-->
   <section>

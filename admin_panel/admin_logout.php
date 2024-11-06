@@ -5,16 +5,18 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Set a session variable for logout message
-$_SESSION['logout_message'] = "You have been logged out successfully.";
+// Check if the admin session is set before unsetting
+if (isset($_SESSION['admin_username'])) {
+    // Set a session variable for logout message
+    $_SESSION['logout_message'] = "You have been logged out successfully.";
 
-// Unset all session variables and destroy the session
-session_unset();
-session_destroy();
+    // Unset only admin-specific session variables
+    unset($_SESSION['admin_username']);
+    unset($_SESSION['admin_id']); // If there's an admin ID or other related variables
+}
 
 // Capture the logout message
 $logout_message = 'You have been logged out successfully.';
-// Clear the message after using it
 ?>
 
 <!DOCTYPE html>
@@ -36,15 +38,12 @@ $logout_message = 'You have been logged out successfully.';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Toastr Notification Script -->
-
     <script>
-        toastr.success('Login Out successful!');
+        toastr.success('Logout successful!');
         setTimeout(function () {
             window.location.href = 'index.php'; // Redirect to dashboard
         }, 2000);
-    </script>";
-
-
+    </script>
 </body>
 
 </html>

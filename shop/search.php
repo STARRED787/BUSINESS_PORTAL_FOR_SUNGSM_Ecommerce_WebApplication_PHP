@@ -96,7 +96,15 @@ session_start();
     }
 </style>
 
-<body>
+<body style="
+  background-image: url(../shop/images/back.jpg);
+  height: 580px; 
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-attachment: fixed;
+">
     <!--Navigation Bar-->
     <section>
         <?php
@@ -264,32 +272,24 @@ session_start();
                 <!-- column end-->
             </div>
 
-            <div class="col-md-2 mb-4 bg-secondary p-10">
-                <!--side nav-->
-                <ul class=" navbar-nav me-auto m-0 text-center">
-                    <li class="nav-item bg-info">
-                        <a href="" class="nav-link">
-                            <h4>Category</h4>
-                        </a>
+            <div class="col-md-2 mb-4 bg-light p-3 shadow">
+                <!-- Side Navigation -->
+                <ul class="nav flex-column text-black">
+                    <li class="nav-item text-black">
+                        <h4 class="text-center mb-3 text-black ">Categories</h4>
+                        <a href="#" class="nav-link bg-info text-white rounded mb-2 text-black">All Categories</a>
+                        <!-- PHP code to display categories in DB -->
+                        <?php getCategory(); ?>
                     </li>
-
-                    <!--PHP code to display category in DB-->
-                    <?php
-                    getCategory();
-                    ?>
-
+                    <li class="nav-item mt-4 text-black">
+                        <h4 class="text-center mb-3 text-black">Brands</h4>
+                        <a href="#" class="nav-link bg-info text-white rounded mb-2 text-black">All Brands</a>
+                        <!-- PHP code to display brands in DB -->
+                        <?php getBrands(); ?>
                     </li>
-                    <li class="nav-item bg-info">
-                        <a href="" class="nav-link">
-                            <h4>Brands</h4>
-                        </a>
-                    </li>
-
-                    <!--PHP code to display category in DB-->
-                    <?php
-                    getBrands()
-                        ?>
                 </ul>
+            </div>
+
     </section>
     <!--footer-------------->
     <footer class="footer col-md-12 col-lg-12 col-sm-12">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 09:05 AM
+-- Generation Time: Nov 07, 2024 at 10:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,7 +62,7 @@ CREATE TABLE `blog_posts` (
 INSERT INTO `blog_posts` (`id`, `title`, `content`, `image`, `created_at`) VALUES
 (14, 'Kraven the Hunter', 'In Marvel Comics, Kraven is depicted as a Russian nobleman whose family was compelled to immigrate to America in 1917 due to the February Revolution. Kraven became an obsessive big game hunter and, after mastering the sport, made Spider-Man his target in an effort to establish himself as the world\'s best hunter.', './blog images/images.jpg', '2024-11-01 20:26:27'),
 (15, 'The iPhone 16 ', 'The iPhone 16 was officially announced on September 9, 2024, and began shipping shortly after on September 20. It starts at a price of $799 for the 128GB model, with the prices scaling up to $899 for 256GB and $1,099 for 512GB​\r\n\r\nKey Features and Specifications:\r\nDisplay: 6.1-inch OLED with a resolution of 2556 x 1179 pixels, featuring a refresh rate of 60Hz.\r\nProcessor: Powered by the new A18 chipset, which offers enhanced performance and improved privacy features​\r\nTECHRADAR\r\n\r\nCamera: The rear setup includes a 48MP main camera and a 12MP ultrawide camera, with a vertically aligned design for improved spatial video capture. The front camera is 12MP as well​\r\n\r\n', './blog images/Apple-iPhone-16-Pro-hero-240909-lp.jpg.news_app_ed.jpg', '2024-11-01 20:35:20'),
-(16, 'Call of Duty- Black Ops 6 ', 'Call of Duty: Black Ops 6 is set against the backdrop of the early 1990, particularly around the time of Operation Desert Storm. Players will step into the roles of CIA operatives Troy Marshall and William \"Case\" Calderon, who are tasked with missions that lead them into a web of conspiracy involving a rogue paramilitary group called \"Pantheon.\" \r\n\r\n​\r\n\r\nKey features include -\r\n\r\nCampaign: The story unfolds as Marshall and Calderon seek to uncover the truth behind Pantheon and a secret CIA project called \"Cradle.\" Players can expect a mix of espionage, tactical gameplay, and psychological twists​\r\n\r\n\r\nPre-Purchase Benefits: Players who opt for the Vault Edition will unlock exclusive content such as unique weapon blueprints and a pack of GobbleGums, enhancing the gameplay experience​\r\n\r\n\r\nGame Editions: The game will be available in different editions, including a Standard and a Vault Edition, each offering a range of benefits including early access to an open beta', './blog images/call-of-duty-black-ops-6-tag-page-cover-art.avif', '2024-11-01 20:39:41');
+(16, 'Call of Duty- Black Ops 6 ', 'Call of Duty: Black Ops 6 is set against the backdrop of the early 1990, particularly around the time of Operation Desert Storm. Players will step into the roles of CIA operatives Troy Marshall and William \"Case\" Calderon, who are tasked with missions that lead them into a web of conspiracy involving a rogue paramilitary group called \"Pantheon.\" \r\n\r\nKey features include -\r\nCampaign: The story unfolds as Marshall and Calderon seek to uncover the truth behind Pantheon and a secret CIA project called \"Cradle.\" Players can expect a mix of espionage, tactical gameplay, and psychological twists​\r\n\r\nPre-Purchase Benefits: Players who opt for the Vault Edition will unlock exclusive content such as unique weapon blueprints and a pack of GobbleGums, enhancing the gameplay experience​\r\n\r\nGame Editions: The game will be available in different editions, including a Standard and a Vault Edition, each offering a range of benefits including early access to an open beta', './blog images/call-of-duty-black-ops-6-tag-page-cover-art.avif', '2024-11-01 20:39:41');
 
 -- --------------------------------------------------------
 
@@ -171,11 +171,10 @@ CREATE TABLE `delivery_details` (
 --
 
 INSERT INTO `delivery_details` (`delivery_id`, `user_id`, `order_id`, `delivery_address`, `contact_number`, `delivery_status`, `delivery_date`, `shipping_method`, `delivery_partner`, `created_at`, `email_sent`, `tracking_no`) VALUES
-(1, 6, 1, '193', '0717798678', 'Success', '2024-11-03', 'Standard', 'Prompt Express', '2024-11-02 13:47:41', 1, 'werrrttt'),
-(2, 6, 2, '193', '0717796266', 'Success', '2024-11-03', 'Standard', 'Prompt Express', '2024-11-02 15:39:43', 1, '1212wq11567'),
-(3, 6, 3, '193', '0717796266', 'Pending', NULL, 'Standard', 'Prompt Express', '2024-11-02 15:41:51', 0, NULL),
-(4, 6, 4, '193', '0717796266', 'Pending', NULL, 'Standard', 'Prompt Express', '2024-11-02 15:48:05', 0, NULL),
-(5, 6, 5, '193', '0717796266', 'Pending', NULL, 'Standard', 'Prompt Express', '2024-11-02 16:04:20', 0, NULL);
+(3, 6, 3, '193', '0717796266', 'Delivered', '2024-11-09', 'Standard', 'Prompt Express', '2024-11-02 15:41:51', 1, '1212wq11111'),
+(4, 6, 4, '193', '0717796266', 'Delivered', '2024-11-09', 'Standard', 'Prompt Express', '2024-11-02 15:48:05', 1, 'Delivered'),
+(5, 6, 5, '193', '0717796266', 'Delivered', '2024-11-10', 'Standard', 'Prompt Express', '2024-11-02 16:04:20', 1, 'werrrttt'),
+(6, 6, 6, '193', '0717796266', 'Pending', NULL, 'Standard', 'Prompt Express', '2024-11-07 18:48:15', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -204,7 +203,8 @@ INSERT INTO `orders` (`order_id`, `user_id`, `amount_due`, `invoice_number`, `to
 (2, 6, 300, 900199838, 1, '2024-11-02 15:41:12', 'Complete', 1, 0),
 (3, 6, 60000, 1806626306, 1, '2024-11-02 15:42:02', 'Complete', 1, 0),
 (4, 6, 60000, 146470748, 1, '2024-11-02 15:49:53', 'Complete', 1, 0),
-(5, 6, 155000, 1733804316, 1, '2024-11-02 16:04:31', 'Complete', 1, 0);
+(5, 6, 155000, 1733804316, 1, '2024-11-02 16:04:31', 'Complete', 1, 0),
+(6, 6, 155000, 15582117, 1, '2024-11-07 18:40:18', 'Pending', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,8 @@ INSERT INTO `orders_pending` (`order_id`, `user_id`, `invoice_number`, `product_
 (2, 6, 900199838, 2, 1, 'Pending'),
 (3, 6, 1806626306, 12, 1, 'Pending'),
 (4, 6, 146470748, 12, 1, 'Pending'),
-(5, 6, 1733804316, 8, 1, 'Pending');
+(5, 6, 1733804316, 8, 1, 'Pending'),
+(6, 6, 15582117, 8, 1, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -465,19 +466,19 @@ ALTER TABLE `customer_feedback`
 -- AUTO_INCREMENT for table `delivery_details`
 --
 ALTER TABLE `delivery_details`
-  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `orders_pending`
 --
 ALTER TABLE `orders_pending`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `owners`

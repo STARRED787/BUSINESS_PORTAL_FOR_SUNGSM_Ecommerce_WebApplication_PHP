@@ -108,114 +108,121 @@ if (isset($_POST['insert_product'])) {
 
 <body>
     <div class="container">
-        <h1 class="text-center mb-4">Insert Products</h1>
-        <!--Form-->
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class="row">
-                <!-- Title -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_tittle" class="form-label">Product Title</label>
-                        <input type="text" name="product_tittle" id="product_tittle" class="form-control"
-                            placeholder="Enter Product Name" required>
-                    </div>
-                </div>
+        <div class="card" style="width:100%;">
+            <div class="card-body">
+                <h1 class="text-center mb-4">Insert Products</h1>
+                <!--Form-->
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <!-- Title -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_tittle" class="form-label">Product Title</label>
+                                <input type="text" name="product_tittle" id="product_tittle" class="form-control"
+                                    placeholder="Enter Product Name" required>
+                            </div>
+                        </div>
 
-                <!-- Description -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_description" class="form-label">Product Description</label>
-                        <input type="text" name="product_description" id="product_description" class="form-control"
-                            placeholder="Enter Product Description" required>
-                    </div>
-                </div>
+                        <!-- Description -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_description" class="form-label">Product Description</label>
+                                <input type="text" name="product_description" id="product_description"
+                                    class="form-control" placeholder="Enter Product Description" required>
+                            </div>
+                        </div>
 
-                <!-- Keyword -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_keyword" class="form-label">Product Keyword</label>
-                        <input type="text" name="product_keyword" id="product_keyword" class="form-control"
-                            placeholder="Enter Product Keyword" required>
-                    </div>
-                </div>
+                        <!-- Keyword -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_keyword" class="form-label">Product Keyword</label>
+                                <input type="text" name="product_keyword" id="product_keyword" class="form-control"
+                                    placeholder="Enter Product Keyword" required>
+                            </div>
+                        </div>
 
-                <!-- Categories -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_categories" class="form-label">Product Category</label>
-                        <select name="product_categories" id="product_categories" class="form-select" required>
-                            <option value="">Select a Category</option>
-                            <?php
-                            $select_query = "SELECT * FROM `categories`";
-                            $result_query = mysqli_query($con, $select_query);
-                            while ($row = mysqli_fetch_assoc($result_query)) {
-                                $category_title = $row['categorie_tittle'];
-                                $category_id = $row['categorie_id'];
-                                echo "<option value='$category_id'>$category_title</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
+                        <!-- Categories -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_categories" class="form-label">Product Category</label>
+                                <select name="product_categories" id="product_categories" class="form-select" required>
+                                    <option value="">Select a Category</option>
+                                    <?php
+                                    $select_query = "SELECT * FROM `categories`";
+                                    $result_query = mysqli_query($con, $select_query);
+                                    while ($row = mysqli_fetch_assoc($result_query)) {
+                                        $category_title = $row['categorie_tittle'];
+                                        $category_id = $row['categorie_id'];
+                                        echo "<option value='$category_id'>$category_title</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
 
-                <!-- Brands -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_brands" class="form-label">Product Brand</label>
-                        <select name="product_brands" id="product_brands" class="form-select" required>
-                            <option value="">Select a Brand</option>
-                            <?php
-                            $select_query = "SELECT * FROM `brands`";
-                            $result_query = mysqli_query($con, $select_query);
-                            while ($row = mysqli_fetch_assoc($result_query)) {
-                                $brand_title = $row['brand_tittle'];
-                                $brand_id = $row['brand_id'];
-                                echo "<option value='$brand_id'>$brand_title</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
+                        <!-- Brands -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_brands" class="form-label">Product Brand</label>
+                                <select name="product_brands" id="product_brands" class="form-select" required>
+                                    <option value="">Select a Brand</option>
+                                    <?php
+                                    $select_query = "SELECT * FROM `brands`";
+                                    $result_query = mysqli_query($con, $select_query);
+                                    while ($row = mysqli_fetch_assoc($result_query)) {
+                                        $brand_title = $row['brand_tittle'];
+                                        $brand_id = $row['brand_id'];
+                                        echo "<option value='$brand_id'>$brand_title</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
 
-                <!-- Image 1 -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_image_1" class="form-label">Product Image 1</label>
-                        <input type="file" name="product_image_1" id="product_image_1" class="form-control" required>
-                    </div>
-                </div>
+                        <!-- Image 1 -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_image_1" class="form-label">Product Image 1</label>
+                                <input type="file" name="product_image_1" id="product_image_1" class="form-control"
+                                    required>
+                            </div>
+                        </div>
 
-                <!-- Image 2 -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_image_2" class="form-label">Product Image 2</label>
-                        <input type="file" name="product_image_2" id="product_image_2" class="form-control" required>
-                    </div>
-                </div>
+                        <!-- Image 2 -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_image_2" class="form-label">Product Image 2</label>
+                                <input type="file" name="product_image_2" id="product_image_2" class="form-control"
+                                    required>
+                            </div>
+                        </div>
 
-                <!-- Image 3 -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_image_3" class="form-label">Product Image 3</label>
-                        <input type="file" name="product_image_3" id="product_image_3" class="form-control" required>
-                    </div>
-                </div>
+                        <!-- Image 3 -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_image_3" class="form-label">Product Image 3</label>
+                                <input type="file" name="product_image_3" id="product_image_3" class="form-control"
+                                    required>
+                            </div>
+                        </div>
 
-                <!-- Price -->
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="form-outline">
-                        <label for="product_Price" class="form-label">Product Price</label>
-                        <input type="text" name="product_Price" id="product_Price" class="form-control"
-                            placeholder="Enter Product Price" required>
-                    </div>
-                </div>
+                        <!-- Price -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="form-outline">
+                                <label for="product_Price" class="form-label">Product Price</label>
+                                <input type="text" name="product_Price" id="product_Price" class="form-control"
+                                    placeholder="Enter Product Price" required>
+                            </div>
+                        </div>
 
-                <!-- Submit Button -->
-                <div class="col-12 mb-2">
-                    <input type="submit" name="insert_product" class="buy-btn" value="Insert Product">
-                </div>
+                        <!-- Submit Button -->
+                        <div class="col-12 mb-2">
+                            <input type="submit" name="insert_product" class="buy-btn" value="Insert Product">
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </body>
 

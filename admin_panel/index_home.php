@@ -34,7 +34,16 @@ include('../include/connect.php'); // Verify path to connect.php
     referrerpolicy="no-referrer" />
 </head>
 
-<body>
+<body style="
+  background-image: url('./images/1327999.jpeg');
+  height: 580px; /* You must set a specified height */
+  width: 100%;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  background-attachment: fixe
+
+">
   <!--Admin Bar-->
   <div class="container-fluid">
     <div class="row flex-nowrap">

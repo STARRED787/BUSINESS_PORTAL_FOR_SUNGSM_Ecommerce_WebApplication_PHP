@@ -27,6 +27,7 @@ $delevery_count = $con->query("SELECT COUNT(*) as count FROM delivery_details")-
 <div class="col py-3">
     <div class="card" style="width:100%;">
         <div class="card-body">
+            <h2 class="text-center mb-3 fw-5">Card Board</h2>
             <div class="row">
                 <!-- Product Count -->
                 <div class="col-md-4">

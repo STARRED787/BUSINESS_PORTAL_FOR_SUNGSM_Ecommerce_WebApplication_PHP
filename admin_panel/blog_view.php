@@ -68,86 +68,90 @@ if (isset($_GET['edit'])) {
 
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Blog Posts</h1>
+        <div class="card" style="width:100%;">
+            <div class="card-body">
+                <h1 class="text-center">Blog Posts</h1>
 
-        <?php if ($editPost): ?>
-            <div class="mb-4">
-                <h2>Edit Blog Post</h2>
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="<?php echo $editPost['id']; ?>">
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="title" name="title"
-                            value="<?php echo htmlspecialchars($editPost['title']); ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control" id="content" name="content" rows="5"
-                            required><?php echo htmlspecialchars($editPost['content']); ?></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Upload New Image (Leave blank to keep current)</label>
-                        <input type="file" class="form-control" id="image" name="image">
-                        <?php if (!empty($editPost['image'])): ?>
-                            <img src="<?php echo htmlspecialchars($editPost['image']); ?>" alt="Current Image"
-                                class="img-fluid mt-2" style="max-width: 100px;">
-                        <?php endif; ?>
-                    </div>
-                    <button type="submit" name="edit" class="btn btn-warning">Update Blog</button>
-                </form>
-            </div>
-        <?php endif; ?>
-
-        <div class="mb-4">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Content</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <?php
-                // Function to limit words in content
-                function limitWords($content, $wordLimit)
-                {
-                    $words = explode(' ', $content);
-                    return implode(' ', array_slice($words, 0, $wordLimit)) . (count($words) > $wordLimit ? '...' : '');
-                }
-                ?>
-
-                <tbody>
-                    <?php while ($post = mysqli_fetch_assoc($result)): ?>
-                        <?php if ($editPost && $editPost['id'] == $post['id']):
-                            continue;
-                        endif; ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($post['id']); ?></td>
-                            <td><?php echo htmlspecialchars($post['title']); ?></td>
-                            <td><?php echo nl2br(htmlspecialchars(limitWords($post['content'], 20))); ?></td>
-                            <!-- Limit to 20 words -->
-                            <td>
-                                <?php if ($post['image']): ?>
-                                    <img src="<?php echo htmlspecialchars($post['image']); ?>" alt="Blog Image"
-                                        style="width: 100px; height: auto;">
-                                <?php else: ?>
-                                    No Image
+                <?php if ($editPost): ?>
+                    <div class="mb-4">
+                        <h2>Edit Blog Post</h2>
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="<?php echo $editPost['id']; ?>">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                    value="<?php echo htmlspecialchars($editPost['title']); ?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea class="form-control" id="content" name="content" rows="5"
+                                    required><?php echo htmlspecialchars($editPost['content']); ?></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Upload New Image (Leave blank to keep current)</label>
+                                <input type="file" class="form-control" id="image" name="image">
+                                <?php if (!empty($editPost['image'])): ?>
+                                    <img src="<?php echo htmlspecialchars($editPost['image']); ?>" alt="Current Image"
+                                        class="img-fluid mt-2" style="max-width: 100px;">
                                 <?php endif; ?>
-                            </td>
-                            <td>
-                                <a href="blog_view.php?edit=<?php echo $post['id']; ?>"
-                                    class="btn btn-info btn-sm mt-2 mb-2">Edit</a>
-                                <a href="blog_view.php?delete=<?php echo $post['id']; ?>"
-                                    class="btn btn-danger btn-sm mt-2 mb-2"
-                                    onclick="return confirm('Are you sure you want to delete this blog post?');">Delete</a>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
+                            </div>
+                            <button type="submit" name="edit" class="btn btn-warning">Update Blog</button>
+                        </form>
+                    </div>
+                <?php endif; ?>
 
-            </table>
+                <div class="mb-4">
+                    <table class="table table-striped border-black">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <?php
+                        // Function to limit words in content
+                        function limitWords($content, $wordLimit)
+                        {
+                            $words = explode(' ', $content);
+                            return implode(' ', array_slice($words, 0, $wordLimit)) . (count($words) > $wordLimit ? '...' : '');
+                        }
+                        ?>
+
+                        <tbody>
+                            <?php while ($post = mysqli_fetch_assoc($result)): ?>
+                                <?php if ($editPost && $editPost['id'] == $post['id']):
+                                    continue;
+                                endif; ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($post['id']); ?></td>
+                                    <td><?php echo htmlspecialchars($post['title']); ?></td>
+                                    <td><?php echo nl2br(htmlspecialchars(limitWords($post['content'], 20))); ?></td>
+                                    <!-- Limit to 20 words -->
+                                    <td>
+                                        <?php if ($post['image']): ?>
+                                            <img src="<?php echo htmlspecialchars($post['image']); ?>" alt="Blog Image"
+                                                style="width: 100px; height: auto;">
+                                        <?php else: ?>
+                                            No Image
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <a href="blog_view.php?edit=<?php echo $post['id']; ?>"
+                                            class="btn btn-info btn-sm mt-2 mb-2">Edit</a>
+                                        <a href="blog_view.php?delete=<?php echo $post['id']; ?>"
+                                            class="btn btn-danger btn-sm mt-2 mb-2"
+                                            onclick="return confirm('Are you sure you want to delete this blog post?');">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 

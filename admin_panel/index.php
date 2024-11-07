@@ -50,14 +50,21 @@ if (isset($_SESSION['admin_username'])) {
 </body>
 
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <div class="card shadow" style="width: 400px; padding: 20px; border-radius: 10px;">
-        <h3 class="text-center">Admin Login</h3>
+    <div class="card shadow" style="
+         width: 400px;
+        padding: 20px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1); /* Minimal background color to ensure blur visibility */
+        backdrop-filter: blur(10px); /* Adds blur to the background */
+        -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+    ">
+        <h3 class="text-center text-white">Admin Login</h3>
         <form method="POST" action="">
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="admin_username" class="form-label">Username</label>
                 <input type="text" class="form-control" name="admin_username" id="admin_username" required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-white">
                 <label for="admin_password" class="form-label">Password</label>
                 <input type="password" class="form-control" name="admin_password" id="admin_password" required>
             </div>
@@ -65,6 +72,8 @@ if (isset($_SESSION['admin_username'])) {
         </form>
     </div>
 </div>
+
+
 <?php
 // Check if form is submitted
 if (isset($_POST['admin_login'])) {

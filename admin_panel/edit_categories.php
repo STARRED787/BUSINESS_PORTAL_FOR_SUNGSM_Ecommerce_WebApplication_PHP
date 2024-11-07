@@ -51,14 +51,14 @@ if (isset($_GET['edit_categories'])) {
     <div class="d-flex justify-content-center mb-4 mt-4" style="border-radius: 15px; font-family:Poppins">
         <div class="card" style="width:100%; max-width: 600px;">
             <div class="card-body">
-                <h1 class="text-center">Edit Product</h1>
+                <h1 class="text-center">Edit categorie</h1>
                 <!--Form-->
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <!-- Title -->
                         <div class="col-12 col-md-6 mb-4">
                             <div class="form-outline">
-                                <label for="product_title" class="form-label">Product Title</label>
+                                <label for="categorie_title" class="form-label">categorie Title</label>
                                 <input type="text" name="categorie_tittle" id="categorie_tittle" class="form-control"
                                     value='<?php echo isset($categorie_tittle) ? $categorie_tittle : ''; ?>' required>
 

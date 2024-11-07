@@ -19,22 +19,26 @@ if (!is_dir('./blog_images')) {
 
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Create a Blog Post</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title" required>
+        <div class="card" style="width:100%;">
+            <div class="card-body">
+                <h1 class="text-center">Create a Blog Post</h1>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Upload Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
+                    </div>
+                    <button type="submit" name="admin_blog" class="btn btn-primary">Post Blog</button>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="image" class="form-label">Upload Image</label>
-                <input type="file" class="form-control" id="image" name="image">
-            </div>
-            <button type="submit" name="admin_blog" class="btn btn-primary">Post Blog</button>
-        </form>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->

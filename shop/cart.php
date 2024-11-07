@@ -392,7 +392,12 @@ session_start();
             <a href='../shop/shop.php'><button class='btn buy-btn mb-3'>Continue Shopping</button></a>
         </div>";
     } else {
-        echo "<h1 class='tx mb-5'>Your Cart is Empty</h1>
+        echo "
+        <div class='card container' style='width:100%;'>
+        <div class='card-body text-center'>
+        <h1 class= mb-5 text-center'>Your Cart is Empty</h1>
+        </div>
+        </div>
         <a href='../shop/shop.php'><button class='btn buy-btn mb-3 m-5'>Continue Shopping</button></a>
         ";
     }

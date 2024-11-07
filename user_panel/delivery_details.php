@@ -107,10 +107,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (mysqli_num_rows($result_check) > 0) {
         // Delivery details already exist
         echo "<script>
-        $(document).ready(function() { 
-            toastr.warning('Delivery details already exist for this order.');
-           
-        });
+            $(document).ready(function() { 
+                toastr.warning('Delivery details already exist for this order.');
+                setTimeout(function() { window.open('./confirm_payement.php?order_id=$order_id&user_id=$user_id', '_self'); }, 2000); // Delay for 2 seconds
+            });
     </script>";
     } else {
         // Insert delivery details into the database

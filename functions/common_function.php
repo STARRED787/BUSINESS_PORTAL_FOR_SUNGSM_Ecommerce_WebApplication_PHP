@@ -286,7 +286,7 @@ function product_Details()
                 <div class='col-md-5'>
                     <h2 class='text-uppercase'>$product_title</h2>
                     <p class=''>$product_description</p>
-                    <p>$product_price</p>
+                    <p>Rs.$product_price</p>
                     <a href='product_details.php?add_to_cart=$product_id' class='btn btn-primary flex buy-btn'>Add to cart</a>
                 </div>
             </div>

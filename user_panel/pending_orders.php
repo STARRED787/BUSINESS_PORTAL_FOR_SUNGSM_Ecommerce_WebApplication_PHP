@@ -67,7 +67,7 @@ if (isset($_SESSION['username'])) {
                         echo '<th scope="col">Invoice Number</th>';
                         echo '<th scope="col">Date</th>';
                         echo '<th scope="col">Status</th>';
-                        echo '<th scope="col">Complete/Incomplete</th>';
+                        echo '<th scope="col">Actions</th>';
                         echo '</tr>';
                         echo '</thead>';
                         echo '<tbody>';
@@ -81,10 +81,10 @@ if (isset($_SESSION['username'])) {
 
                             // Retrieve product details from orders_pending table
                             $get_pending_orders = "
-                                SELECT op.product_id, op.quantity, p.product_price 
-                                FROM `orders_pending` op 
-                                JOIN `products` p ON op.product_id = p.product_id 
-                                WHERE op.order_id='$order_id'";
+            SELECT op.product_id, op.quantity, p.product_price 
+            FROM `orders_pending` op 
+            JOIN `products` p ON op.product_id = p.product_id 
+            WHERE op.order_id='$order_id'";
 
                             $result_pending_orders = mysqli_query($con, $get_pending_orders);
 
@@ -111,16 +111,19 @@ if (isset($_SESSION['username'])) {
                                 $order_status_display = "Incomplete";
 
                                 echo "
-                                    <tr class='table-info'>
-                                        <td>$sl_order</td>
-                                        <td>$order_id</td>
-                                        <td>$order_amount_due</td>
-                                        <td>" . round($calculated_total_products) . "</td> <!-- Show calculated total products -->
-                                        <td>$order_invoice_number</td>
-                                        <td>$order_order_date</td>
-                                        <td>$order_status_display</td>
-                                        <td class='text-center'><a href='./checkout.php?order_id=$order_id' class='btn btn-primary btn-sm'>Confirm</a></td>
-                                    </tr>";
+                <tr class='table-info'>
+                    <td>$sl_order</td>
+                    <td>$order_id</td>
+                    <td>$order_amount_due</td>
+                    <td>" . round($calculated_total_products) . "</td> <!-- Show calculated total products -->
+                    <td>$order_invoice_number</td>
+                    <td>$order_order_date</td>
+                    <td>$order_status_display</td>
+                    <td class='text-center'>
+                        <a href='./checkout.php?order_id=$order_id' class='btn btn-primary btn-sm'>Confirm</a>
+                        <a href='./cancel_order.php?order_id=$order_id' class='btn btn-danger btn-sm' onclick=\"return confirm('Are you sure you want to cancel this order?');\">Cancel</a>
+                    </td>
+                </tr>";
 
                                 $sl_order++;
                             }
@@ -131,11 +134,12 @@ if (isset($_SESSION['username'])) {
                         echo '</div>'; // End of table-responsive
                     } else {
                         echo "<div class='alert alert-warning' role='alert'>
-                            No pending orders found.
-                        </div>";
+        No pending orders found.
+    </div>";
                     }
                     ?>
                 </div>
+
             </div>
         </div>
     </div>

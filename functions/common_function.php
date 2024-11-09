@@ -231,7 +231,10 @@ function search_Product()
             </div>";
             }
         } else {
-            echo "<p>No products found matching your search criteria.</p>";
+            echo "<p class='alert alert-warning text-center mt-3' role='alert'>
+  No products found matching your search criteria.
+</p>
+";
         }
     }
 

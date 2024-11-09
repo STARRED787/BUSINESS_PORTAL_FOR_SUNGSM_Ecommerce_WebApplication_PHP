@@ -29,39 +29,39 @@ if (!$con) {
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center">All Payments</h1>
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-4">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Payment ID</th>
+                                <th scope="col">Order Number</th>
+                                <th scope="col">Invoice Number</th>
+                                <th scope="col">Amount Due</th>
+                                <th scope="col">Payment Mode</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Fetching payment details from the database
+                            $get_payments_details = "SELECT * FROM `user_payements`";
+                            $result_payments = mysqli_query($con, $get_payments_details);
 
-                <table class="table table-bordered mt-4">
-                    <thead class="table-primary">
-                        <tr>
-                            <th scope="col">Payment ID</th>
-                            <th scope="col">Order Number</th>
-                            <th scope="col">Invoice Number</th>
-                            <th scope="col">Amount Due</th>
-                            <th scope="col">Payment Mode</th>
-                            <th scope="col">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Fetching payment details from the database
-                        $get_payments_details = "SELECT * FROM `user_payements`";
-                        $result_payments = mysqli_query($con, $get_payments_details);
+                            // Check if the query was successful
+                            if (!$result_payments) {
+                                echo "<tr><td colspan='6'>Error: " . mysqli_error($con) . "</td></tr>";
+                            } else {
+                                // Check if there are results
+                                if (mysqli_num_rows($result_payments) > 0) {
+                                    while ($row_payments = mysqli_fetch_assoc($result_payments)) {
+                                        $payment_id = $row_payments['payement_id'];
+                                        $payment_order_id = $row_payments['order_id'];
+                                        $payment_invoice_number = $row_payments['invoice_number'];
+                                        $payment_amount = $row_payments['amount'];
+                                        $payment_payment_mode = $row_payments['payement_mode'];
+                                        $payment_date = $row_payments['date'];
 
-                        // Check if the query was successful
-                        if (!$result_payments) {
-                            echo "<tr><td colspan='6'>Error: " . mysqli_error($con) . "</td></tr>";
-                        } else {
-                            // Check if there are results
-                            if (mysqli_num_rows($result_payments) > 0) {
-                                while ($row_payments = mysqli_fetch_assoc($result_payments)) {
-                                    $payment_id = $row_payments['payement_id'];
-                                    $payment_order_id = $row_payments['order_id'];
-                                    $payment_invoice_number = $row_payments['invoice_number'];
-                                    $payment_amount = $row_payments['amount'];
-                                    $payment_payment_mode = $row_payments['payement_mode'];
-                                    $payment_date = $row_payments['date'];
-
-                                    echo "
+                                        echo "
                                         <tr class='table-info'>
                                             <td>$payment_id</td>
                                             <td>$payment_order_id</td>
@@ -71,15 +71,15 @@ if (!$con) {
                                             <td>$payment_date</td>
                                         </tr>
                                     ";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6' class='text-center'>No payments found.</td></tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='6' class='text-center'>No payments found.</td></tr>";
                             }
-                        }
-                        ?>
-                    </tbody>
-                </table>
-
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

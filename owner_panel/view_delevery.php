@@ -30,11 +30,12 @@ if (!$result_delivery) {
         <div class="card" style="width:100%;">
             <div class="card-body">
                 <h1 class="text-center">Delivery Details</h1>
+                <div class="table-responsive">
 
-                <?php
-                if (mysqli_num_rows($result_delivery) > 0) {
-                    echo '<table class="table table-bordered mt-5">';
-                    echo '<thead class="table-primary">
+                    <?php
+                    if (mysqli_num_rows($result_delivery) > 0) {
+                        echo '<table class="table table-bordered mt-5">';
+                        echo '<thead class="table-primary">
                             <tr>
                                 <th scope="col">Delivery ID</th>
                                 <th scope="col">Order ID</th>
@@ -48,12 +49,12 @@ if (!$result_delivery) {
                             </tr>
                         </thead><tbody>';
 
-                    while ($row_delivery = mysqli_fetch_assoc($result_delivery)) {
-                        $delivery_id = $row_delivery['delivery_id'];
-                        $tracking_no = $row_delivery['tracking_no'];
-                        $delivery_date = $row_delivery['delivery_date'];
+                        while ($row_delivery = mysqli_fetch_assoc($result_delivery)) {
+                            $delivery_id = $row_delivery['delivery_id'];
+                            $tracking_no = $row_delivery['tracking_no'];
+                            $delivery_date = $row_delivery['delivery_date'];
 
-                        echo "<tr class='table-info'>
+                            echo "<tr class='table-info'>
                                 <td>{$delivery_id}</td>
                                 <td>{$row_delivery['order_id']}</td>
                                 <td>{$row_delivery['delivery_address']}</td>
@@ -64,12 +65,13 @@ if (!$result_delivery) {
                                 <td>{$row_delivery['delivery_partner']}</td>
                                 <td>" . ($tracking_no ?: "Not added") . "</td>
                             </tr>";
+                        }
+                        echo '</tbody></table>';
+                    } else {
+                        echo "<div class='alert alert-warning'>No delivery details found.</div>";
                     }
-                    echo '</tbody></table>';
-                } else {
-                    echo "<div class='alert alert-warning'>No delivery details found.</div>";
-                }
-                ?>
+                    ?>
+                </div>
             </div>
         </div>
     </div>

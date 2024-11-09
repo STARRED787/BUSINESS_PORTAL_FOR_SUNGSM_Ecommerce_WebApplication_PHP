@@ -23,34 +23,36 @@ include('../include/connect.php');
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center">View Brands</h1>
-                <table class="table table-bordered mt-5">
-                    <thead class="table-primary text-center">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Brand</th>
-
-                        </tr>
-                    </thead>
-                    <tbody class="bg-info text-center">
-                        <?php
-                        // Fetch catagories details
-                        $get_brand_details = "SELECT * FROM `brands`";
-                        $result_brand = mysqli_query($con, $get_brand_details);
-                        while ($row_brand = mysqli_fetch_assoc($result_brand)) {
-                            $brand_id = $row_brand['brand_id'];
-                            $brand_title = $row_brand['brand_tittle'];
-                            ?>
-
-                            <tr class='table-info'>
-                                <td><?php echo $brand_id ?></td>
-                                <td><?php echo $brand_title ?></td>
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-5">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Brand</th>
 
                             </tr>
+                        </thead>
+                        <tbody class="bg-info text-center">
                             <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            // Fetch catagories details
+                            $get_brand_details = "SELECT * FROM `brands`";
+                            $result_brand = mysqli_query($con, $get_brand_details);
+                            while ($row_brand = mysqli_fetch_assoc($result_brand)) {
+                                $brand_id = $row_brand['brand_id'];
+                                $brand_title = $row_brand['brand_tittle'];
+                                ?>
+
+                                <tr class='table-info'>
+                                    <td><?php echo $brand_id ?></td>
+                                    <td><?php echo $brand_title ?></td>
+
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

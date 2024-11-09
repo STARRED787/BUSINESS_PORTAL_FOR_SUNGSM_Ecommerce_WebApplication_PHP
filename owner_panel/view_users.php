@@ -23,6 +23,7 @@ include('../include/connect.php');
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center">View Users</h1>
+                <div class="table-responsive"></div>
                 <table class="table table-bordered mt-5">
                     <thead class="table-primary text-center">
                         <tr>
@@ -64,6 +65,7 @@ include('../include/connect.php');
                 </table>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

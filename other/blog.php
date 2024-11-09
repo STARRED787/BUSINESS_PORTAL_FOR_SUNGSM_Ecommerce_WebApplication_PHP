@@ -104,7 +104,7 @@ $result = mysqli_query($con, $sql);
     }
 </style>
 
-<body>
+<body style="background-image: url('../index/images/blog.jpg');">
 
 
 

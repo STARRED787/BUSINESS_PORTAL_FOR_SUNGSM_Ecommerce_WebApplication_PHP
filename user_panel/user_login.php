@@ -119,26 +119,60 @@ if (isset($_POST['user_login'])) {
     $user_username = $_POST['username'];
     $user_password = $_POST['password'];
 
-    $select_query = "SELECT * FROM user WHERE username='$user_username'";
-    $result = mysqli_query($con, $select_query);
+    // Prepare the select query to prevent SQL injection
+    $select_query = "SELECT * FROM user WHERE username = ?";
+    $stmt = mysqli_prepare($con, $select_query);
+
+    // Check if the statement preparation was successful
+    if ($stmt === false) {
+        echo "
+        <script>
+            $(document).ready(function() {
+                toastr.error('Error preparing the SQL query.');
+            });
+        </script>";
+        exit(); // Stop execution if query preparation fails
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $user_username); // Bind parameter to prevent SQL injection
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     $rows_count = mysqli_num_rows($result);
     $row = mysqli_fetch_assoc($result);
-    $user_ip = getIPAddress();
 
-    // Check if user exists
     if ($rows_count > 0) {
+        // Verify password using password_verify function for hashed passwords
         if (password_verify($user_password, $row['password'])) {
             // Set session variables
             $_SESSION['username'] = $user_username;
             $_SESSION['user_id'] = $row['user_id']; // Store user_id in the session
 
-            // Check if the cart has items
-            $select_query_cart = "SELECT * FROM cart WHERE ip_address='$user_ip'";
-            $select_cart = mysqli_query($con, $select_query_cart);
+            // Get the user's IP address for cart check
+            $user_ip = getIPAddress();
+
+            // Check if the user has any items in the cart
+            $select_query_cart = "SELECT * FROM cart WHERE ip_address = ?";
+            $stmt_cart = mysqli_prepare($con, $select_query_cart);
+
+            // Check if cart statement preparation is successful
+            if ($stmt_cart === false) {
+                echo "
+                <script>
+                    $(document).ready(function() {
+                        toastr.error('Error preparing the cart query.');
+                    });
+                </script>";
+                exit(); // Stop execution if query preparation fails
+            }
+
+            mysqli_stmt_bind_param($stmt_cart, "s", $user_ip);
+            mysqli_stmt_execute($stmt_cart);
+            $select_cart = mysqli_stmt_get_result($stmt_cart);
             $rows_count_cart = mysqli_num_rows($select_cart);
 
-            if ($rows_count == 1 && $rows_count_cart == 0) {
-                // Redirect to profile if no items in cart
+            // Redirect based on cart items
+            if ($rows_count_cart == 0) {
+                // Redirect to shop page if no items in cart
                 echo "
                 <script>
                     $(document).ready(function() {
@@ -149,7 +183,7 @@ if (isset($_POST['user_login'])) {
                     });
                 </script>";
             } else {
-                // Redirect to payment if there are items in the cart
+                // Redirect to payment page if there are items in cart
                 echo "
                 <script>
                     $(document).ready(function() {
@@ -161,6 +195,7 @@ if (isset($_POST['user_login'])) {
                 </script>";
             }
         } else {
+            // If password doesn't match
             echo "
             <script>
                 $(document).ready(function() {
@@ -169,6 +204,7 @@ if (isset($_POST['user_login'])) {
             </script>";
         }
     } else {
+        // If username doesn't exist
         echo "
         <script>
             $(document).ready(function() {
@@ -176,7 +212,12 @@ if (isset($_POST['user_login'])) {
             });
         </script>";
     }
+
+    // Close the prepared statements if they were successfully created
+    if ($stmt) {
+        mysqli_stmt_close($stmt);
+    }
+
+
 }
-
-
 ?>

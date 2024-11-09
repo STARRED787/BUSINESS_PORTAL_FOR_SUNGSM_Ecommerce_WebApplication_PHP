@@ -232,13 +232,13 @@ $result = mysqli_query($con, $sql);
                 <div class="card mb-4">
                     <div class="row g-0">
                         <?php if ($post['image']): ?>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-12">
                                 <img src="../admin_panel/<?php echo htmlspecialchars($post['image']); ?>" alt="Blog Image"
                                     class="img-fluid rounded-start w-100" style="height: 100%; object-fit: cover;">
                             </div>
                         <?php endif; ?>
 
-                        <div class="col-md-6 d-flex flex-column">
+                        <div class="col-md-6 col-12 d-flex flex-column">
                             <div class="card-body">
                                 <h2 class="card-title"><?php echo htmlspecialchars($post['title']); ?></h2>
                                 <p class="card-text"><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
@@ -246,6 +246,7 @@ $result = mysqli_query($con, $sql);
                         </div>
                     </div>
                 </div>
+
             <?php endwhile; ?>
         </div>
 

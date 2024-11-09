@@ -11,42 +11,42 @@ include('../include/connect.php');
     <div class="card" style="width:100%;">
         <div class="card-body">
             <h1 class="text-center ">All Orders</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered mt-5 ">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col">Sl no</th>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Amount Due</th>
+                            <th scope="col">Total products</th>
+                            <th scope="col">Invoice Number</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Complete/Incomplete</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            <table class="table table-bordered mt-5 ">
-                <thead class="table-primary">
-                    <tr>
-                        <th scope="col">Sl no</th>
-                        <th scope="col">Order Number</th>
-                        <th scope="col">Amount Due</th>
-                        <th scope="col">Total products</th>
-                        <th scope="col">Invoice Number</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Complete/Incomplete</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
+                        <!---- PHP code to get orders table data to display my orders tble ----->
+                        <?php
+                        $get_orders_details = "SELECT * FROM `orders` ";
+                        $result_orders = mysqli_query($con, $get_orders_details);
+                        while ($row_orders = mysqli_fetch_assoc($result_orders)) {
+                            $sl_order = 1;
+                            $order_id = $row_orders['order_id'];
+                            $order_amount_due = $row_orders['amount_due'];
+                            $order_invoice_number = $row_orders['invoice_number'];
+                            $order_total_products = $row_orders['total_products'];
+                            $order_order_date = $row_orders['order_date'];
+                            $order_date = $row_orders['order_date'];
+                            $order_status = $row_orders['order_status'];
+                            if ($order_status == 'Pending') {
+                                $order_status = "Incomplete";
+                            } else {
+                                $order_status = "Complete";
+                            }
 
-                    <!---- PHP code to get orders table data to display my orders tble ----->
-                    <?php
-                    $get_orders_details = "SELECT * FROM `orders` ";
-                    $result_orders = mysqli_query($con, $get_orders_details);
-                    while ($row_orders = mysqli_fetch_assoc($result_orders)) {
-                        $sl_order = 1;
-                        $order_id = $row_orders['order_id'];
-                        $order_amount_due = $row_orders['amount_due'];
-                        $order_invoice_number = $row_orders['invoice_number'];
-                        $order_total_products = $row_orders['total_products'];
-                        $order_order_date = $row_orders['order_date'];
-                        $order_date = $row_orders['order_date'];
-                        $order_status = $row_orders['order_status'];
-                        if ($order_status == 'Pending') {
-                            $order_status = "Incomplete";
-                        } else {
-                            $order_status = "Complete";
-                        }
-
-                        echo "
+                            echo "
                             <tr class='table-info'>
                             <td>$sl_order</td>
                             <td>$order_id</td>
@@ -55,28 +55,28 @@ include('../include/connect.php');
                             <td>  $order_invoice_number</td>
                             <td>  $order_date</td>
                             <td> $order_status</td>";
+                            ?>
+
+                        <?php
+                        //display status of order
+                        if ($order_status == 'Complete') {
+                            echo "<td>paid</td>";
+                        } else {
+                            echo "  <td>Unpaid</td>";
+                        }
+
+                        $sl_order++;
+                        }
+
+
                         ?>
 
-                    <?php
-                    //display status of order
-                    if ($order_status == 'Complete') {
-                        echo "<td>paid</td>";
-                    } else {
-                        echo "  <td>Unpaid</td>";
-                    }
-
-                    $sl_order++;
-                    }
-
-
-                    ?>
 
 
 
-
-                </tbody>
-            </table>
-
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -11,41 +11,41 @@ include('../include/connect.php');
     <div class="card" style="width:100%;">
         <div class="card-body">
             <h1 class="text-center ">All Payments</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered mt-5">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col">Payment ID</th>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Invoice Number</th>
+                            <th scope="col">Amount Due</th>
+                            <th scope="col">Payment Mode</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Fetching payments details from the database
+                        $get_payments_details = "SELECT * FROM `user_payements`";
+                        $result_payments = mysqli_query($con, $get_payments_details);
 
-            <table class="table table-bordered mt-5">
-                <thead class="table-primary">
-                    <tr>
-                        <th scope="col">Payment ID</th>
-                        <th scope="col">Order Number</th>
-                        <th scope="col">Invoice Number</th>
-                        <th scope="col">Amount Due</th>
-                        <th scope="col">Payment Mode</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    // Fetching payments details from the database
-                    $get_payments_details = "SELECT * FROM `user_payements`";
-                    $result_payments = mysqli_query($con, $get_payments_details);
+                        // Check if the query was successful
+                        if (!$result_payments) {
+                            echo "<tr><td colspan='7' class='text-center'>Error: " . mysqli_error($con) . "</td></tr>";
+                        } else {
+                            // Check if there are results
+                            if (mysqli_num_rows($result_payments) > 0) {
+                                // Fetch each payment record and display it in the table
+                                while ($row_orders = mysqli_fetch_assoc($result_payments)) {
+                                    $payment_id = $row_orders['payement_id'];
+                                    $payment_order_id = $row_orders['order_id'];
+                                    $payment_invoice_number = $row_orders['invoice_number'];
+                                    $payment_amount = $row_orders['amount'];
+                                    $payment_payment_mode = $row_orders['payement_mode'];
+                                    $payment_date = $row_orders['date'];
 
-                    // Check if the query was successful
-                    if (!$result_payments) {
-                        echo "<tr><td colspan='7' class='text-center'>Error: " . mysqli_error($con) . "</td></tr>";
-                    } else {
-                        // Check if there are results
-                        if (mysqli_num_rows($result_payments) > 0) {
-                            // Fetch each payment record and display it in the table
-                            while ($row_orders = mysqli_fetch_assoc($result_payments)) {
-                                $payment_id = $row_orders['payement_id'];
-                                $payment_order_id = $row_orders['order_id'];
-                                $payment_invoice_number = $row_orders['invoice_number'];
-                                $payment_amount = $row_orders['amount'];
-                                $payment_payment_mode = $row_orders['payement_mode'];
-                                $payment_date = $row_orders['date'];
-
-                                echo "
+                                    echo "
                         <tr class='table-info'>
                             <td>$payment_id</td>
                             <td>$payment_order_id</td>
@@ -63,17 +63,17 @@ include('../include/connect.php');
                             </td>
                         </tr>
                     ";
+                                }
+                            } else {
+                                // No payments found; still display headings
+                                echo "<tr><td colspan='7' class='text-center'>No payments found.</td></tr>";
                             }
-                        } else {
-                            // No payments found; still display headings
-                            echo "<tr><td colspan='7' class='text-center'>No payments found.</td></tr>";
                         }
-                    }
-                    ?>
-                </tbody>
-            </table>
+                        ?>
+                    </tbody>
+                </table>
 
-
+            </div>
 
         </div>
     </div>

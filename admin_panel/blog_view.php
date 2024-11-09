@@ -101,55 +101,57 @@ if (isset($_GET['edit'])) {
                 <?php endif; ?>
 
                 <div class="mb-4">
-                    <table class="table table-striped border-black">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Content</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <?php
-                        // Function to limit words in content
-                        function limitWords($content, $wordLimit)
-                        {
-                            $words = explode(' ', $content);
-                            return implode(' ', array_slice($words, 0, $wordLimit)) . (count($words) > $wordLimit ? '...' : '');
-                        }
-                        ?>
-
-                        <tbody>
-                            <?php while ($post = mysqli_fetch_assoc($result)): ?>
-                                <?php if ($editPost && $editPost['id'] == $post['id']):
-                                    continue;
-                                endif; ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped border-black">
+                            <thead>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($post['id']); ?></td>
-                                    <td><?php echo htmlspecialchars($post['title']); ?></td>
-                                    <td><?php echo nl2br(htmlspecialchars(limitWords($post['content'], 20))); ?></td>
-                                    <!-- Limit to 20 words -->
-                                    <td>
-                                        <?php if ($post['image']): ?>
-                                            <img src="<?php echo htmlspecialchars($post['image']); ?>" alt="Blog Image"
-                                                style="width: 100px; height: auto;">
-                                        <?php else: ?>
-                                            No Image
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <a href="blog_view.php?edit=<?php echo $post['id']; ?>"
-                                            class="btn btn-info btn-sm mt-2 mb-2">Edit</a>
-                                        <a href="blog_view.php?delete=<?php echo $post['id']; ?>"
-                                            class="btn btn-danger btn-sm mt-2 mb-2"
-                                            onclick="return confirm('Are you sure you want to delete this blog post?');">Delete</a>
-                                    </td>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Content</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
-                            <?php endwhile; ?>
-                        </tbody>
+                            </thead>
+                            <?php
+                            // Function to limit words in content
+                            function limitWords($content, $wordLimit)
+                            {
+                                $words = explode(' ', $content);
+                                return implode(' ', array_slice($words, 0, $wordLimit)) . (count($words) > $wordLimit ? '...' : '');
+                            }
+                            ?>
 
-                    </table>
+                            <tbody>
+                                <?php while ($post = mysqli_fetch_assoc($result)): ?>
+                                    <?php if ($editPost && $editPost['id'] == $post['id']):
+                                        continue;
+                                    endif; ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($post['id']); ?></td>
+                                        <td><?php echo htmlspecialchars($post['title']); ?></td>
+                                        <td><?php echo nl2br(htmlspecialchars(limitWords($post['content'], 20))); ?></td>
+                                        <!-- Limit to 20 words -->
+                                        <td>
+                                            <?php if ($post['image']): ?>
+                                                <img src="<?php echo htmlspecialchars($post['image']); ?>" alt="Blog Image"
+                                                    style="width: 100px; height: auto;">
+                                            <?php else: ?>
+                                                No Image
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <a href="blog_view.php?edit=<?php echo $post['id']; ?>"
+                                                class="btn btn-info btn-sm mt-2 mb-2">Edit</a>
+                                            <a href="blog_view.php?delete=<?php echo $post['id']; ?>"
+                                                class="btn btn-danger btn-sm mt-2 mb-2"
+                                                onclick="return confirm('Are you sure you want to delete this blog post?');">Delete</a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

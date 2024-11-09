@@ -23,44 +23,46 @@ include('../include/connect.php');
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center">View Catogory</h1>
-                <table class="table table-bordered mt-5">
-                    <thead class="table-primary text-center">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Categorie</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-info text-center">
-                        <?php
-                        // Fetch catagories details
-                        $get_catagories_details = "SELECT * FROM `categories`";
-                        $result_categories = mysqli_query($con, $get_catagories_details);
-                        while ($row_atagories = mysqli_fetch_assoc($result_categories)) {
-                            $categories_id = $row_atagories['categorie_id'];
-                            $categories_title = $row_atagories['categorie_tittle'];
-                            ?>
-
-                            <tr class='table-info'>
-                                <td><?php echo $categories_id ?></td>
-                                <td><?php echo $categories_title ?></td>
-                                <td><a href='edit_categories.php?edit_categories=<?php echo $categories_id ?>'><i
-                                            class='bx bx-edit text-success'></i></a></td>
-                                <td>
-                                    <!-- Anchor tag for delete with confirmation -->
-                                    <a href="delete_categories.php?delete_categories=<?php echo $categories_id ?>"
-                                        onclick="return confirm('Are you sure you want to delete this product?')">
-                                        <i class='bx bxs-trash mx-4 text-danger'></i>
-                                    </a>
-                                </td>
-
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-5">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Categorie</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
                             </tr>
+                        </thead>
+                        <tbody class="bg-info text-center">
                             <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            // Fetch catagories details
+                            $get_catagories_details = "SELECT * FROM `categories`";
+                            $result_categories = mysqli_query($con, $get_catagories_details);
+                            while ($row_atagories = mysqli_fetch_assoc($result_categories)) {
+                                $categories_id = $row_atagories['categorie_id'];
+                                $categories_title = $row_atagories['categorie_tittle'];
+                                ?>
+
+                                <tr class='table-info'>
+                                    <td><?php echo $categories_id ?></td>
+                                    <td><?php echo $categories_title ?></td>
+                                    <td><a href='edit_categories.php?edit_categories=<?php echo $categories_id ?>'><i
+                                                class='bx bx-edit text-success'></i></a></td>
+                                    <td>
+                                        <!-- Anchor tag for delete with confirmation -->
+                                        <a href="delete_categories.php?delete_categories=<?php echo $categories_id ?>"
+                                            onclick="return confirm('Are you sure you want to delete this product?')">
+                                            <i class='bx bxs-trash mx-4 text-danger'></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

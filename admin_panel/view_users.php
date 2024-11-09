@@ -23,51 +23,53 @@ include('../include/connect.php');
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center">View Users</h1>
-                <table class="table table-bordered mt-5">
-                    <thead class="table-primary text-center">
-                        <tr>
-                            <th scope="col">User ID</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Adress</th>
-                            <th scope="col">Phone Number</th>
-                            <th scope="col">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-info text-center">
-                        <?php
-                        // Fetch product details
-                        $get_product_details = "SELECT * FROM `user`";
-                        $result_product = mysqli_query($con, $get_product_details);
-                        while ($row_product = mysqli_fetch_assoc($result_product)) {
-                            $user_id = $row_product['user_id'];
-                            $user_username = $row_product['username'];
-                            $user_email = $row_product['user_email'];
-                            $user_image = $row_product['user_image'];
-                            $user_address = $row_product['user_address'];
-                            $user_mobile = $row_product['user_mobile'];
-                            ?>
-                            <tr class='table-info'>
-                                <td><?php echo $user_id ?></td>
-                                <td><?php echo $user_username ?></td>
-                                <td><?php echo $user_email ?></td>
-                                <td><img src='../images/<?php echo $user_image ?>' width='70px' height='70px'></td>
-                                <td> <?php echo $user_address ?></td>
-                                <td><?php echo $user_mobile ?></td>
-                                <td>
-                                    <!-- Anchor tag for delete with confirmation -->
-                                    <a href="delete_users.php?delete_users=<?php echo $user_id ?>"
-                                        onclick="return confirm('Are you sure you want to delete this product?')">
-                                        <i class='bx bxs-trash mx-4 text-danger'></i>
-                                    </a>
-                                </td>
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-5">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th scope="col">User ID</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Adress</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Delete</th>
                             </tr>
+                        </thead>
+                        <tbody class="bg-info text-center">
                             <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            // Fetch product details
+                            $get_product_details = "SELECT * FROM `user`";
+                            $result_product = mysqli_query($con, $get_product_details);
+                            while ($row_product = mysqli_fetch_assoc($result_product)) {
+                                $user_id = $row_product['user_id'];
+                                $user_username = $row_product['username'];
+                                $user_email = $row_product['user_email'];
+                                $user_image = $row_product['user_image'];
+                                $user_address = $row_product['user_address'];
+                                $user_mobile = $row_product['user_mobile'];
+                                ?>
+                                <tr class='table-info'>
+                                    <td><?php echo $user_id ?></td>
+                                    <td><?php echo $user_username ?></td>
+                                    <td><?php echo $user_email ?></td>
+                                    <td><img src='../images/<?php echo $user_image ?>' width='70px' height='70px'></td>
+                                    <td> <?php echo $user_address ?></td>
+                                    <td><?php echo $user_mobile ?></td>
+                                    <td>
+                                        <!-- Anchor tag for delete with confirmation -->
+                                        <a href="delete_users.php?delete_users=<?php echo $user_id ?>"
+                                            onclick="return confirm('Are you sure you want to delete this product?')">
+                                            <i class='bx bxs-trash mx-4 text-danger'></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -47,70 +47,71 @@ if (isset($_SESSION['username'])) {
         <div class="d-flex justify-content-center" style="border-radius: 15px; font-family:Poppins;">
             <div class="card" style="width:100%;">
                 <div class="card-body">
-                    <?php
+                    <div class="table-responsive">
+                        <?php
 
-                    $get_orders_details = "SELECT * FROM `orders` WHERE user_id='$user_id'";
-                    $result_orders = mysqli_query($con, $get_orders_details);
-                    $order_count = mysqli_num_rows($result_orders); // Get the number of orders
-                    $sl_order = 1;
+                        $get_orders_details = "SELECT * FROM `orders` WHERE user_id='$user_id'";
+                        $result_orders = mysqli_query($con, $get_orders_details);
+                        $order_count = mysqli_num_rows($result_orders); // Get the number of orders
+                        $sl_order = 1;
 
-                    if ($order_count > 0) {
-                        echo " <h1 class='text-center'>Pending Orders</h1>";
-                        echo '<div class="table-responsive">'; // Make the table responsive
-                        echo '<table class="table table-bordered mt-5">';
-                        echo '<thead class="table-primary">';
-                        echo '<tr>';
-                        echo '<th scope="col">Sl no</th>';
-                        echo '<th scope="col">Order Number</th>';
-                        echo '<th scope="col">Amount Due</th>';
-                        echo '<th scope="col">Total Products</th>';
-                        echo '<th scope="col">Invoice Number</th>';
-                        echo '<th scope="col">Date</th>';
-                        echo '<th scope="col">Status</th>';
-                        echo '<th scope="col">Actions</th>';
-                        echo '</tr>';
-                        echo '</thead>';
-                        echo '<tbody>';
+                        if ($order_count > 0) {
+                            echo " <h1 class='text-center'>Pending Orders</h1>";
+                            echo '<div class="table-responsive">'; // Make the table responsive
+                            echo '<table class="table table-bordered mt-5">';
+                            echo '<thead class="table-primary">';
+                            echo '<tr>';
+                            echo '<th scope="col">Sl no</th>';
+                            echo '<th scope="col">Order Number</th>';
+                            echo '<th scope="col">Amount Due</th>';
+                            echo '<th scope="col">Total Products</th>';
+                            echo '<th scope="col">Invoice Number</th>';
+                            echo '<th scope="col">Date</th>';
+                            echo '<th scope="col">Status</th>';
+                            echo '<th scope="col">Actions</th>';
+                            echo '</tr>';
+                            echo '</thead>';
+                            echo '<tbody>';
 
-                        while ($row_orders = mysqli_fetch_assoc($result_orders)) {
-                            $order_id = $row_orders['order_id'];
-                            $order_amount_due = $row_orders['amount_due'];
-                            $order_invoice_number = $row_orders['invoice_number'];
-                            $order_order_date = $row_orders['order_date'];
-                            $order_status = $row_orders['order_status'];
+                            while ($row_orders = mysqli_fetch_assoc($result_orders)) {
+                                $order_id = $row_orders['order_id'];
+                                $order_amount_due = $row_orders['amount_due'];
+                                $order_invoice_number = $row_orders['invoice_number'];
+                                $order_order_date = $row_orders['order_date'];
+                                $order_status = $row_orders['order_status'];
 
-                            // Retrieve product details from orders_pending table
-                            $get_pending_orders = "
+                                // Retrieve product details from orders_pending table
+                                $get_pending_orders = "
             SELECT op.product_id, op.quantity, p.product_price 
             FROM `orders_pending` op 
             JOIN `products` p ON op.product_id = p.product_id 
             WHERE op.order_id='$order_id'";
 
-                            $result_pending_orders = mysqli_query($con, $get_pending_orders);
+                                $result_pending_orders = mysqli_query($con, $get_pending_orders);
 
-                            $total_products = 0; // Initialize total products counter
-                            $single_product_price = 0; // Initialize single product price variable
-                            $calculated_total_products = 0; // Initialize calculated total products
-                    
-                            // Fetch product details
-                            while ($row_pending_orders = mysqli_fetch_assoc($result_pending_orders)) {
-                                $product_id = $row_pending_orders['product_id'];
-                                $quantity = $row_pending_orders['quantity'];
-                                $single_product_price = $row_pending_orders['product_price']; // Get the single product price
-                    
-                                // Calculate total products as order amount due divided by the price of one product
-                                if ($single_product_price > 0) {
-                                    $calculated_total_products = $order_amount_due / $single_product_price; // Calculate total products
-                                } else {
-                                    $calculated_total_products = 0; // Fallback if price is zero or not found
+                                $total_products = 0; // Initialize total products counter
+                                $single_product_price = 0; // Initialize single product price variable
+                                $calculated_total_products = 0; // Initialize calculated total products
+                        
+                                // Fetch product details
+                                while ($row_pending_orders = mysqli_fetch_assoc($result_pending_orders)) {
+                                    $product_id = $row_pending_orders['product_id'];
+                                    $quantity = $row_pending_orders['quantity'];
+                                    $single_product_price = $row_pending_orders['product_price']; // Get the single product price
+                        
+                                    // Calculate total products as order amount due divided by the price of one product
+                                    if ($single_product_price > 0) {
+                                        $calculated_total_products = $order_amount_due / $single_product_price; // Calculate total products
+                                    } else {
+                                        $calculated_total_products = 0; // Fallback if price is zero or not found
+                                    }
                                 }
-                            }
 
-                            // Only display orders with status 'Pending'
-                            if ($order_status == 'Pending') {
-                                $order_status_display = "Incomplete";
+                                // Only display orders with status 'Pending'
+                                if ($order_status == 'Pending') {
+                                    $order_status_display = "Incomplete";
 
-                                echo "
+                                    echo "
                 <tr class='table-info'>
                     <td>$sl_order</td>
                     <td>$order_id</td>
@@ -125,19 +126,20 @@ if (isset($_SESSION['username'])) {
                     </td>
                 </tr>";
 
-                                $sl_order++;
+                                    $sl_order++;
+                                }
                             }
-                        }
 
-                        echo '</tbody>';
-                        echo '</table>';
-                        echo '</div>'; // End of table-responsive
-                    } else {
-                        echo "<div class='alert alert-warning' role='alert'>
+                            echo '</tbody>';
+                            echo '</table>';
+                            echo '</div>'; // End of table-responsive
+                        } else {
+                            echo "<div class='alert alert-warning' role='alert'>
         No pending orders found.
     </div>";
-                    }
-                    ?>
+                        }
+                        ?>
+                    </div>
                 </div>
 
             </div>

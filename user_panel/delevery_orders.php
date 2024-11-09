@@ -43,50 +43,50 @@ if (isset($_SESSION['username'])) {
         <div class="card" style="width:100%;">
             <div class="card-body">
                 <h1 class="text-center">Delivery Details</h1>
+                <div class="table-responsive">
+                    <?php
+                    // Fetch delivery details
+                    $get_delivery_details = "SELECT * FROM `delivery_details` WHERE user_id='$user_id'";
+                    $result_delivery = mysqli_query($con, $get_delivery_details);
+                    $delivery_count = mysqli_num_rows($result_delivery); // Get the number of delivery records
+                    
+                    if ($delivery_count > 0) {
+                        // If there are delivery records, show the table
+                        echo '<table class="table table-bordered mt-5">';
+                        echo '<thead class="table-primary">';
+                        echo '<tr>';
+                        echo '<th scope="col">Delivery ID</th>';
+                        echo '<th scope="col">Order ID</th>';
+                        echo '<th scope="col">Delivery Address</th>';
+                        echo '<th scope="col">Contact Number</th>';
+                        echo '<th scope="col">Delivery Status</th>';
+                        echo '<th scope="col">Delivery Date</th>';
+                        echo '<th scope="col">Shipping Method</th>';
+                        echo '<th scope="col">Delivery Partner</th>';
+                        echo '<th scope="col">Tracking No</th>';
+                        echo '</tr>';
+                        echo '</thead>';
+                        echo '<tbody>';
 
-                <?php
-                // Fetch delivery details
-                $get_delivery_details = "SELECT * FROM `delivery_details` WHERE user_id='$user_id'";
-                $result_delivery = mysqli_query($con, $get_delivery_details);
-                $delivery_count = mysqli_num_rows($result_delivery); // Get the number of delivery records
-                
-                if ($delivery_count > 0) {
-                    // If there are delivery records, show the table
-                    echo '<table class="table table-bordered mt-5">';
-                    echo '<thead class="table-primary">';
-                    echo '<tr>';
-                    echo '<th scope="col">Delivery ID</th>';
-                    echo '<th scope="col">Order ID</th>';
-                    echo '<th scope="col">Delivery Address</th>';
-                    echo '<th scope="col">Contact Number</th>';
-                    echo '<th scope="col">Delivery Status</th>';
-                    echo '<th scope="col">Delivery Date</th>';
-                    echo '<th scope="col">Shipping Method</th>';
-                    echo '<th scope="col">Delivery Partner</th>';
-                    echo '<th scope="col">Tracking No</th>';
-                    echo '</tr>';
-                    echo '</thead>';
-                    echo '<tbody>';
+                        // Display each delivery record
+                        while ($row_delivery = mysqli_fetch_assoc($result_delivery)) {
+                            $delivery_id = $row_delivery['delivery_id'];
+                            $order_id = $row_delivery['order_id'];
+                            $delivery_address = $row_delivery['delivery_address'];
+                            $contact_number = $row_delivery['contact_number'];
+                            $delivery_status = $row_delivery['delivery_status'];
+                            $delivery_date = $row_delivery['delivery_date'];
+                            $shipping_method = $row_delivery['shipping_method'];
+                            $delivery_partner = $row_delivery['delivery_partner'];
+                            $tracking_no = $row_delivery['tracking_no'];
 
-                    // Display each delivery record
-                    while ($row_delivery = mysqli_fetch_assoc($result_delivery)) {
-                        $delivery_id = $row_delivery['delivery_id'];
-                        $order_id = $row_delivery['order_id'];
-                        $delivery_address = $row_delivery['delivery_address'];
-                        $contact_number = $row_delivery['contact_number'];
-                        $delivery_status = $row_delivery['delivery_status'];
-                        $delivery_date = $row_delivery['delivery_date'];
-                        $shipping_method = $row_delivery['shipping_method'];
-                        $delivery_partner = $row_delivery['delivery_partner'];
-                        $tracking_no = $row_delivery['tracking_no'];
+                            // Check if the delivery date is NULL and set the display value
+                            $display_date = $delivery_date ? $delivery_date : "Not yet";
 
-                        // Check if the delivery date is NULL and set the display value
-                        $display_date = $delivery_date ? $delivery_date : "Not yet";
+                            // Check if the delivery date is NULL and set the display value
+                            $tracking_no = $tracking_no ? $tracking_no : "Not yet";
 
-                        // Check if the delivery date is NULL and set the display value
-                        $tracking_no = $tracking_no ? $tracking_no : "Not yet";
-
-                        echo "
+                            echo "
                         <tr class='table-info'>
                             <td>$delivery_id</td>
                             <td>$order_id</td>
@@ -98,17 +98,18 @@ if (isset($_SESSION['username'])) {
                             <td>$delivery_partner</td>
                             <td>$tracking_no</td>
                         </tr>";
-                    }
+                        }
 
-                    echo '</tbody>';
-                    echo '</table>';
-                } else {
-                    // No delivery details found, hide the table
-                    echo "<div class='alert alert-warning' role='alert'>
+                        echo '</tbody>';
+                        echo '</table>';
+                    } else {
+                        // No delivery details found, hide the table
+                        echo "<div class='alert alert-warning' role='alert'>
                             No delivery details found.
                           </div>";
-                }
-                ?>
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     </div>

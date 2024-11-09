@@ -250,12 +250,28 @@ if (isset($_GET['order_id'])) {
                     return;
                 }
 
+                // Validate expiry date format and check if it's a valid future date
+                var expiryDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/; // MM/YY format
+                if (!expiryDatePattern.test(expiryDate)) {
+                    toastr.error("Invalid expiry date format. Use MM/YY format.");
+                    return;
+                }
+
+                // Check if expiry date is in the future
+                var currentDate = new Date();
+                var [expMonth, expYear] = expiryDate.split("/").map(Number);
+                expYear += 2000; // Convert YY to YYYY
+                var expiryDateObj = new Date(expYear, expMonth - 1); // Month is zero-indexed
+                if (expiryDateObj <= currentDate) {
+                    toastr.error("Card is expired. Please use a valid card.");
+                    return;
+                }
+
                 // Validate CVV (3 or 4 digits)
                 var cvvPattern = /^\d{3,4}$/; // Matches 3 or 4 digits
                 if (!cvvPattern.test(cvv)) {
                     toastr.error("Invalid CVV. It should be 3 or 4 digits.");
                     return;
-
                 }
 
                 // Simulate a successful payment process
@@ -266,6 +282,7 @@ if (isset($_GET['order_id'])) {
             });
         });
     </script>
+
 </body>
 
 </html>

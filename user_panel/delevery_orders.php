@@ -63,6 +63,7 @@ if (isset($_SESSION['username'])) {
                     echo '<th scope="col">Delivery Date</th>';
                     echo '<th scope="col">Shipping Method</th>';
                     echo '<th scope="col">Delivery Partner</th>';
+                    echo '<th scope="col">Tracking No</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
@@ -77,9 +78,13 @@ if (isset($_SESSION['username'])) {
                         $delivery_date = $row_delivery['delivery_date'];
                         $shipping_method = $row_delivery['shipping_method'];
                         $delivery_partner = $row_delivery['delivery_partner'];
+                        $tracking_no = $row_delivery['tracking_no'];
 
                         // Check if the delivery date is NULL and set the display value
                         $display_date = $delivery_date ? $delivery_date : "Not yet";
+
+                        // Check if the delivery date is NULL and set the display value
+                        $tracking_no = $tracking_no ? $tracking_no : "Not yet";
 
                         echo "
                         <tr class='table-info'>
@@ -91,6 +96,7 @@ if (isset($_SESSION['username'])) {
                             <td>$display_date</td>  <!-- Display date or 'Not yet' -->
                             <td>$shipping_method</td>
                             <td>$delivery_partner</td>
+                            <td>$tracking_no</td>
                         </tr>";
                     }
 

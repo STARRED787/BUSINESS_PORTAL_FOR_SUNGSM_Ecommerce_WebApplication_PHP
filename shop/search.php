@@ -319,44 +319,43 @@ session_start();
                     <div class="underline"><span></span></div>
                 </h3>
                 <ul>
-                    <li><a class="a" href="#">Home</a></li>
-                    <li><a class="a" href="#">Shop</a></li>
-                    <li><a class="a" href="#">Blog</a></li>
-                    <li><a class="a" href="#">Contact Us</a></li>
-                    <li><a class="a" href="#">Sign In</a></li>
+                    <li><a class="a" href="../index/index.php">Home</a></li>
+                    <li><a class="a" href="../shop/shop.php">Shop</a></li>
+                    <li><a class="a" href="../other/blog.php">Blog</a></li>
+                    <li><a class="a" href="../other/cantact.php">Contact Us</a></li>
+                    <li><a class="a" href="../user_panel/user_login.php">Sign In</a></li>
                     <li>
-                        <a class="a" href="#">Registration</a>
+                        <a class="a" href="../user_panel/user_registration.php">Registration</a>
                     </li>
                 </ul>
-            </div>
-            <div class="col">
-                <h3>
-                    Newsletter
-                    <div class="underline"><span></span></div>
-                </h3>
-                <form>
-                    <i class="bx bxs-envelope" undefined></i>
-                    <input type="text" placeholder="Enter Your Email ID" required />
-                    <button type="submit">
-                        <i class="bx bxs-right-arrow-circle"></i>
-                    </button>
-                </form>
-                <div class="social-icons">
+                <div class="col">
                     <h3>
-                        Follow Us
+                        Newsletter
                         <div class="underline"><span></span></div>
                     </h3>
+                    <form>
+                        <i class="bx bxs-envelope" undefined></i>
+                        <input type="text" placeholder="Enter Your Email ID" required />
+                        <button type="submit">
+                            <i class="bx bxs-right-arrow-circle"></i>
+                        </button>
+                    </form>
+                    <div class="social-icons">
+                        <h3>
+                            Follow Us
+                            <div class="underline"><span></span></div>
+                        </h3>
 
-                    <i class="bx bxl-facebook-circle"></i>
-                    <i class="bx bxl-instagram-alt"></i>
-                    <i class="bx bxl-twitter"></i>
-                    <i class="bx bxl-whatsapp"></i>
-                    <i class="bx bxl-youtube"></i>
+                        <i class="bx bxl-facebook-circle"></i>
+                        <i class="bx bxl-instagram-alt"></i>
+                        <i class="bx bxl-twitter"></i>
+                        <i class="bx bxl-whatsapp"></i>
+                        <i class="bx bxl-youtube"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr />
-        <p class="copyright">SUN GSM © 2024 - All Right Reserved</p>
+            <hr />
+            <p class="copyright">SUN GSM © 2024 - All Right Reserved</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

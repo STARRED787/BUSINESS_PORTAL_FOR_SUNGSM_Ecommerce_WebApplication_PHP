@@ -342,13 +342,13 @@ session_start();
                         <div class="underline"><span></span></div>
                     </h3>
                     <ul>
-                        <li><a class="a" href="#">Home</a></li>
-                        <li><a class="a" href="#">Shop</a></li>
-                        <li><a class="a" href="#">Blog</a></li>
-                        <li><a class="a" href="#">Contact Us</a></li>
-                        <li><a class="a" href="#">Sign In</a></li>
+                        <li><a class="a" href="../index/index.php">Home</a></li>
+                        <li><a class="a" href="../shop/shop.php">Shop</a></li>
+                        <li><a class="a" href="../other/blog.php">Blog</a></li>
+                        <li><a class="a" href="../other/cantact.php">Contact Us</a></li>
+                        <li><a class="a" href="../user_panel/user_login.php">Sign In</a></li>
                         <li>
-                            <a class="a" href="#">Registration</a>
+                            <a class="a" href="../user_panel/user_registration.php">Registration</a>
                         </li>
                     </ul>
                 </div>

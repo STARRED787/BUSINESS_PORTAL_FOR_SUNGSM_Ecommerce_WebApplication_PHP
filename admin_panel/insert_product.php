@@ -37,7 +37,10 @@ if (isset($_POST['insert_product'])) {
 
         if (mysqli_num_rows($check_result) > 0) {
             // Product already exists
-            echo "<script>alert('Product already exists!')</script>";
+            echo "<script>
+            alert('Product already exists!');
+            window.location.href = 'index_home.php?insert_product';
+        </script>";
             exit();
         } else {
             move_uploaded_file($tmp_product_image_1, "../images/$product_image_1");
